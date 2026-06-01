@@ -56,7 +56,7 @@
         #steg-canvas-label {
             position: absolute;
             top: 7px; left: 7px;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0,0,0,0.95);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 3px;
             padding: 3px 8px;
@@ -149,7 +149,6 @@
         .ch-btn.nn.active { background: rgba(255,255,255,.07);border-color:rgba(255,255,255,.25);color:#ddd; }
         .ch-btn.acc.active{ background: rgba(224,120,32,.2);  border-color:var(--clr-accent,#e07820);color:var(--clr-accent,#e07820); }
 
-        .btn-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
         .btn-full { grid-column: 1 / -1; }
 
         .stat-row {
@@ -238,25 +237,26 @@
 		
 		.btn-container {
 		display: flex;
-		flex-wrap: wrap; /* Разрешаем перенос на новую строку */
+		flex-wrap: wrap; 
 		gap: 5px;
 		width: 100%;
 		box-sizing: border-box;
 	}
 
 	.btn-container .btn {
-		flex: 1 1 calc(33.33% - 5px); /* Занимают примерно треть ширины */
-		min-width: 60px; /* Минимальная ширина, чтобы не схлопнулись */
+		flex: 1 1 calc(33.33% - 5px);
+		min-width: 60px; 
 		font-size: 11px;
 		padding: 5px 2px;
 	}
-
+	
 	.btn-grid-2 {
 		display: grid;
-		grid-template-columns: 1fr 1fr; /* Ровно две колонки */
+		grid-template-columns: 1fr 1fr;
 		gap: 5px;
-		margin-top: 5px;
+		width: 100%;
 	}
+
     </style>
 </head>
 <body>
@@ -369,18 +369,15 @@
                                 </div>
                             </div>
                         </div>
-						<div class="steg-side-box" style="margin-bottom:0; width: 240px;">
+						<div class="steg-side-box" style="margin-bottom:0; width: 190px;">
 							<div class="steg-box-title">Display Mode</div>
 							
 							<div class="btn-container">
 								<button class="btn" data-mode="bw">B&W</button>
 								<button class="btn" data-mode="color">Color</button>
-								<button class="btn" data-mode="invert">Invert</button>
-							</div>
-							
-							<div class="btn-grid-2">
-								<button class="btn" id="btnSaveBit">Save</button>
+								<button class="btn" data-mode="invert">INVERT</button>
 								<button class="btn" id="btnOrigView">Orig</button>
+								<button class="btn" id="btnSaveBit">Save</button>
 							</div>
 						</div>
                     </div>
@@ -528,11 +525,6 @@
                         <button class="btn" data-qp="6">Bit 6</button>
                         <button class="btn" data-qp="7" title="MSB - most visible">MSB (7)</button>
                     </div>
-                </div>
-
-                <div class="steg-side-box">
-                    <div class="steg-box-title"><i class="fas fa-exclamation-triangle"></i> Anomaly Detection</div>
-                    <div id="anomalies" style="font-size:11px;color:var(--clr-muted,#888);">Load image to analyze</div>
                 </div>
 
                 <div class="steg-side-box">
