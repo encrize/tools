@@ -51,11 +51,23 @@
     <main class="main-content">
         <div class="container" style="text-align: center;">
             <h1><i class="fas fa-th-large" style="margin-right: 15px;"></i> Image Splitter</h1>
-            <p>Divide an image into a grid (e.g., 3x3 for Instagram).</p>
-            
-            <div style="margin-bottom: 25px;">
-                <input type="file" id="image-input" accept="image/*" style="max-width: 400px; width: 100%;">
-            </div>
+        <p style="margin-bottom: 25px;">Divide an image into a grid (e.g., 3x3 for Instagram).</p>
+        
+        <div id="drop-zone" style="
+            border: 1px dashed var(--clr-muted, #555);
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 40px 20px;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        ">
+            <i class="fas fa-file-image" style="font-size: 2.5rem; color: var(--clr-muted, #888); margin-bottom: 15px; display: block; transition: color 0.2s;"></i>
+            <p style="font-size: 1rem; color: var(--clr-text, #fff); margin: 0 0 6px;">Drag and drop an image or click to select</p>
+            <p style="font-size: 0.85rem; color: var(--clr-muted, #888); margin: 0;">Supports all major image formats</p>
+            <input type="file" id="image-input" accept="image/*" style="display: none;">
+        </div>
             
             <div class="tool-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 400px; margin: 0 auto 25px; gap: 15px; text-align: left;">
                 <div>
@@ -79,10 +91,40 @@
     </main>
 
     <script>
+		const dropZone = document.getElementById('drop-zone');
         const imageInput = document.getElementById('image-input');
         const previewGrid = document.getElementById('preview-grid');
         const splitBtn = document.getElementById('split-btn');
         let sourceImg = new Image();
+		
+		    dropZone.addEventListener('click', () => imageInput.click());
+
+			['dragenter', 'dragover'].forEach(eventName => {
+				dropZone.addEventListener(eventName, (e) => {
+					e.preventDefault();
+					dropZone.style.borderColor = 'var(--clr-accent)';
+					dropZone.style.background = 'rgba(0, 0, 0, 0.35)';
+					if (icon) icon.style.color = 'var(--clr-accent)';
+				}, false);
+			});
+
+			['dragleave', 'drop'].forEach(eventName => {
+				dropZone.addEventListener(eventName, (e) => {
+					e.preventDefault();
+					dropZone.style.borderColor = 'var(--clr-muted)';
+					dropZone.style.background = 'rgba(0, 0, 0, 0.2)';
+					if (icon) icon.style.color = 'var(--clr-muted)';
+				}, false);
+			});
+
+			dropZone.addEventListener('drop', (e) => {
+				const dt = e.dataTransfer;
+				const files = dt.files;
+				if (files.length > 0) {
+					imageInput.files = files;
+					handleFile(files[0]);
+				}
+			});
 
         imageInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
