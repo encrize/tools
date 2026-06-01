@@ -23,6 +23,7 @@
         <li class="nav-item"><a href="palette-extractor.html" class="nav-link"><i class="fas fa-palette"></i> Palette Extractor</a></li>
         <li class="nav-item"><a href="placeholder-gen.html" class="nav-link"><i class="fas fa-image"></i> Placeholder Gen</a></li>
         <li class="nav-item"><a href="color-picker.html" class="nav-link"><i class="fas fa-eye-dropper"></i> Color Picker</a></li>
+		<li class="nav-item"><a href="stego-lab.html"    class="nav-link"><i class="fas fa-user-secret"></i> Stego Lab</a></li>
 		
         <li class="nav-category" style="padding:15px 20px 5px;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--clr-muted,#888);font-weight:bold;">Conversion & Math</li>
 		
@@ -74,38 +75,36 @@
 <script>
     const words = ["lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua", "enim", "ad", "minim", "veniam", "quis", "nostrud", "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo", "consequat", "duis", "aute", "irure", "in", "reprehenderit", "voluptate", "velit", "esse", "cillum", "eu", "fugiat", "nulla", "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", "culpa", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum"];
 
-function generateLorem() {
-    let count = parseInt(document.getElementById('word-count').value);
-    if (count <= 0) return;
+    function generateLorem() {
+        let count = parseInt(document.getElementById('word-count').value);
+        if (count <= 0) return;
 
-    let sentences = [];
-    let remainingWords = count - 2; 
-    
-    let firstSentence = ["Lorem", "ipsum"];
-    let firstLen = Math.floor(Math.random() * 5) + 3;
-
-    while (firstSentence.length < firstLen && remainingWords > 0) {
-        firstSentence.push(words[Math.floor(Math.random() * words.length)]);
-        remainingWords--;
-    }
-    sentences.push(firstSentence.join(' ') + '.');
-
-    while (remainingWords > 0) {
-        let sentenceLen = Math.floor(Math.random() * 7) + 5;
-        let currentSentence = [];
+        let sentences = [];
+        let remainingWords = count;
         
-        for (let i = 0; i < sentenceLen && remainingWords > 0; i++) {
-            let word = words[Math.floor(Math.random() * words.length)];
-            currentSentence.push(i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word);
+        let firstSentence = ["Lorem", "ipsum"];
+        let firstLen = Math.floor(Math.random() * 5) + 3;
+        
+        while (firstSentence.length < firstLen && remainingWords > 0) {
+            firstSentence.push(words[Math.floor(Math.random() * words.length)]);
             remainingWords--;
         }
-        if (currentSentence.length > 0) {
+        sentences.push(firstSentence.join(' ') + '.');
+
+        while (remainingWords > 0) {
+            let sentenceLen = Math.floor(Math.random() * 7) + 5;
+            let currentSentence = [];
+            
+            for (let i = 0; i < sentenceLen && remainingWords > 0; i++) {
+                let word = words[Math.floor(Math.random() * words.length)];
+                currentSentence.push(i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word);
+                remainingWords--;
+            }
             sentences.push(currentSentence.join(' ') + '.');
         }
-    }
 
-    document.getElementById('lorem-output').value = sentences.join(' ');
-}
+        document.getElementById('lorem-output').value = sentences.join(' ');
+    }
 
     function copyText() {
         const output = document.getElementById('lorem-output');

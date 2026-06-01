@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Lab - Ultimate Tools</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .steg-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 18px;
+        }
+        .steg-tab {
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            color: var(--clr-muted, #888);
+            cursor: pointer;
+            font-size: 12px;
+            font-family: inherit;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all .15s;
+        }
+        .steg-tab.active {
+            color: var(--clr-accent, #e07820);
+            border-bottom-color: var(--clr-accent, #e07820);
+        }
+        .steg-tab:hover:not(.active) { color: #ccc; }
+
+        .steg-panel { display: none; }
+        .steg-panel.active { display: block; }
+
+		#steg-canvas-wrap {
+			background: rgba(0,0,0,0.3);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 4px;
+			min-height: 280px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			position: relative;
+			margin-bottom: 14px;
+			width: 100%;
+		}
+        #steg-canvas-wrap canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 420px;
+        }
+        #steg-canvas-empty { color: var(--clr-muted, #888); font-size: 13px; text-align: center; }
+        #steg-canvas-label {
+            position: absolute;
+            top: 7px; left: 7px;
+            background: rgba(0,0,0,0.65);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 3px;
+            padding: 3px 8px;
+            font-size: 10px;
+            color: #888;
+            display: none;
+        }
+
+        .steg-side-box {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 4px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+        .steg-side-box:last-child { margin-bottom: 0; }
+        .steg-box-title {
+            font-size: .72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--clr-muted, #888);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+		
+		#steg-canvas {
+			max-width: 100% !important;
+			height: auto !important;
+		}
+		
+		.steg-panel > div {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 14px;
+		}
+		
+		#steg-canvas-wrap {
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.steg-workspace {
+			display: grid;
+			grid-template-columns: minmax(300px, 1fr) 290px;
+			gap: 20px;
+			align-items: start;
+			width: 100%;
+		}
+
+        .ctrl-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 9px;
+        }
+        .ctrl-row:last-child { margin-bottom: 0; }
+        .ctrl-row label {
+            font-size: 11px;
+            color: var(--clr-muted, #888);
+            min-width: 70px;
+        }
+        .ctrl-row .cv {
+            font-size: 11px;
+            color: var(--clr-accent, #e07820);
+            min-width: 30px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .ctrl-row input[type=range] {
+            flex: 1;
+            accent-color: var(--clr-accent, #e07820);
+        }
+
+        .ch-group { display: flex; gap: 4px; flex-wrap: wrap; }
+        .ch-btn {
+            padding: 4px 10px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            font-family: inherit;
+            color: var(--clr-muted, #888);
+            transition: all .15s;
+        }
+        .ch-btn:hover { color: #ccc; border-color: rgba(255,255,255,0.2); }
+        .ch-btn.r.active  { background: rgba(200,60,70,.25);  border-color:#cc4455; color:#ff6677; }
+        .ch-btn.g.active  { background: rgba(50,160,90,.2);   border-color:#44aa66; color:#55cc77; }
+        .ch-btn.b.active  { background: rgba(50,110,200,.2);  border-color:#4477cc; color:#6699ee; }
+        .ch-btn.nn.active { background: rgba(255,255,255,.07);border-color:rgba(255,255,255,.25);color:#ddd; }
+        .ch-btn.acc.active{ background: rgba(224,120,32,.2);  border-color:var(--clr-accent,#e07820);color:var(--clr-accent,#e07820); }
+
+        .btn-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+        .btn-full { grid-column: 1 / -1; }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--clr-muted,#888);
+        }
+        .stat-row:last-child { border: none; }
+        .stat-val { color: var(--clr-text,#ccc); }
+
+        .hist-wrap { display: flex; gap: 6px; margin-top: 4px; }
+        .hist-col  { flex: 1; }
+        .hist-lbl  { font-size: 9px; font-weight: bold; margin-bottom: 3px; }
+        .hist-bars { display: grid; grid-template-columns: repeat(24,1fr); gap: 1px; height: 38px; align-items: end; }
+        .hist-bar  { border-radius: 1px 1px 0 0; min-height: 1px; }
+
+        .lsb-map { display: grid; grid-template-columns: repeat(8,1fr); gap: 3px; margin-top: 7px; }
+        .lsb-cell {
+            height: 18px; border-radius: 2px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: bold;
+            border: 1px solid transparent;
+        }
+        .lsb-cell.on  { background: rgba(224,120,32,.25); color:var(--clr-accent,#e07820); border-color:rgba(224,120,32,.4); }
+        .lsb-cell.off { background: rgba(0,0,0,.3); color: rgba(255,255,255,.15); }
+
+        .ent-row { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+        .ent-bg  { flex: 1; height: 5px; background: rgba(0,0,0,.3); border-radius: 2px; }
+        .ent-bar { height: 100%; border-radius: 2px; transition: width .4s; }
+
+        .anom-item { font-size: 11px; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+        .anom-item:last-child { border: none; }
+
+        .qp-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; flex-wrap: wrap;  }
+
+        #steg-toast {
+            position: fixed; bottom: 18px; right: 18px;
+            background: rgba(0,0,0,.85);
+            border: 1px solid var(--clr-accent,#e07820);
+            color: var(--clr-accent,#e07820);
+            padding: 8px 16px; border-radius: 4px;
+            font-size: 12px; opacity: 0;
+            transition: opacity .3s; pointer-events: none; z-index: 9999;
+        }
+        #steg-toast.show { opacity: 1; }
+
+        .steg-ta {
+            width: 100%;
+            background: rgba(0,0,0,.3);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 4px;
+            color: var(--clr-text,#ccc);
+            padding: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            resize: vertical;
+            outline: none;
+            min-height: 64px;
+        }
+        .steg-ta:focus { border-color: var(--clr-accent,#e07820); }
+
+        select.steg-sel {
+            background: rgba(0,0,0,.3);
+            border: 1px solid rgba(255,255,255,.12);
+            color: var(--clr-text,#ccc);
+            border-radius: 3px;
+            padding: 4px 8px;
+            font-family: inherit;
+            font-size: 11px;
+            outline: none;
+            flex: 1;
+        }
+        select.steg-sel:focus { border-color: var(--clr-accent,#e07820); }
+		
+		.qp-grid .btn {
+		flex: 1 1 calc(50% - 8px); 
+		min-width: 10px; 
+		padding: 6px 10px;
+		box-sizing: border-box;
+		text-align: center;
+		cursor: pointer;
+		}
+		
+		.btn-container {
+		display: flex;
+		flex-wrap: wrap; /* Разрешаем перенос на новую строку */
+		gap: 5px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.btn-container .btn {
+		flex: 1 1 calc(33.33% - 5px); /* Занимают примерно треть ширины */
+		min-width: 60px; /* Минимальная ширина, чтобы не схлопнулись */
+		font-size: 11px;
+		padding: 5px 2px;
+	}
+
+	.btn-grid-2 {
+		display: grid;
+		grid-template-columns: 1fr 1fr; /* Ровно две колонки */
+		gap: 5px;
+		margin-top: 5px;
+	}
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-header">Ultimate Tools</div>
+    <ul class="nav-menu">
+        <li class="nav-item"><a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+
+        <li class="nav-category" style="padding:15px 20px 5px;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--clr-muted,#888);font-weight:bold;">Graphics &amp; Photo</li>
+
+        <li class="nav-item"><a href="image-redactor.html"        class="nav-link"><i class="fas fa-sliders-h"></i> Image Redactor</a></li>
+        <li class="nav-item"><a href="social-media-cropper.html"  class="nav-link"><i class="fas fa-crop"></i> Social Cropper</a></li>
+        <li class="nav-item"><a href="image-splitter.html"        class="nav-link"><i class="fas fa-th-large"></i> Image Splitter</a></li>
+        <li class="nav-item"><a href="image-format-converter.html"class="nav-link"><i class="fas fa-sync-alt"></i> Image Converter</a></li>
+        <li class="nav-item"><a href="palette-extractor.html"     class="nav-link"><i class="fas fa-palette"></i> Palette Extractor</a></li>
+        <li class="nav-item"><a href="placeholder-gen.html"       class="nav-link"><i class="fas fa-image"></i> Placeholder Gen</a></li>
+        <li class="nav-item"><a href="color-picker.html"          class="nav-link"><i class="fas fa-eye-dropper"></i> Color Picker</a></li>
+        <li class="nav-item"><a href="stego-lab.html"             class="nav-link active"><i class="fas fa-user-secret"></i> Stego Lab</a></li>
+
+        <li class="nav-category" style="padding:15px 20px 5px;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--clr-muted,#888);font-weight:bold;">Conversion &amp; Math</li>
+
+        <li class="nav-item"><a href="graph-calc.html"    class="nav-link"><i class="fas fa-calculator"></i> Graphic Calculator</a></li>
+        <li class="nav-item"><a href="num-system.html"    class="nav-link"><i class="fas fa-microchip"></i> Number Systems</a></li>
+        <li class="nav-item"><a href="base-converter.html"class="nav-link"><i class="fas fa-exchange-alt"></i> Base Converter</a></li>
+        <li class="nav-item"><a href="mp3-converter.html" class="nav-link"><i class="fas fa-headphones"></i> Media Converter</a></li>
+
+        <li class="nav-category" style="padding:15px 20px 5px;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--clr-muted,#888);font-weight:bold;">Utilities &amp; Text</li>
+
+        <li class="nav-item"><a href="exif-cleaner.html"    class="nav-link"><i class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
+        <li class="nav-item"><a href="pass-gen.html"        class="nav-link"><i class="fas fa-key"></i> Password Gen</a></li>
+        <li class="nav-item"><a href="qr-gen.html"          class="nav-link"><i class="fas fa-qrcode"></i> QR Generator</a></li>
+        <li class="nav-item"><a href="word-counter.html"    class="nav-link"><i class="fas fa-font"></i> Word Counter</a></li>
+        <li class="nav-item"><a href="lorem-ipsum.html"     class="nav-link"><i class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
+        <li class="nav-item"><a href="hash-generator.html"  class="nav-link"><i class="fas fa-hashtag"></i> Hash Generator</a></li>
+        <li class="nav-item"><a href="json-formatter.html"  class="nav-link"><i class="fas fa-code"></i> JSON Formatter</a></li>
+        <li class="nav-item"><a href="regex-tester.html"    class="nav-link"><i class="fas fa-search"></i> Regex Tester</a></li>
+        <li class="nav-item"><a href="url-encoder.html"     class="nav-link"><i class="fas fa-link"></i> URL Encoder</a></li>
+        <li class="nav-item"><a href="diff-checker.html"    class="nav-link"><i class="fas fa-code-branch"></i> Diff Checker</a></li>
+    </ul>
+</aside>
+
+<main class="main-content">
+<div class="container" style="max-width:900px;margin:0 auto; padding:40px;">
+
+    <h1 style="text-align:center;">
+        <i class="fas fa-user-secret" style="margin-right:15px;"></i> Steganography Lab ( WIP ) 
+    </h1>
+    <p style="text-align:center;margin-bottom:25px;">
+        Bit plane analysis &middot; LSB encode / decode &middot; Channel viewer &middot; Entropy &amp; anomaly detection
+    </p>
+
+    <div id="steg-drop" style="
+			position: relative;
+            border: 1px dashed var(--clr-muted, #555);
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 40px 20px;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        ">
+	<input type="file" id="steg-file" accept="image/*"
+		   style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer; z-index:2;">
+        <i class="fas fa-file-image" id="steg-drop-icon"
+           style="font-size:2.4rem;color:var(--clr-muted,#888);margin-bottom:14px;display:block;transition:color .2s;"></i>
+        <p style="font-size:1rem;color:var(--clr-text,#fff);margin:0 0 5px;">Drag and drop an image or click to select</p>
+        <p style="font-size:.85rem;color:var(--clr-muted,#888);margin:0;">PNG &middot; BMP &middot; WebP &middot; JPEG supported</p>
+    </div>
+
+    <div id="steg-workspace" style="display:none;">
+
+        <div class="steg-tabs">
+            <button class="steg-tab active" data-tab="bitplane"><i class="fas fa-layer-group"></i> Bit Plane</button>
+            <button class="steg-tab"        data-tab="rgb"     ><i class="fas fa-adjust"></i> RGB Channels</button>
+            <button class="steg-tab"        data-tab="analysis"><i class="fas fa-chart-bar"></i> Analysis</button>
+            <button class="steg-tab"        data-tab="encode"  ><i class="fas fa-lock"></i> Encode LSB</button>
+            <button class="steg-tab"        data-tab="decode"  ><i class="fas fa-unlock"></i> Decode LSB</button>
+        </div>
+
+        <div class="steg-workspace">
+
+            <div>
+                <div id="steg-canvas-wrap">
+                    <div id="steg-canvas-empty">
+                        <i class="fas fa-image" style="font-size:2rem;margin-bottom:8px;display:block;"></i>
+                        Load an image to start
+                    </div>
+                    <canvas id="steg-canvas"></canvas>
+                    <div id="steg-canvas-label">original</div>
+                </div>
+
+                <div id="steg-panel-bitplane" class="steg-panel active">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                        <div class="steg-side-box" style="margin-bottom:0;">
+                            <div class="steg-box-title">Bit Plane</div>
+                            <div class="ctrl-row">
+                                <label>Plane (0-7)</label>
+                                <input type="range" id="bitSlider" min="0" max="7" value="0" step="1">
+                                <span class="cv" id="bitVal">0</span>
+                            </div>
+                            <div class="ctrl-row" style="margin-top:8px;">
+                                <label>Channel</label>
+                                <div class="ch-group">
+                                    <button class="ch-btn r  active" data-ch="R">R</button>
+                                    <button class="ch-btn g"          data-ch="G">G</button>
+                                    <button class="ch-btn b"          data-ch="B">B</button>
+                                    <button class="ch-btn nn"         data-ch="All">All</button>
+                                </div>
+                            </div>
+                        </div>
+						<div class="steg-side-box" style="margin-bottom:0; width: 240px;">
+							<div class="steg-box-title">Display Mode</div>
+							
+							<div class="btn-container">
+								<button class="btn" data-mode="bw">B&W</button>
+								<button class="btn" data-mode="color">Color</button>
+								<button class="btn" data-mode="invert">Invert</button>
+							</div>
+							
+							<div class="btn-grid-2">
+								<button class="btn" id="btnSaveBit">Save</button>
+								<button class="btn" id="btnOrigView">Orig</button>
+							</div>
+						</div>
+                    </div>
+                </div>
+				
+                <div id="steg-panel-rgb" class="steg-panel">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                        <div class="steg-side-box" style="margin-bottom:0;">
+                            <div class="steg-box-title">View Channel</div>
+                            <div class="ch-group" style="flex-wrap:wrap;gap:6px;">
+                                <button class="ch-btn nn active" data-view="original">Original</button>
+                                <button class="ch-btn r"          data-view="r">Red only</button>
+                                <button class="ch-btn g"          data-view="g">Green only</button>
+                                <button class="ch-btn b"          data-view="b">Blue only</button>
+                                <button class="ch-btn nn"         data-view="gray">Grayscale</button>
+                            </div>
+                        </div>
+                        <div class="steg-side-box" style="margin-bottom:0;">
+                            <div class="steg-box-title">Operations</div>
+                            <div class="btn-grid-2">
+                                <button class="btn" data-op="swap_rb">Swap R-B</button>
+                                <button class="btn" data-op="swap_rg">Swap R-G</button>
+                                <button class="btn" data-op="invert_all">Invert all</button>
+                                <button class="btn" data-op="neg_r">Negate R</button>
+                                <button class="btn" data-op="neg_g">Negate G</button>
+                                <button class="btn" data-op="neg_b">Negate B</button>
+                                <button class="btn btn-full" id="btnSaveRgb"><i class="fas fa-save"></i> Save result</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="steg-panel-analysis" class="steg-panel">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+                        <div class="steg-side-box" style="margin-bottom:0;">
+                            <div class="steg-box-title">Image Stats</div>
+                            <div id="statsTable"><span style="color:var(--clr-muted,#888);font-size:11px;">Load image</span></div>
+                        </div>
+                        <div class="steg-side-box" style="margin-bottom:0;">
+                            <div class="steg-box-title">RGB Histogram</div>
+                            <div id="histogram"><span style="color:var(--clr-muted,#888);font-size:11px;">Load image</span></div>
+                        </div>
+                    </div>
+                    <div class="steg-side-box">
+                        <div class="steg-box-title">LSB Bit Map &mdash; first 64 pixels (Red channel, bit 0)</div>
+                        <div class="lsb-map" id="lsbGrid"></div>
+                        <p style="font-size:10px;color:var(--clr-muted,#888);margin-top:6px;">
+                            <span style="color:var(--clr-accent,#e07820);">&#9632;</span> Orange = bit 1 &nbsp;
+                            <span style="color:rgba(255,255,255,.2);">&#9632;</span> Dark = bit 0
+                        </p>
+                    </div>
+                </div>
+
+                <!--ENCODE-->
+                <div id="steg-panel-encode" class="steg-panel">
+                    <div class="steg-side-box">
+                        <div class="steg-box-title">LSB Text Encoder</div>
+                        <div class="ctrl-row">
+                            <label>Channel</label>
+                            <select id="encCh" class="steg-sel">
+                                <option value="0">Red</option>
+                                <option value="1">Green</option>
+                                <option value="2">Blue</option>
+                                <option value="3">All channels (Luma)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-row">
+                            <label>Bits / pixel</label>
+                            <select id="encBits" class="steg-sel">
+                                <option value="1">1 bit &mdash; max stealth</option>
+                                <option value="2">2 bits</option>
+                                <option value="4">4 bits &mdash; medium</option>
+                            </select>
+                        </div>
+                        <p style="font-size:11px;color:var(--clr-muted,#888);margin-bottom:6px;">Secret message:</p>
+                        <textarea id="encText" class="steg-ta" placeholder="Type your secret message here..."></textarea>
+                        <div class="btn-grid-2" style="margin-top:10px;">
+                            <button class="btn btn-full" id="btnEncode" style="background:var(--clr-accent,#e07820);color:#fff;font-weight:bold;border-color:var(--clr-accent,#e07820);">
+                                <i class="fas fa-lock"></i> Encode &amp; Preview
+                            </button>
+                            <button class="btn btn-full" id="btnSaveEnc" disabled>
+                                <i class="fas fa-save"></i> Save stego image
+                            </button>
+                        </div>
+                        <p id="encStatus" style="font-size:10px;color:var(--clr-muted,#888);margin-top:7px;text-align:center;"></p>
+                    </div>
+                </div>
+
+                <!-- DECODE -->
+                <div id="steg-panel-decode" class="steg-panel">
+                    <div class="steg-side-box">
+                        <div class="steg-box-title">LSB Text Decoder</div>
+                        <div class="ctrl-row">
+                            <label>Channel</label>
+                            <select id="decCh" class="steg-sel">
+                                <option value="0">Red</option>
+                                <option value="1">Green</option>
+                                <option value="2">Blue</option>
+                                <option value="3">All channels (Luma)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-row">
+                            <label>Bits / pixel</label>
+                            <select id="decBits" class="steg-sel">
+                                <option value="1">1 bit</option>
+                                <option value="2">2 bits</option>
+                                <option value="4">4 bits</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-row">
+                            <label>Max chars</label>
+                            <input type="range" id="decLen" min="10" max="5000" value="500" step="10">
+                            <span class="cv" id="decLenVal">500</span>
+                        </div>
+                        <button class="btn btn-full" id="btnDecode"
+                                style="width:100%;margin:10px 0;background:var(--clr-accent,#e07820);color:#fff;font-weight:bold;border-color:var(--clr-accent,#e07820);">
+                            <i class="fas fa-unlock"></i> Extract Hidden Data
+                        </button>
+                        <textarea id="decOutput" class="steg-ta" readonly
+                                  placeholder="Extracted text will appear here..." style="height:90px;"></textarea>
+                        <button class="btn" id="btnCopy" style="width:100%;margin-top:8px;">
+                            <i class="fas fa-copy"></i> Copy result
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="steg-side-box">
+                    <div class="steg-box-title"><i class="fas fa-info-circle"></i> File Info</div>
+                    <div id="fileInfo" style="font-size:11px;color:var(--clr-muted,#888);">No image loaded</div>
+                </div>
+
+                <div class="steg-side-box">
+                    <div class="steg-box-title"><i class="fas fa-th-large"></i> Quick Bit Planes</div>
+                    <div class="qp-grid" id="qpGrid">
+                        <button class="btn" data-qp="0" title="LSB - most hidden">LSB (0)</button>
+                        <button class="btn" data-qp="1">Bit 1</button>
+                        <button class="btn" data-qp="2">Bit 2</button>
+                        <button class="btn" data-qp="3">Bit 3</button>
+                        <button class="btn" data-qp="4">Bit 4</button>
+                        <button class="btn" data-qp="5">Bit 5</button>
+                        <button class="btn" data-qp="6">Bit 6</button>
+                        <button class="btn" data-qp="7" title="MSB - most visible">MSB (7)</button>
+                    </div>
+                </div>
+
+                <div class="steg-side-box">
+                    <div class="steg-box-title"><i class="fas fa-exclamation-triangle"></i> Anomaly Detection</div>
+                    <div id="anomalies" style="font-size:11px;color:var(--clr-muted,#888);">Load image to analyze</div>
+                </div>
+
+                <div class="steg-side-box">
+                    <div class="steg-box-title"><i class="fas fa-signal"></i> Bit Entropy (Red ch.)</div>
+                    <div id="entropyBars"><span style="font-size:11px;color:var(--clr-muted,#888);">Load image</span></div>
+                </div>
+
+                <div class="steg-side-box">
+                    <div class="steg-box-title"><i class="fas fa-download"></i> Export</div>
+                    <div style="display:flex;flex-direction:column;gap:7px;">
+                        <button class="btn" id="btnSaveCurrent"><i class="fas fa-camera"></i> Save current view</button>
+                        <button class="btn" id="btnSaveOrig"><i class="fas fa-image"></i> Save original</button>
+                        <button class="btn" id="btnReset"><i class="fas fa-trash-alt"></i> Reset all</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+<div id="steg-toast"></div>
+
+<script>
+(function(){
+const canvas  = document.getElementById('steg-canvas');
+const ctx     = canvas.getContext('2d');
+const dropEl  = document.getElementById('steg-drop');
+const dropIcon= document.getElementById('steg-drop-icon');
+const wsEl    = document.getElementById('steg-workspace');
+
+let orig = null, stegoData = null;
+let activeTab = 'bitplane', activeChannel = 'R', activeMode = 'bw';
+let rgbView = 'original', rgbOp = null;
+
+function toast(msg, dur=1800){
+    const t = document.getElementById('steg-toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), dur);
+}
+
+document.getElementById('steg-file').addEventListener('change', e => {
+    if (e.target.files[0]) loadImage(e.target.files[0]);
+});
+dropEl.addEventListener('dragover', e => { e.preventDefault(); dropEl.style.borderColor='var(--clr-accent,#e07820)'; dropEl.style.background='rgba(224,120,32,.06)'; dropIcon.style.color='var(--clr-accent,#e07820)'; });
+dropEl.addEventListener('dragleave', () => { dropEl.style.borderColor='var(--clr-muted,#555)'; dropEl.style.background='rgba(0,0,0,.2)'; dropIcon.style.color='var(--clr-muted,#888)'; });
+dropEl.addEventListener('drop', e => { e.preventDefault(); dropEl.style.borderColor='var(--clr-muted,#555)'; dropEl.style.background='rgba(0,0,0,.2)'; dropIcon.style.color='var(--clr-muted,#888)'; if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]); });
+
+function loadImage(file){
+    const r = new FileReader();
+    r.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+            canvas.width = img.width; canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            orig = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            stegoData = null;
+            document.getElementById('steg-canvas-empty').style.display = 'none';
+            canvas.style.display = 'block';
+            document.getElementById('steg-canvas-label').style.display = 'block';
+            wsEl.style.display = 'block';
+            dropEl.style.marginBottom = '0';
+            updateFileInfo(file, img);
+            renderEntropy(); detectAnomalies(); renderAnalysis();
+            updateCanvas();
+        };
+        img.src = ev.target.result;
+    };
+    r.readAsDataURL(file);
+}
+
+document.querySelectorAll('.steg-tab').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.steg-tab').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); activeTab = b.dataset.tab;
+    document.querySelectorAll('.steg-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('steg-panel-' + activeTab).classList.add('active');
+    if (orig) updateCanvas();
+    if (orig && activeTab === 'analysis') renderAnalysis();
+}));
+
+function updateCanvas(){
+    if (!orig) return;
+    if      (activeTab === 'bitplane') renderBitPlane();
+    else if (activeTab === 'rgb')      renderRGB();
+    else if (activeTab === 'encode' && stegoData) ctx.putImageData(stegoData, 0, 0);
+    else ctx.putImageData(orig, 0, 0);
+    updateLabel();
+}
+
+function updateLabel(){
+    const l = document.getElementById('steg-canvas-label');
+    if (activeTab === 'bitplane') l.textContent = `Bit ${document.getElementById('bitSlider').value} - ${activeChannel} - ${activeMode}`;
+    else if (activeTab === 'rgb') l.textContent = `Channel: ${rgbView}`;
+    else l.textContent = 'original';
+}
+
+function renderBitPlane(){
+    const bit = parseInt(document.getElementById('bitSlider').value);
+    const d = orig.data, out = ctx.createImageData(canvas.width, canvas.height), od = out.data;
+    for (let i = 0; i < d.length; i += 4){
+        let r=(d[i  ]>>bit)&1, g=(d[i+1]>>bit)&1, b=(d[i+2]>>bit)&1, v;
+        if      (activeChannel==='R') v = r*255;
+        else if (activeChannel==='G') v = g*255;
+        else if (activeChannel==='B') v = b*255;
+        else v = ((r+g+b)>1?1:0)*255;
+        if (activeMode==='invert') v = 255-v;
+        if (activeMode==='color'){ od[i]=r*255; od[i+1]=g*255; od[i+2]=b*255; }
+        else { od[i]=od[i+1]=od[i+2]=v; }
+        od[i+3]=255;
+    }
+    ctx.putImageData(out, 0, 0);
+}
+
+function renderRGB(){
+    const d = orig.data, out = ctx.createImageData(canvas.width, canvas.height), od = out.data;
+    for (let i = 0; i < d.length; i += 4){
+        if      (rgbView==='r')       { od[i]=d[i];       od[i+1]=0;        od[i+2]=0;        }
+        else if (rgbView==='g')       { od[i]=0;           od[i+1]=d[i+1];   od[i+2]=0;        }
+        else if (rgbView==='b')       { od[i]=0;           od[i+1]=0;        od[i+2]=d[i+2];   }
+        else if (rgbView==='gray')    { const l=Math.round(.299*d[i]+.587*d[i+1]+.114*d[i+2]); od[i]=od[i+1]=od[i+2]=l; }
+        else if (rgbOp==='swap_rb')   { od[i]=d[i+2];     od[i+1]=d[i+1];   od[i+2]=d[i];     }
+        else if (rgbOp==='swap_rg')   { od[i]=d[i+1];     od[i+1]=d[i];     od[i+2]=d[i+2];   }
+        else if (rgbOp==='invert_all'){ od[i]=255-d[i];   od[i+1]=255-d[i+1];od[i+2]=255-d[i+2]; }
+        else if (rgbOp==='neg_r')     { od[i]=255-d[i];   od[i+1]=d[i+1];   od[i+2]=d[i+2];   }
+        else if (rgbOp==='neg_g')     { od[i]=d[i];       od[i+1]=255-d[i+1];od[i+2]=d[i+2];  }
+        else if (rgbOp==='neg_b')     { od[i]=d[i];       od[i+1]=d[i+1];   od[i+2]=255-d[i+2]; }
+        else                          { od[i]=d[i];       od[i+1]=d[i+1];   od[i+2]=d[i+2];   }
+        od[i+3]=255;
+    }
+    ctx.putImageData(out, 0, 0);
+}
+
+document.getElementById('bitSlider').addEventListener('input', function(){
+    document.getElementById('bitVal').textContent = this.value;
+    document.querySelectorAll('#qpGrid .btn').forEach(b => b.classList.toggle('active', b.dataset.qp == this.value));
+    if (orig && activeTab==='bitplane') renderBitPlane(); updateLabel();
+});
+
+document.querySelectorAll('.ch-btn[data-ch]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.ch-btn[data-ch]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); activeChannel = b.dataset.ch;
+    if (orig && activeTab==='bitplane') renderBitPlane();
+}));
+
+document.querySelectorAll('.btn[data-mode]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.btn[data-mode]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); activeMode = b.dataset.mode;
+    if (orig && activeTab==='bitplane') renderBitPlane();
+}));
+
+document.querySelectorAll('.ch-btn[data-view]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.ch-btn[data-view]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); rgbView = b.dataset.view; rgbOp = null;
+    if (orig && activeTab==='rgb') renderRGB();
+}));
+
+document.querySelectorAll('.btn[data-op]').forEach(b => b.addEventListener('click', () => {
+    rgbOp = b.dataset.op; rgbView = 'op';
+    if (orig && activeTab==='rgb') renderRGB();
+}));
+
+document.querySelectorAll('#qpGrid .btn').forEach(b => b.addEventListener('click', () => {
+    const v = b.dataset.qp;
+    document.getElementById('bitSlider').value = v;
+    document.getElementById('bitVal').textContent = v;
+    document.querySelectorAll('#qpGrid .btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    document.querySelectorAll('.steg-tab').forEach(t => t.classList.toggle('active', t.dataset.tab==='bitplane'));
+    document.querySelectorAll('.steg-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('steg-panel-bitplane').classList.add('active');
+    activeTab = 'bitplane';
+    if (orig){ renderBitPlane(); updateLabel(); }
+}));
+
+function updateFileInfo(file, img){
+    document.getElementById('fileInfo').innerHTML = `
+        <div class="stat-row"><span>${file.name}</span></div>
+        <div class="stat-row"><span>Resolution</span><span class="stat-val">${img.width}&times;${img.height}</span></div>
+        <div class="stat-row"><span>File size</span><span class="stat-val">${(file.size/1024).toFixed(1)} KB</span></div>
+        <div class="stat-row"><span>Total pixels</span><span class="stat-val">${(img.width*img.height).toLocaleString()}</span></div>
+        <div class="stat-row"><span>Capacity (1-bit)</span><span class="stat-val">${Math.floor(img.width*img.height/8).toLocaleString()} chars</span></div>
+    `;
+}
+
+function renderAnalysis(){
+    if (!orig) return;
+    const d = orig.data, n = d.length/4;
+    let rs=0, gs=0, bs=0;
+    for (let i=0;i<d.length;i+=4){ rs+=d[i]; gs+=d[i+1]; bs+=d[i+2]; }
+    document.getElementById('statsTable').innerHTML = `
+        <div class="stat-row"><span>Pixels</span><span class="stat-val">${n.toLocaleString()}</span></div>
+        <div class="stat-row"><span style="color:#cc4455;">Avg Red</span><span class="stat-val">${(rs/n).toFixed(1)}</span></div>
+        <div class="stat-row"><span style="color:#44aa66;">Avg Green</span><span class="stat-val">${(gs/n).toFixed(1)}</span></div>
+        <div class="stat-row"><span style="color:#5588ee;">Avg Blue</span><span class="stat-val">${(bs/n).toFixed(1)}</span></div>
+        <div class="stat-row"><span>LSB capacity</span><span class="stat-val">${Math.floor(n/8).toLocaleString()} chars</span></div>
+    `;
+    const bins=24, step=256/bins;
+    const rH=new Array(bins).fill(0), gH=new Array(bins).fill(0), bH=new Array(bins).fill(0);
+    for (let i=0;i<d.length;i+=4){
+        rH[Math.min(bins-1,Math.floor(d[i]/step))]++;
+        gH[Math.min(bins-1,Math.floor(d[i+1]/step))]++;
+        bH[Math.min(bins-1,Math.floor(d[i+2]/step))]++;
+    }
+    const mx = Math.max(...rH,...gH,...bH);
+    let html = '<div class="hist-wrap">';
+    [['R',rH,'#cc4455'],['G',gH,'#44aa66'],['B',bH,'#5588ee']].forEach(([lbl,arr,col]) => {
+        html += `<div class="hist-col"><div class="hist-lbl" style="color:${col}">${lbl}</div><div class="hist-bars">`;
+        arr.forEach(v => { const h=Math.max(1,Math.round((v/mx)*38)); html+=`<div class="hist-bar" style="height:${h}px;background:${col}"></div>`; });
+        html += '</div></div>';
+    });
+    html += '</div>';
+    document.getElementById('histogram').innerHTML = html;
+    let lb='';
+    for (let i=0;i<64;i++){ const bit=d[i*4]&1; lb+=`<div class="lsb-cell ${bit?'on':'off'}">${bit}</div>`; }
+    document.getElementById('lsbGrid').innerHTML = lb;
+}
+
+function renderEntropy(){
+    if (!orig) return;
+    const d = orig.data, n = d.length/4;
+    let html = '';
+    for (let bit=0; bit<8; bit++){
+        let ones=0;
+        for (let i=0;i<d.length;i+=4) ones+=(d[i]>>bit)&1;
+        const ratio=ones/n;
+        const ent=-((ratio*Math.log2(ratio+1e-9))+((1-ratio)*Math.log2(1-ratio+1e-9)));
+        const pct=Math.round(ent*100);
+        const col = bit<3 ? 'var(--clr-accent,#e07820)' : 'rgba(255,255,255,.25)';
+        html += `<div class="ent-row">
+            <span style="font-size:10px;color:var(--clr-muted,#888);min-width:38px;">Bit ${bit}</span>
+            <div class="ent-bg"><div class="ent-bar" style="width:${pct}%;background:${col}"></div></div>
+            <span style="font-size:10px;color:var(--clr-muted,#aaa);min-width:28px;">${pct}%</span>
+        </div>`;
+    }
+    document.getElementById('entropyBars').innerHTML = html;
+}
+
+function detectAnomalies(){
+    if (!orig) return;
+    const d = orig.data, n = d.length/4;
+    let ones=0;
+    for (let i=0;i<d.length;i+=4) ones += d[i]&1;
+    const ratio = ones/n;
+    const uniform = ratio>0.48 && ratio<0.52;
+    let html = '';
+    html += `<div class="anom-item" style="color:${uniform?'#cc8820':'#44aa66'};">
+        ${uniform ? '? LSB is suspiciously uniform - possible hidden data' : '? LSB distribution looks natural'}
+    </div>`;
+    if (n>2000){
+        let pairs=0;
+        for (let i=0;i<Math.min(d.length-4,8000);i+=8) if((d[i]&1)===(d[i+4]&1)) pairs++;
+        const pr = pairs / Math.min(n/2, 1000);
+        html += `<div class="anom-item" style="color:${pr>0.55?'#cc8820':'#44aa66'};">
+            ${pr>0.55 ? '? High LSB pair correlation detected' : '? LSB pairs show normal variance'}
+        </div>`;
+    }
+    html += `<div class="anom-item" style="color:var(--clr-muted,#888);">? Max hidden data (1-bit): ${Math.floor(n/8).toLocaleString()} bytes</div>`;
+    document.getElementById('anomalies').innerHTML = html;
+}
+
+document.getElementById('btnEncode').addEventListener('click', () => {
+    if (!orig) return toast('Load an image first');
+    const text = document.getElementById('encText').value;
+    if (!text) return toast('Enter a message to encode');
+    const chIdx = parseInt(document.getElementById('encCh').value);
+    const bpp   = parseInt(document.getElementById('encBits').value);
+    const msg   = text + '\0';
+    const bits  = [];
+    for (const c of msg) for (let b=7;b>=0;b--) bits.push((c.charCodeAt(0)>>b)&1);
+    const chMap    = [[0],[1],[2],[0,1,2]];
+    const channels = chMap[chIdx];
+    const maxBits  = Math.floor(orig.data.length/4) * bpp * channels.length;
+    if (bits.length > maxBits) return toast(`Message too long! Max ? ${Math.floor(maxBits/8)} chars`);
+    const enc  = new Uint8ClampedArray(orig.data);
+    let bi=0; const mask = (~((1<<bpp)-1)) & 0xFF;
+    for (let i=0; i<enc.length && bi<bits.length; i+=4){
+        for (const ch of channels){
+            if (bi>=bits.length) break;
+            let v = enc[i+ch] & mask;
+            for (let b=bpp-1; b>=0 && bi<bits.length; b--,bi++) v |= bits[bi]<<b;
+            enc[i+ch] = v;
+        }
+    }
+    stegoData = new ImageData(enc, canvas.width, canvas.height);
+    ctx.putImageData(stegoData, 0, 0);
+    document.getElementById('btnSaveEnc').disabled = false;
+    const usedPct = Math.round((bits.length/maxBits)*100);
+    document.getElementById('encStatus').textContent = `Encoded ${msg.length-1} chars - ${bits.length} bits - ${usedPct}% of capacity used`;
+    toast('Message encoded successfully!');
+});
+
+document.getElementById('btnDecode').addEventListener('click', () => {
+    if (!orig) return toast('Load an image first');
+    const chIdx = parseInt(document.getElementById('decCh').value);
+    const bpp   = parseInt(document.getElementById('decBits').value);
+    const maxC  = parseInt(document.getElementById('decLen').value);
+    const src   = stegoData || orig;
+    const d     = src.data;
+    const bits  = [];
+    const chMap = [[0],[1],[2],[0,1,2]];
+    const channels = chMap[chIdx];
+    for (let i=0; i<d.length; i+=4){
+        for (const ch of channels) for (let b=bpp-1;b>=0;b--) bits.push((d[i+ch]>>b)&1);
+        if (bits.length > maxC*8+16) break;
+    }
+    let result='';
+    for (let i=0; i<bits.length-7; i+=8){
+        let code=0; for (let b=0;b<8;b++) code=(code<<1)|bits[i+b];
+        if (code===0) break;
+        result += String.fromCharCode(code);
+        if (result.length>=maxC) break;
+    }
+    document.getElementById('decOutput').value = result || '(no readable text found)';
+    if (result) toast(`Extracted ${result.length} characters`); else toast('Nothing found');
+});
+
+document.getElementById('decLen').addEventListener('input', function(){ document.getElementById('decLenVal').textContent = this.value; });
+document.getElementById('btnCopy').addEventListener('click', () => {
+    const v = document.getElementById('decOutput').value;
+    if (v) navigator.clipboard.writeText(v).then(() => toast('Copied to clipboard!'));
+});
+
+function saveCurrentView(){
+    const t=document.createElement('canvas'); t.width=canvas.width; t.height=canvas.height;
+    t.getContext('2d').drawImage(canvas,0,0);
+    const a=document.createElement('a'); a.download=`stego_${activeTab}_${Date.now()}.png`; a.href=t.toDataURL('image/png'); a.click(); toast('Saved!');
+}
+function saveImageData(data, name){
+    if (!data) return toast('Nothing to save');
+    const t=document.createElement('canvas'); t.width=canvas.width; t.height=canvas.height;
+    t.getContext('2d').putImageData(data,0,0);
+    const a=document.createElement('a'); a.download=name; a.href=t.toDataURL('image/png'); a.click(); toast('Saved!');
+}
+
+document.getElementById('btnSaveBit').addEventListener('click', saveCurrentView);
+document.getElementById('btnOrigView').addEventListener('click', () => { if (orig) { ctx.putImageData(orig,0,0); updateLabel(); } });
+document.getElementById('btnSaveRgb').addEventListener('click', saveCurrentView);
+document.getElementById('btnSaveCurrent').addEventListener('click', saveCurrentView);
+document.getElementById('btnSaveOrig').addEventListener('click', () => saveImageData(orig, 'original.png'));
+document.getElementById('btnSaveEnc').addEventListener('click', () => saveImageData(stegoData, `stego_encoded_${Date.now()}.png`));
+document.getElementById('btnReset').addEventListener('click', () => {
+    if (!orig) return;
+    stegoData = null; ctx.putImageData(orig,0,0); updateLabel();
+    document.getElementById('encText').value = '';
+    document.getElementById('decOutput').value = '';
+    document.getElementById('encStatus').textContent = '';
+    document.getElementById('btnSaveEnc').disabled = true;
+    toast('Reset complete');
+});
+
+})();
+</script>
+</body>
+</html>
