@@ -45,19 +45,20 @@
     <style>
         /* Стилизация полей ввода под тёмную тему GibsyLab, замеченную на скриншоте */
         .date-input-group input {
-            width: 100%; 
-            padding: 10px; 
-            background-color: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 6px; 
-            color: #fff;
+            width: 100%;
+            padding: 11px 14px;
+            background-color: #fff;
+            border: 2px solid var(--brut-ink, #111);
+            border-radius: 0;
+            color: var(--clr-text, #111);
             font-size: 0.95rem;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s;
+            transition: var(--transition, all 0.15s ease);
         }
         .date-input-group input:focus {
-            border-color: #ff5722; /* Фирменный оранжевый акцент */
+            border-color: var(--clr-accent, #ff4d2e);
+            box-shadow: 4px 4px 0 var(--clr-accent, #ff4d2e);
         }
         .date-input-group label {
             display: block; 
@@ -170,7 +171,7 @@
                 
                 <div class="tool-card no-hover" style="cursor: default;">
                     <h3><i aria-hidden="true" class="fas fa-hourglass-half"></i> Countdown to Date</h3>
-                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ccc;">How many days left until a specific deadline or event?</p>
+                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--clr-muted);">How many days left until a specific deadline or event?</p>
                     
                     <div class="date-input-group" style="margin-bottom: 15px;">
                         <label>Target Date:</label>
@@ -182,7 +183,7 @@
 
                 <div class="tool-card no-hover" style="cursor: default;">
                     <h3><i aria-hidden="true" class="fas fa-calendar-day"></i> Days Between Dates</h3>
-                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ccc;">Calculate the exact number of days passed between two custom dates.</p>
+                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--clr-muted);">Calculate the exact number of days passed between two custom dates.</p>
                     
                     <div class="date-input-group" style="margin-bottom: 10px;">
                         <label>Start Date:</label>
@@ -199,7 +200,7 @@
 
                 <div class="tool-card no-hover" style="cursor: default;">
                     <h3><i aria-hidden="true" class="fas fa-calendar-plus"></i> Add or Subtract Days</h3>
-                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ccc;">Find the calendar date by adding or subtracting days from a starting point.</p>
+                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--clr-muted);">Find the calendar date by adding or subtracting days from a starting point.</p>
                     
                     <div class="date-input-group" style="margin-bottom: 10px;">
                         <label>Base Date:</label>
@@ -216,7 +217,7 @@
 
                 <div class="tool-card no-hover" style="cursor: default;">
                     <h3><i aria-hidden="true" class="fas fa-exchange-alt"></i> Time Unit Converter</h3>
-                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ccc;">Convert days into years/months/weeks or vice versa instantly.</p>
+                    <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--clr-muted);">Convert days into years/months/weeks or vice versa instantly.</p>
                     
                     <div class="date-input-group" style="margin-bottom: 12px;">
                         <label>Total Days:</label>

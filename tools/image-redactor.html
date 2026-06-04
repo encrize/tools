@@ -74,6 +74,23 @@
   }
 ]
     </script>
+<style>
+    /* Brutalist shadow fit-up for Image Redactor's tight button rows/grids */
+    #editor-workspace .btn, #actions .btn {
+        box-shadow: 2px 2px 0 var(--brut-ink, #111);
+    }
+    #editor-workspace .btn:hover, #editor-workspace .btn:focus-visible,
+    #actions .btn:hover, #actions .btn:focus-visible {
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0 var(--brut-ink, #111);
+    }
+    #editor-workspace .btn:active, #actions .btn:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0 var(--brut-ink, #111);
+    }
+    /* A touch more breathing room between the rotate/flip buttons */
+    #actions { gap: 12px !important; }
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -157,62 +174,62 @@
                 </div>
                 
                 <div id="actions" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn" onclick="rotateLeft()" style="background: #444;"><i aria-hidden="true" class="fas fa-undo"></i> Left</button>
-                    <button class="btn" onclick="rotateRight()" style="background: #444;"><i aria-hidden="true" class="fas fa-redo"></i> Right</button>
-                    <button class="btn" onclick="flipX()" style="background: #444;"><i aria-hidden="true" class="fas fa-arrows-alt-h"></i> Flip X</button>
-                    <button class="btn" onclick="flipY()" style="background: #444;"><i aria-hidden="true" class="fas fa-arrows-alt-v"></i> Flip Y</button>
-                    <button class="btn" onclick="resetEditor()" style="background: #222; color: #aaa;"><i aria-hidden="true" class="fas fa-sync-alt"></i> Reset</button>
+                    <button class="btn" onclick="rotateLeft()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-undo"></i> Left</button>
+                    <button class="btn" onclick="rotateRight()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-redo"></i> Right</button>
+                    <button class="btn" onclick="flipX()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-arrows-alt-h"></i> Flip X</button>
+                    <button class="btn" onclick="flipY()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-arrows-alt-v"></i> Flip Y</button>
+                    <button class="btn" onclick="resetEditor()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-sync-alt"></i> Reset</button>
                 </div>
             </div>
 
-            <div style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: #fff; border: 3px solid var(--brut-ink); box-shadow: 5px 5px 0 var(--brut-ink); border-radius: 0; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
                 <div>
-                    <label style="font-weight: bold; font-size: 0.9rem; color: #fff; display: block; margin-bottom: 8px;">Cropping Aspect</label>
+                    <label style="font-weight: bold; font-size: 0.9rem; color: var(--clr-text); display: block; margin-bottom: 8px;">Cropping Aspect</label>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-                        <button class="btn" onclick="changeAspect(NaN)" style="font-size:0.8rem; background: #333; padding: 6px;">Free</button>
-                        <button class="btn" onclick="changeAspect(1)" style="font-size:0.8rem; background: #333; padding: 6px;">1:1 Square</button>
-                        <button class="btn" onclick="changeAspect(4/3)" style="font-size:0.8rem; background: #333; padding: 6px;">4:3 Standard</button>
-                        <button class="btn" onclick="changeAspect(16/9)" style="font-size:0.8rem; background: #333; padding: 6px;">16:9 Wide</button>
+                        <button class="btn" onclick="changeAspect(NaN)" style="font-size:0.8rem; background: #fff; color: var(--clr-text); padding: 6px;">Free</button>
+                        <button class="btn" onclick="changeAspect(1)" style="font-size:0.8rem; background: #fff; color: var(--clr-text); padding: 6px;">1:1 Square</button>
+                        <button class="btn" onclick="changeAspect(4/3)" style="font-size:0.8rem; background: #fff; color: var(--clr-text); padding: 6px;">4:3 Standard</button>
+                        <button class="btn" onclick="changeAspect(16/9)" style="font-size:0.8rem; background: #fff; color: var(--clr-text); padding: 6px;">16:9 Wide</button>
                     </div>
                 </div>
 
                 <div>
-                    <label style="font-weight: bold; font-size: 0.9rem; color: #fff; display: block; margin-bottom: 12px;">Color & Effects</label>
+                    <label style="font-weight: bold; font-size: 0.9rem; color: var(--clr-text); display: block; margin-bottom: 12px;">Color & Effects</label>
                     
                     <div style="margin-bottom: 10px;">
-                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#aaa; margin-bottom:4px;"><span>Brightness</span><span id="val-bright">100%</span></div>
+                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--clr-muted); margin-bottom:4px;"><span>Brightness</span><span id="val-bright">100%</span></div>
                         <input type="range" id="filter-brightness" min="50" max="150" value="100" style="width:100%; accent-color: var(--clr-accent, #00bcd4);" oninput="applyFiltersPreview()">
                     </div>
 
                     <div style="margin-bottom: 10px;">
-                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#aaa; margin-bottom:4px;"><span>Contrast</span><span id="val-contrast">100%</span></div>
+                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--clr-muted); margin-bottom:4px;"><span>Contrast</span><span id="val-contrast">100%</span></div>
                         <input type="range" id="filter-contrast" min="50" max="150" value="100" style="width:100%; accent-color: var(--clr-accent, #00bcd4);" oninput="applyFiltersPreview()">
                     </div>
 
                     <div style="margin-bottom: 10px;">
-                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#aaa; margin-bottom:4px;"><span>Saturation</span><span id="val-saturate">100%</span></div>
+                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--clr-muted); margin-bottom:4px;"><span>Saturation</span><span id="val-saturate">100%</span></div>
                         <input type="range" id="filter-saturate" min="0" max="200" value="100" style="width:100%; accent-color: var(--clr-accent, #00bcd4);" oninput="applyFiltersPreview()">
                     </div>
 
                     <div style="margin-bottom: 10px;">
-                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#aaa; margin-bottom:4px;"><span>Sharpness</span><span id="val-sharp">0%</span></div>
+                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--clr-muted); margin-bottom:4px;"><span>Sharpness</span><span id="val-sharp">0%</span></div>
                         <input type="range" id="filter-sharp" min="0" max="100" value="0" style="width:100%; accent-color: var(--clr-accent, #00bcd4);" oninput="applyFiltersPreview()">
                     </div>
                 </div>
 
-                <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                    <label style="font-weight: bold; font-size: 0.9rem; color: #fff; display: block; margin-bottom: 8px;">Export Settings</label>
+                <div style="border-top: 2px solid var(--brut-ink); padding-top: 15px;">
+                    <label style="font-weight: bold; font-size: 0.9rem; color: var(--clr-text); display: block; margin-bottom: 8px;">Export Settings</label>
                     <div style="display: flex; gap: 10px; margin-bottom: 12px;">
-                        <label style="color:#fff; font-size:0.85rem; display:flex; align-items:center; gap:5px; cursor:pointer;">
+                        <label style="color: var(--clr-text); font-size:0.85rem; display:flex; align-items:center; gap:5px; cursor:pointer;">
                             <input type="radio" name="format" value="image/png" checked onchange="toggleQualityRow()"> PNG
                         </label>
-                        <label style="color:#fff; font-size:0.85rem; display:flex; align-items:center; gap:5px; cursor:pointer;">
+                        <label style="color: var(--clr-text); font-size:0.85rem; display:flex; align-items:center; gap:5px; cursor:pointer;">
                             <input type="radio" name="format" value="image/jpeg" onchange="toggleQualityRow()"> JPEG
                         </label>
                     </div>
 
                     <div id="quality-row" style="margin-bottom: 15px;">
-                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#aaa; margin-bottom:4px;">
+                        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--clr-muted); margin-bottom:4px;">
                             <span>Quality</span>
                             <span id="val-quality">Max (Lossless)</span>
                         </div>

@@ -40,12 +40,12 @@
         .copy-btn { margin-top:.4rem; width:100%; background:transparent; border:1px solid var(--clr-border,#3a3330); color:var(--clr-text,#f0ebe6); padding:5px; border-radius:4px; cursor:pointer; font-size:.78rem; }
         .copy-btn:hover { border-color:var(--clr-accent,#e8633a); color:var(--clr-accent,#e8633a); }
         .swatches { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
-        .swatch { width:36px; height:36px; border-radius:6px; cursor:pointer; border:2px solid transparent; transition:transform .1s; }
-        .swatch:hover { transform:scale(1.15); border-color:rgba(255,255,255,.3); }
+        .swatch { width:36px; height:36px; border-radius:0; cursor:pointer; border:2px solid var(--brut-ink,#111); box-shadow:2px 2px 0 var(--brut-ink,#111); transition:transform .1s; }
+        .swatch:hover { transform:translate(-1px,-1px) scale(1.08); box-shadow:3px 3px 0 var(--brut-ink,#111); }
         .section-label { font-weight:700; margin-bottom:.6rem; }
         .shades-row { display:flex; gap:.4rem; margin-top:1.5rem; flex-wrap:wrap; }
-        .shade { height:40px; flex:1; min-width:40px; border-radius:6px; cursor:pointer; transition:transform .1s; }
-        .shade:hover { transform:scaleY(1.1); }
+        .shade { height:40px; flex:1; min-width:40px; border-radius:0; cursor:pointer; border:2px solid var(--brut-ink,#111); transition:transform .1s; }
+        .shade:hover { transform:scaleY(1.1); box-shadow:2px 2px 0 var(--brut-ink,#111); }
     </style>
     <script type="application/ld+json">
 [

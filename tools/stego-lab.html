@@ -294,6 +294,26 @@
         .mini-bar-bg { height:6px; background:rgba(0,0,0,.3); border-radius:3px; overflow:hidden; margin-top:3px; }
         .mini-bar { height:100%; border-radius:3px; transition:width .4s; }
 
+        /* --- Brutalist shadow fit-up for tight Stego Lab button rows --- */
+        .btn-container, .btn-grid-2, .seg, .qp-grid { gap: 10px; }
+        .steg-panel .btn,
+        .btn-container .btn, .btn-grid-2 .btn, .seg .btn, .qp-grid .btn {
+            box-shadow: 2px 2px 0 var(--brut-ink, #111);
+        }
+        .steg-panel .btn:hover, .steg-panel .btn:focus-visible,
+        .btn-container .btn:hover, .btn-grid-2 .btn:hover,
+        .seg .btn:hover, .qp-grid .btn:hover,
+        .btn-container .btn:focus-visible, .btn-grid-2 .btn:focus-visible,
+        .seg .btn:focus-visible, .qp-grid .btn:focus-visible {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 var(--brut-ink, #111);
+        }
+        .steg-panel .btn:active,
+        .btn-container .btn:active, .btn-grid-2 .btn:active,
+        .seg .btn:active, .qp-grid .btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 var(--brut-ink, #111);
+        }
     </style>
     <script type="application/ld+json">
 [

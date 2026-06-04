@@ -347,7 +347,7 @@ let myChart;
             const roots = findRoots(e.compiled, rootXMin, rootXMax);
             let block = `<div class="roots-section">
                 <h4 style="color:${e.color};">● ${e.label} = ${e.raw}
-                    <span style="font-weight:normal;font-size:.8rem;color:#888;"> (roots on [${rootXMin}; ${rootXMax}])</span>
+                    <span style="font-weight:normal;font-size:.8rem;color:var(--clr-muted);"> (roots on [${rootXMin}; ${rootXMax}])</span>
                 </h4>`;
             if (roots.length > 0) {
                 block += '<ul>';
@@ -358,7 +358,7 @@ let myChart;
                 });
                 block += '</ul>';
             } else {
-                block += `<ul><li style="color:#888;">no roots found</li></ul>`;
+                block += `<ul><li style="color:var(--clr-muted);">no roots found</li></ul>`;
             }
             block += '</div>';
             infoHTML += block;
@@ -366,7 +366,7 @@ let myChart;
 
         if (exprs.length >= 2) {
             let interHTML = `<div class="roots-section"><h4><i aria-hidden="true" class="fas fa-project-diagram"></i> Intersections
-                <span style="font-weight:normal;font-size:.8rem;color:#888;"> (on [${rootXMin}; ${rootXMax}])</span>
+                <span style="font-weight:normal;font-size:.8rem;color:var(--clr-muted);"> (on [${rootXMin}; ${rootXMax}])</span>
             </h4><ul>`;
             for (let i = 0; i < exprs.length; i++) {
                 for (let j = i + 1; j < exprs.length; j++) {
@@ -384,7 +384,7 @@ let myChart;
                                 specialPoints.push({ x: p.x, y: p.y, color: '#ffffff' });
                         });
                     } else {
-                        interHTML += `<li style="color:#888;">${ea.label} and ${eb.label}: no intersections</li>`;
+                        interHTML += `<li style="color:var(--clr-muted);">${ea.label} and ${eb.label}: no intersections</li>`;
                     }
                 }
             }
