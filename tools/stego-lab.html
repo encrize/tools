@@ -342,6 +342,10 @@
             .steg-panel div[style*="1fr 1fr"] { grid-template-columns: 1fr !important; }
             .steg-side-box { padding: 12px; }
         }
+
+        /* --- QA: mobile overflow safety --- */
+        .steg-workspace, .steg-workspace > div, .steg-panel, .steg-panel > div, .steg-panel > div > div { min-width: 0; }
+        #steg-workspace canvas, #steg-workspace img, #steg-workspace pre, #steg-workspace table { max-width: 100%; }
     </style>
     <script type="application/ld+json">
 [
@@ -437,7 +441,7 @@
 </aside>
 
 <main class="main-content" id="main" tabindex="-1">
-<div class="container" style="max-width:900px;margin:0 auto; padding:40px;">
+<div class="container" style="max-width:900px;margin:0 auto; padding:clamp(16px,4vw,40px);">
 
     <h1 style="text-align:center;">
         <i aria-hidden="true" class="fas fa-user-secret" style="margin-right:15px;"></i> Steganography Lab
@@ -506,7 +510,7 @@
                                 </div>
                             </div>
                         </div>
-						<div class="steg-side-box" style="margin-bottom:0; width: 190px;">
+						<div class="steg-side-box" style="margin-bottom:0;">
 							<div class="steg-box-title">Display Mode</div>
 							
 							<div class="btn-container">
