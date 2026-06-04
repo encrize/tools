@@ -95,6 +95,52 @@
   }
 
   /* ----------------------------------------------------------------- */
+  /* Desktop sidebar collapse (persisted via localStorage)              */
+  /* ----------------------------------------------------------------- */
+  function setupSidebarCollapse(sidebar) {
+    if (!sidebar) return;
+    var header = sidebar.querySelector(".sidebar-header");
+    if (!header) return;
+    var STORAGE_KEY = "gl-sidebar-collapsed";
+
+    // Button inside the sidebar header to hide the sidebar
+    var collapseBtn = document.createElement("button");
+    collapseBtn.type = "button";
+    collapseBtn.className = "sidebar-collapse";
+    collapseBtn.id = "sidebarCollapse";
+    collapseBtn.setAttribute("aria-label", "Hide sidebar");
+    collapseBtn.setAttribute("title", "Hide sidebar");
+    collapseBtn.setAttribute("aria-controls", "primaryNav");
+    collapseBtn.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
+    header.appendChild(collapseBtn);
+
+    // Floating button to bring the sidebar back when collapsed
+    var reopenBtn = document.createElement("button");
+    reopenBtn.type = "button";
+    reopenBtn.className = "sidebar-reopen";
+    reopenBtn.id = "sidebarReopen";
+    reopenBtn.setAttribute("aria-label", "Show sidebar");
+    reopenBtn.setAttribute("title", "Show sidebar");
+    reopenBtn.setAttribute("aria-controls", "primaryNav");
+    reopenBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+    document.body.appendChild(reopenBtn);
+
+    function setCollapsed(collapsed) {
+      document.body.classList.toggle("sidebar-collapsed", collapsed);
+      collapseBtn.setAttribute("aria-expanded", String(!collapsed));
+      try { window.localStorage.setItem(STORAGE_KEY, collapsed ? "1" : "0"); } catch (e) {}
+    }
+
+    var saved = null;
+    try { saved = window.localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    if (saved === "1") setCollapsed(true);
+    else collapseBtn.setAttribute("aria-expanded", "true");
+
+    collapseBtn.addEventListener("click", function () { setCollapsed(true); });
+    reopenBtn.addEventListener("click", function () { setCollapsed(false); });
+  }
+
+  /* ----------------------------------------------------------------- */
   /* Mobile navigation drawer                                           */
   /* ----------------------------------------------------------------- */
   function init() {
@@ -109,6 +155,10 @@
     var overlay = document.getElementById("navOverlay");
 
     if (sidebar) highlightActiveLink(sidebar);
+
+    // Allow hiding the sidebar on desktop too (mobile uses the drawer below)
+    setupSidebarCollapse(sidebar);
+
     if (!toggle || !sidebar || !overlay) return;
 
     var mobileQuery = window.matchMedia("(max-width: 900px)");

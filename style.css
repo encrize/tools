@@ -492,3 +492,112 @@ main:focus {
     border-color: #e2483a !important;
     box-shadow: 0 0 0 2px rgba(226, 72, 58, 0.25) !important;
 }
+
+/* ===================================================================== */
+/* Desktop sidebar collapse + small-screen responsiveness (added)        */
+/* ===================================================================== */
+
+/* Smooth collapse transitions on desktop */
+.sidebar { transition: transform 0.25s ease; }
+.main-content { transition: margin-left 0.25s ease; }
+
+/* Keep the sidebar header row aligned so the collapse button fits in */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Collapse button (lives in the sidebar header, desktop only) */
+.sidebar-collapse {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    color: var(--clr-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.sidebar-collapse:hover,
+.sidebar-collapse:focus-visible {
+    background: var(--clr-accent);
+    color: #fff;
+    border-color: var(--clr-accent);
+}
+
+/* Floating button to bring the sidebar back (desktop only, when collapsed) */
+.sidebar-reopen {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    width: 44px;
+    height: 44px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    color: var(--clr-text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 1100;
+    box-shadow: 0 4px 14px var(--clr-shadow);
+    transition: var(--transition);
+}
+.sidebar-reopen:hover,
+.sidebar-reopen:focus-visible {
+    background: var(--clr-accent);
+    color: #fff;
+}
+
+/* Collapsed state only applies on desktop widths */
+@media (min-width: 901px) {
+    body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+    body.sidebar-collapsed .main-content { margin-left: 0; }
+    body.sidebar-collapsed .sidebar-reopen { display: inline-flex; }
+}
+
+/* On mobile the topbar hamburger handles everything */
+@media (max-width: 900px) {
+    .sidebar-collapse { display: none; }
+    .sidebar-reopen { display: none !important; }
+}
+
+/* ---- Global small-screen safety ---- */
+body { overflow-x: hidden; }
+img, canvas, svg, video { max-width: 100%; height: auto; }
+pre { overflow-x: auto; max-width: 100%; }
+table { max-width: 100%; }
+
+/* Tablet and below: tighten spacing + collapse inline multi-column grids */
+@media (max-width: 768px) {
+    .main-content { padding: 22px; }
+    .container { padding: 24px; }
+    h1 { font-size: 1.7rem; }
+    /* Inline grids declared via style="grid-template-columns:..." stack to 1 column */
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    /* Inline flex rows are allowed to wrap so controls don't overflow */
+    [style*="display:flex"],
+    [style*="display: flex"] { flex-wrap: wrap; }
+    /* Stego Lab workspace (class-based grid) stacks canvas above controls */
+    .steg-workspace { grid-template-columns: 1fr !important; }
+}
+
+/* Phones: larger tap targets, no iOS zoom-on-focus, roomier widths */
+@media (max-width: 520px) {
+    h1 { font-size: 1.45rem; }
+    h2 { font-size: 1.2rem; }
+    .container { padding: 16px; }
+    .sidebar { width: min(86vw, var(--sidebar-width)); }
+    /* 16px inputs prevent mobile Safari from zooming when focused */
+    input, select, textarea { font-size: 16px; }
+    .nav-toggle { width: 42px; height: 42px; }
+}
