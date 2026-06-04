@@ -106,6 +106,7 @@
         <li class="nav-item"><a href="exif-cleaner.html" class="nav-link"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
         <li class="nav-item"><a href="exif-viewer.html" class="nav-link"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
         <li class="nav-item"><a href="pass-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
+        <li class="nav-item"><a href="pass-strength.html" class="nav-link active"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
         <li class="nav-item"><a href="qr-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
         <li class="nav-item"><a href="word-counter.html" class="nav-link"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
         <li class="nav-item"><a href="lorem-ipsum.html" class="nav-link"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
@@ -115,7 +116,6 @@
         <li class="nav-item"><a href="url-encoder.html" class="nav-link"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
         <li class="nav-item"><a href="diff-checker.html" class="nav-link"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
         <li class="nav-item"><a href="markdown-editor.html" class="nav-link"><i aria-hidden="true" class="fab fa-markdown"></i> Markdown Editor</a></li>
-        <li class="nav-item"><a href="pass-strength.html" class="nav-link active"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
         <li class="nav-item"><a href="random-picker.html" class="nav-link"><i aria-hidden="true" class="fas fa-dice"></i> Random Picker</a></li>
     </ul>
 </aside>
@@ -176,8 +176,11 @@
             if(/[^A-Za-z0-9]/.test(p))pool+=33;
             var entropy=p.length?Math.round(p.length*Math.log2(pool||1)):0;
             var isCommon=common.indexOf(p.toLowerCase())>-1;
-            var seq=/^(.)\1+$/.test(p)||/0123|1234|2345|3456|4567|5678|6789|abcd|qwerty/i.test(p);
-            if(isCommon||seq)entropy=Math.min(entropy,12);
+            var allRepeat=/^(.)\1+$/.test(p);
+            var hasSeq=/0123|1234|2345|3456|4567|5678|6789|abcd|qwerty/i.test(p);
+            var seq=allRepeat||hasSeq;
+            if(isCommon||allRepeat){entropy=Math.min(entropy,12);}
+            else if(hasSeq){entropy=Math.max(0,entropy-15);}
             var guesses=Math.pow(2,entropy);
             var crack=guesses/2/1e10; // 10 billion guesses/sec offline
             var score;
