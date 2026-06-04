@@ -576,3 +576,34 @@ input[type="checkbox"]:focus,
 input[type="radio"]:focus {
     box-shadow: none;
 }
+
+
+/* ===== Shared file upload / drop zone (unified across all tools) ===== */
+.drop-zone {
+    border: 1px dashed var(--clr-muted);
+    border-radius: 4px;
+    background: var(--clr-surface-2);
+    padding: 40px 20px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+.drop-zone:hover { border-color: var(--clr-accent); }
+.drop-zone:focus-visible { outline: 3px solid var(--brut-blue); outline-offset: 2px; }
+.drop-zone.dragover {
+    border-color: var(--clr-accent);
+    background: rgba(255, 77, 46, 0.08);
+}
+.drop-zone i,
+.drop-zone .dz-icon {
+    font-size: 2.5rem;
+    color: var(--clr-muted);
+    margin-bottom: 15px;
+    display: block;
+    transition: color 0.2s;
+}
+.drop-zone.dragover i,
+.drop-zone.dragover .dz-icon { color: var(--clr-accent); }
+.drop-zone .dz-title { font-size: 1rem; color: var(--clr-text); margin: 0 0 6px; }
+.drop-zone .dz-hint { font-size: 0.85rem; color: var(--clr-muted); margin: 0; }
