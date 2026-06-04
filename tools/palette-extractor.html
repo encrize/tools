@@ -128,7 +128,7 @@
             <div id="drop-zone" style="
                 border: 1px dashed var(--clr-muted, #555);
                 border-radius: 4px;
-                background: rgba(0, 0, 0, 0.2);
+                background: #f3f1e8;
                 padding: 40px 20px;
                 cursor: pointer;
                 margin-bottom: 24px;
@@ -142,7 +142,7 @@
             </div>
             
             <div id="preview-container" style="display: none; margin-bottom: 30px;">
-                <img id="image-preview" style="max-width: 100%; max-height: 400px; border-radius: 8px; box-shadow: var(--shadow);">
+                <img alt="Image preview" id="image-preview" style="max-width: 100%; max-height: 400px; border-radius: 8px; box-shadow: var(--shadow);">
             </div>
             
             <div id="palette-container" class="tool-grid" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px;">
@@ -173,7 +173,7 @@
             dropZone.addEventListener(eventName, (e) => {
                 e.preventDefault();
                 dropZone.style.borderColor = 'var(--clr-muted)';
-                dropZone.style.background = 'rgba(0, 0, 0, 0.2)';
+                dropZone.style.background = '#f3f1e8';
                 if (icon) icon.style.color = 'var(--clr-muted)';
             }, false);
         });

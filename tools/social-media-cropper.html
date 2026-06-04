@@ -130,7 +130,7 @@
         <div id="drop-zone" style="
             border: 1px dashed var(--clr-muted, #555);
             border-radius: 4px;
-            background: rgba(0, 0, 0, 0.2);
+            background: #f3f1e8;
             padding: 40px 20px;
             cursor: pointer;
             margin-bottom: 24px;
@@ -144,14 +144,14 @@
         </div>
         
         <div id="cropper-container" style="display: none; max-height: 450px; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
-            <img id="image-to-crop" style="display: block; max-width: 100%; max-height: 450px; margin: 0 auto;">
+            <img alt="Image being cropped" id="image-to-crop" style="display: block; max-width: 100%; max-height: 450px; margin: 0 auto;">
         </div>
         
         <div id="actions" style="display: none; gap: 10px; justify-content: center; flex-wrap: wrap;">
             <button class="btn" onclick="cropImage()"><i aria-hidden="true" class="fas fa-download"></i> Crop & Download</button>
-            <button class="btn" onclick="rotateLeft()" style="background: #444;"><i aria-hidden="true" class="fas fa-undo"></i> Left</button>
-            <button class="btn" onclick="rotateRight()" style="background: #444;"><i aria-hidden="true" class="fas fa-redo"></i> Right</button>
-            <button class="btn" onclick="resetCropper()" style="background: #222; color: #aaa;"><i aria-hidden="true" class="fas fa-sync-alt"></i> Reset</button>
+            <button class="btn" onclick="rotateLeft()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-undo"></i> Left</button>
+            <button class="btn" onclick="rotateRight()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-redo"></i> Right</button>
+            <button class="btn" onclick="resetCropper()" style="background: #fff; color: var(--clr-text);"><i aria-hidden="true" class="fas fa-sync-alt"></i> Reset</button>
         </div>
     </div>
 </main>
@@ -180,7 +180,7 @@
         dropZone.addEventListener(eventName, (e) => {
             e.preventDefault();
             dropZone.style.borderColor = 'var(--clr-muted)';
-            dropZone.style.background = 'rgba(0, 0, 0, 0.2)';
+            dropZone.style.background = '#f3f1e8';
             if (icon) icon.style.color = 'var(--clr-muted)';
         }, false);
     });

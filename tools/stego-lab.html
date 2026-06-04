@@ -314,6 +314,34 @@
             transform: translate(1px, 1px);
             box-shadow: 1px 1px 0 var(--brut-ink, #111);
         }
+
+        /* --- QA: light-theme contrast fixes --- */
+        .steg-side-box { background:#fff; border:2px solid var(--brut-ink); }
+        .ch-btn { background:#fff; border:2px solid var(--brut-ink); color:var(--clr-text); }
+        .ch-btn:hover { color:var(--clr-text); border-color:var(--brut-ink); }
+        .ch-btn.nn.active { background:rgba(0,0,0,.08); border-color:var(--brut-ink); color:var(--clr-text); }
+        select.steg-sel, .steg-input, .steg-ta { background:#fff; border:2px solid var(--brut-ink); color:var(--clr-text); }
+        .steg-tabs { border-bottom:2px solid var(--brut-ink); }
+        .steg-tab:hover:not(.active) { color:var(--clr-text); }
+        .stat-row { border-bottom-color:rgba(0,0,0,.12); }
+        .anom-item { border-bottom-color:rgba(0,0,0,.1); }
+        .cap-track, .mini-bar-bg, .ent-bg { background:rgba(0,0,0,.12); }
+        .lsb-cell.off { background:rgba(0,0,0,.08); color:rgba(0,0,0,.3); }
+        .steg-preview { border:2px solid var(--brut-ink); }
+        #steg-canvas-wrap { background:#111; border:2px solid var(--brut-ink); }
+        #steg-canvas-empty { color:#bbb; }
+
+        /* --- QA: mobile responsiveness --- */
+        @media (max-width: 860px) {
+            .steg-workspace { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 520px) {
+            .steg-tabs { flex-wrap: wrap; }
+            .steg-tab { flex: 1 1 auto; text-align: center; }
+            .qp-grid { grid-template-columns: repeat(2, 1fr); }
+            .steg-panel div[style*="1fr 1fr"] { grid-template-columns: 1fr !important; }
+            .steg-side-box { padding: 12px; }
+        }
     </style>
     <script type="application/ld+json">
 [
