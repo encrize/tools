@@ -122,7 +122,7 @@
 
     <main class="main-content" id="main" tabindex="-1">
         <div class="container" style="max-width:780px;text-align:center;">
-            <h1><i aria-hidden="true" class="fas fa-user-shield" style="margin-right:14px;"></i>Password Strength Checker</h1>
+            <h1><i aria-hidden="true" class="fas fa-user-shield" style="margin-right:14px;"></i>Password Strength Checker (WIP)</h1>
             <p>Find out how strong your password really is. Entropy and crack-time are calculated locally in your browser &mdash; nothing is ever transmitted or stored.</p>
 
             <div class="ps-input-wrap">
@@ -174,13 +174,29 @@
             if(/[A-Z]/.test(p))pool+=26;
             if(/[0-9]/.test(p))pool+=10;
             if(/[^A-Za-z0-9]/.test(p))pool+=33;
-            var entropy=p.length?Math.round(p.length*Math.log2(pool||1)):0;
-            var isCommon=common.indexOf(p.toLowerCase())>-1;
-            var allRepeat=/^(.)\1+$/.test(p);
-            var hasSeq=/0123|1234|2345|3456|4567|5678|6789|abcd|qwerty/i.test(p);
-            var seq=allRepeat||hasSeq;
-            if(isCommon||allRepeat){entropy=Math.min(entropy,12);}
-            else if(hasSeq){entropy=Math.max(0,entropy-15);}
+            var perChar=Math.log2(pool||1);
+            var lp=p.toLowerCase();
+            var walks=['qwertyuiop','asdfghjkl','zxcvbnm','1234567890','abcdefghijklmnopqrstuvwxyz'];
+            var seqs=[];
+            walks.forEach(function(w){seqs.push(w);seqs.push(w.split('').reverse().join(''));});
+            function inRun(sub){
+                if(sub.length<3)return false;
+                for(var k=0;k<seqs.length;k++){if(seqs[k].indexOf(sub)>-1)return true;}
+                return false;
+            }
+            var entropy=0,i=0,n=p.length,seqFound=false;
+            while(i<n){
+                var bestLen=0;
+                for(var len=Math.min(n-i,12);len>=3;len--){if(inRun(lp.substr(i,len))){bestLen=len;break;}}
+                var rep=1;while(i+rep<n&&lp.charAt(i+rep)===lp.charAt(i))rep++;
+                if(bestLen>=3&&bestLen>=rep){entropy+=Math.log2(seqs.length)+Math.log2(bestLen);i+=bestLen;seqFound=true;}
+                else if(rep>=3){entropy+=Math.log2(26)+Math.log2(rep);i+=rep;seqFound=true;}
+                else{entropy+=perChar;i+=1;}
+            }
+            entropy=Math.round(entropy);
+            var isCommon=common.indexOf(lp)>-1;
+            if(isCommon)entropy=Math.min(entropy,10);
+            var seq=seqFound;
             var guesses=Math.pow(2,entropy);
             var crack=guesses/2/1e10; // 10 billion guesses/sec offline
             var score;

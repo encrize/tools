@@ -1,16 +1,5 @@
-/*!
- * GibsyLab – shared UI behaviour
- * - Accessible mobile navigation drawer
- * - Toast notifications + clipboard helper (window.GibsyLab)
- * - Automatic "active" nav highlighting based on the current URL
- * - Auto-updating footer year
- */
 (function () {
   "use strict";
-
-  /* ----------------------------------------------------------------- */
-  /* Public helpers: window.GibsyLab.toast / copy                       */
-  /* ----------------------------------------------------------------- */
   var toastTimer = null;
 
   function ensureToastHost() {
@@ -73,9 +62,6 @@
   window.GibsyLab.toast = toast;
   window.GibsyLab.copy = copy;
 
-  /* ----------------------------------------------------------------- */
-  /* Highlight the nav link matching the current page                   */
-  /* ----------------------------------------------------------------- */
   function highlightActiveLink(sidebar) {
     var here = window.location.pathname.split("/").pop() || "index.html";
     var links = sidebar.querySelectorAll(".nav-link");
@@ -94,16 +80,12 @@
     return matched;
   }
 
-  /* ----------------------------------------------------------------- */
-  /* Desktop sidebar collapse (persisted via localStorage)              */
-  /* ----------------------------------------------------------------- */
   function setupSidebarCollapse(sidebar) {
     if (!sidebar) return;
     var header = sidebar.querySelector(".sidebar-header");
     if (!header) return;
     var STORAGE_KEY = "gl-sidebar-collapsed";
 
-    // Button inside the sidebar header to hide the sidebar
     var collapseBtn = document.createElement("button");
     collapseBtn.type = "button";
     collapseBtn.className = "sidebar-collapse";
@@ -114,7 +96,6 @@
     collapseBtn.innerHTML = '<i class="fas fa-chevron-left" aria-hidden="true"></i>';
     header.appendChild(collapseBtn);
 
-    // Floating button to bring the sidebar back when collapsed
     var reopenBtn = document.createElement("button");
     reopenBtn.type = "button";
     reopenBtn.className = "sidebar-reopen";
@@ -140,11 +121,7 @@
     reopenBtn.addEventListener("click", function () { setCollapsed(false); });
   }
 
-  /* ----------------------------------------------------------------- */
-  /* Mobile navigation drawer                                           */
-  /* ----------------------------------------------------------------- */
   function init() {
-    // Keep the footer copyright year current wherever it appears.
     var yearEls = document.querySelectorAll("[data-year]");
     for (var y = 0; y < yearEls.length; y++) {
       yearEls[y].textContent = String(new Date().getFullYear());
@@ -156,7 +133,6 @@
 
     if (sidebar) highlightActiveLink(sidebar);
 
-    // Allow hiding the sidebar on desktop too (mobile uses the drawer below)
     setupSidebarCollapse(sidebar);
 
     if (!toggle || !sidebar || !overlay) return;
@@ -166,7 +142,6 @@
     function openNav() {
       sidebar.classList.add("open");
       overlay.hidden = false;
-      // force reflow so the opacity transition runs
       void overlay.offsetWidth;
       overlay.classList.add("show");
       toggle.setAttribute("aria-expanded", "true");
@@ -197,7 +172,6 @@
       if (e.key === "Escape" || e.key === "Esc") closeNav();
     });
 
-    // Close the drawer after choosing a destination on mobile
     var links = sidebar.querySelectorAll("a");
     for (var i = 0; i < links.length; i++) {
       links[i].addEventListener("click", function () {
@@ -205,7 +179,6 @@
       });
     }
 
-    // Reset state when switching back to desktop layout
     var onChange = function () {
       if (!mobileQuery.matches) closeNav();
     };
