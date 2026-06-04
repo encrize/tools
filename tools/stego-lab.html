@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0c0a">
     <title>Steganography Lab - GibsyLab</title>
+    <meta name="description" content="Hide secret messages inside images and decode them again using LSB steganography. Everything stays on your device.">
+    <meta name="author" content="GibsyLab">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.gibsy.qd.je/tools/stego-lab.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="GibsyLab">
+    <meta property="og:title" content="Stego Lab | GibsyLab">
+    <meta property="og:description" content="Hide secret messages inside images and decode them again using LSB steganography. Everything stays on your device.">
+    <meta property="og:url" content="https://tools.gibsy.qd.je/tools/stego-lab.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Stego Lab | GibsyLab">
+    <meta name="twitter:description" content="Hide secret messages inside images and decode them again using LSB steganography. Everything stays on your device.">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../favicon.svg">
+    <link rel="manifest" href="../site.webmanifest">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -257,58 +273,79 @@
 		width: 100%;
 	}
 
+        .seg { display:flex; gap:5px; margin-bottom:10px; flex-wrap:wrap; }
+        .seg .btn.active { background:rgba(224,120,32,.2); border-color:var(--clr-accent,#e07820); color:var(--clr-accent,#e07820); }
+        .cap-track { height:7px; background:rgba(0,0,0,.35); border-radius:4px; overflow:hidden; margin:4px 0; }
+        .cap-fill { height:100%; width:0%; background:var(--clr-accent,#e07820); transition:width .25s, background .25s; }
+        .cap-fill.over { background:#cc4455; }
+        .steg-input { width:100%; background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.1); border-radius:4px; color:var(--clr-text,#ccc); padding:6px 8px; font-family:inherit; font-size:12px; outline:none; box-sizing:border-box; }
+        .steg-input:focus { border-color:var(--clr-accent,#e07820); }
+        .steg-preview { max-width:100%; max-height:170px; border-radius:4px; border:1px solid rgba(255,255,255,.1); margin-top:8px; display:none; }
+        .steg-check { display:flex; align-items:center; gap:7px; font-size:11px; color:var(--clr-muted,#888); margin:7px 0; cursor:pointer; }
+        .steg-check input { accent-color:var(--clr-accent,#e07820); }
+        .steg-note { font-size:10px; color:var(--clr-muted,#888); margin-top:7px; line-height:1.45; }
+        .verdict { font-size:12px; font-weight:bold; padding:3px 0 5px; }
+        .mini-bar-bg { height:6px; background:rgba(0,0,0,.3); border-radius:3px; overflow:hidden; margin-top:3px; }
+        .mini-bar { height:100%; border-radius:3px; transition:width .4s; }
+
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="topbar">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
+    <a class="topbar-brand" href="../index.html">GibsyLab</a>
+</div>
+<div class="nav-overlay" id="navOverlay" hidden></div>
 
-<aside class="sidebar">
+<aside class="sidebar" id="primaryNav" aria-label="Main navigation">
     <div class="sidebar-header">GibsyLab</div>
     <ul class="nav-menu">
-        <li class="nav-item"><a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+        <li class="nav-item"><a href="../index.html" class="nav-link"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
 
-        <li class="nav-category" style="padding:15px 20px 5px;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--clr-muted,#888);font-weight:bold;">Graphics &amp; Photo</li>
+        <li class="nav-category">Graphics &amp; Photo</li>
 
-        <li class="nav-item"><a href="image-redactor.html"        class="nav-link"><i class="fas fa-sliders-h"></i> Image Redactor</a></li>
-        <li class="nav-item"><a href="social-media-cropper.html"  class="nav-link"><i class="fas fa-crop"></i> Social Cropper</a></li>
-        <li class="nav-item"><a href="image-splitter.html"        class="nav-link"><i class="fas fa-th-large"></i> Image Splitter</a></li>
-        <li class="nav-item"><a href="image-format-converter.html"class="nav-link"><i class="fas fa-sync-alt"></i> Image Converter</a></li>
-        <li class="nav-item"><a href="palette-extractor.html"     class="nav-link"><i class="fas fa-palette"></i> Palette Extractor</a></li>
-        <li class="nav-item"><a href="placeholder-gen.html"       class="nav-link"><i class="fas fa-image"></i> Placeholder Gen</a></li>
-        <li class="nav-item"><a href="color-picker.html"          class="nav-link"><i class="fas fa-eye-dropper"></i> Color Picker</a></li>
-        <li class="nav-item"><a href="stego-lab.html"             class="nav-link active"><i class="fas fa-user-secret"></i> Stego Lab</a></li>
+        <li class="nav-item"><a href="image-redactor.html"        class="nav-link"><i aria-hidden="true" class="fas fa-sliders-h"></i> Image Redactor</a></li>
+        <li class="nav-item"><a href="social-media-cropper.html"  class="nav-link"><i aria-hidden="true" class="fas fa-crop"></i> Social Cropper</a></li>
+        <li class="nav-item"><a href="image-splitter.html"        class="nav-link"><i aria-hidden="true" class="fas fa-th-large"></i> Image Splitter</a></li>
+        <li class="nav-item"><a href="image-format-converter.html"class="nav-link"><i aria-hidden="true" class="fas fa-sync-alt"></i> Image Converter</a></li>
+        <li class="nav-item"><a href="palette-extractor.html"     class="nav-link"><i aria-hidden="true" class="fas fa-palette"></i> Palette Extractor</a></li>
+        <li class="nav-item"><a href="placeholder-gen.html"       class="nav-link"><i aria-hidden="true" class="fas fa-image"></i> Placeholder Gen</a></li>
+        <li class="nav-item"><a href="color-picker.html"          class="nav-link"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</a></li>
+        <li class="nav-item"><a href="stego-lab.html"             class="nav-link active"><i aria-hidden="true" class="fas fa-user-secret"></i> Stego Lab</a></li>
 
-        <li class="nav-category" style="padding:15px 20px 5px;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--clr-muted,#888);font-weight:bold;">Conversion &amp; Math</li>
+        <li class="nav-category">Conversion &amp; Math</li>
 
-        <li class="nav-item"><a href="graph-calc.html"    class="nav-link"><i class="fas fa-calculator"></i> Graphic Calculator</a></li>
-		<li class="nav-item"><a href="date-calculator.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Date Calculator</a></li>
-        <li class="nav-item"><a href="num-system.html"    class="nav-link"><i class="fas fa-microchip"></i> Number Systems</a></li>
-        <li class="nav-item"><a href="base-converter.html"class="nav-link"><i class="fas fa-exchange-alt"></i> Base Converter</a></li>
-        <li class="nav-item"><a href="mp3-converter.html" class="nav-link"><i class="fas fa-headphones"></i> Media Converter</a></li>
+        <li class="nav-item"><a href="graph-calc.html"    class="nav-link"><i aria-hidden="true" class="fas fa-calculator"></i> Graphic Calculator</a></li>
+		<li class="nav-item"><a href="date-calculator.html" class="nav-link"><i aria-hidden="true" class="fas fa-calendar-alt"></i> Date Calculator</a></li>
+        <li class="nav-item"><a href="num-system.html"    class="nav-link"><i aria-hidden="true" class="fas fa-microchip"></i> Number Systems</a></li>
+        <li class="nav-item"><a href="base-converter.html"class="nav-link"><i aria-hidden="true" class="fas fa-exchange-alt"></i> Base Converter</a></li>
+        <li class="nav-item"><a href="mp3-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-headphones"></i> Media Converter</a></li>
 
-        <li class="nav-category" style="padding:15px 20px 5px;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--clr-muted,#888);font-weight:bold;">Utilities &amp; Text</li>
+        <li class="nav-category">Utilities &amp; Text</li>
 
-        <li class="nav-item"><a href="exif-cleaner.html"    class="nav-link"><i class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
-		<li class="nav-item"><a href="exif-viewer.html" class="nav-link"><i class="fas fa-search-plus"></i> EXIF Viewer</a></li>
-        <li class="nav-item"><a href="pass-gen.html"        class="nav-link"><i class="fas fa-key"></i> Password Gen</a></li>
-        <li class="nav-item"><a href="qr-gen.html"          class="nav-link"><i class="fas fa-qrcode"></i> QR Generator</a></li>
-        <li class="nav-item"><a href="word-counter.html"    class="nav-link"><i class="fas fa-font"></i> Word Counter</a></li>
-        <li class="nav-item"><a href="lorem-ipsum.html"     class="nav-link"><i class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
-        <li class="nav-item"><a href="hash-generator.html"  class="nav-link"><i class="fas fa-hashtag"></i> Hash Generator</a></li>
-        <li class="nav-item"><a href="json-formatter.html"  class="nav-link"><i class="fas fa-code"></i> JSON Formatter</a></li>
-        <li class="nav-item"><a href="regex-tester.html"    class="nav-link"><i class="fas fa-search"></i> Regex Tester</a></li>
-        <li class="nav-item"><a href="url-encoder.html"     class="nav-link"><i class="fas fa-link"></i> URL Encoder</a></li>
-        <li class="nav-item"><a href="diff-checker.html"    class="nav-link"><i class="fas fa-code-branch"></i> Diff Checker</a></li>
+        <li class="nav-item"><a href="exif-cleaner.html"    class="nav-link"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
+		<li class="nav-item"><a href="exif-viewer.html" class="nav-link"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
+        <li class="nav-item"><a href="pass-gen.html"        class="nav-link"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
+        <li class="nav-item"><a href="qr-gen.html"          class="nav-link"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
+        <li class="nav-item"><a href="word-counter.html"    class="nav-link"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
+        <li class="nav-item"><a href="lorem-ipsum.html"     class="nav-link"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
+        <li class="nav-item"><a href="hash-generator.html"  class="nav-link"><i aria-hidden="true" class="fas fa-hashtag"></i> Hash Generator</a></li>
+        <li class="nav-item"><a href="json-formatter.html"  class="nav-link"><i aria-hidden="true" class="fas fa-code"></i> JSON Formatter</a></li>
+        <li class="nav-item"><a href="regex-tester.html"    class="nav-link"><i aria-hidden="true" class="fas fa-search"></i> Regex Tester</a></li>
+        <li class="nav-item"><a href="url-encoder.html"     class="nav-link"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
+        <li class="nav-item"><a href="diff-checker.html"    class="nav-link"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
     </ul>
 </aside>
 
-<main class="main-content">
+<main class="main-content" id="main" tabindex="-1">
 <div class="container" style="max-width:900px;margin:0 auto; padding:40px;">
 
     <h1 style="text-align:center;">
-        <i class="fas fa-user-secret" style="margin-right:15px;"></i> Steganography Lab ( WIP ) 
+        <i aria-hidden="true" class="fas fa-user-secret" style="margin-right:15px;"></i> Steganography Lab
     </h1>
     <p style="text-align:center;margin-bottom:25px;">
-        Bit plane analysis &middot; LSB encode / decode &middot; Channel viewer &middot; Entropy &amp; anomaly detection
+        Hide text, images &amp; files &middot; AES-256 encryption &middot; Bit-plane &amp; channel analysis &middot; Chi-square steganalysis
     </p>
 
     <div id="steg-drop" style="
@@ -324,7 +361,7 @@
         ">
 	<input type="file" id="steg-file" accept="image/*"
 		   style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer; z-index:2;">
-        <i class="fas fa-file-image" id="steg-drop-icon"
+        <i aria-hidden="true" class="fas fa-file-image" id="steg-drop-icon"
            style="font-size:2.4rem;color:var(--clr-muted,#888);margin-bottom:14px;display:block;transition:color .2s;"></i>
         <p style="font-size:1rem;color:var(--clr-text,#fff);margin:0 0 5px;">Drag and drop an image or click to select</p>
         <p style="font-size:.85rem;color:var(--clr-muted,#888);margin:0;">PNG &middot; BMP &middot; WebP &middot; JPEG supported</p>
@@ -333,11 +370,11 @@
     <div id="steg-workspace" style="display:none;">
 
         <div class="steg-tabs">
-            <button class="steg-tab active" data-tab="bitplane"><i class="fas fa-layer-group"></i> Bit Plane</button>
-            <button class="steg-tab"        data-tab="rgb"     ><i class="fas fa-adjust"></i> RGB Channels</button>
-            <button class="steg-tab"        data-tab="analysis"><i class="fas fa-chart-bar"></i> Analysis</button>
-            <button class="steg-tab"        data-tab="encode"  ><i class="fas fa-lock"></i> Encode LSB</button>
-            <button class="steg-tab"        data-tab="decode"  ><i class="fas fa-unlock"></i> Decode LSB</button>
+            <button class="steg-tab active" data-tab="bitplane"><i aria-hidden="true" class="fas fa-layer-group"></i> Bit Plane</button>
+            <button class="steg-tab"        data-tab="rgb"     ><i aria-hidden="true" class="fas fa-adjust"></i> RGB Channels</button>
+            <button class="steg-tab"        data-tab="analysis"><i aria-hidden="true" class="fas fa-chart-bar"></i> Analysis</button>
+            <button class="steg-tab"        data-tab="hide"  ><i aria-hidden="true" class="fas fa-lock"></i> Hide</button>
+            <button class="steg-tab"        data-tab="reveal"  ><i aria-hidden="true" class="fas fa-unlock"></i> Reveal</button>
         </div>
 
         <div class="steg-workspace">
@@ -345,7 +382,7 @@
             <div>
                 <div id="steg-canvas-wrap">
                     <div id="steg-canvas-empty">
-                        <i class="fas fa-image" style="font-size:2rem;margin-bottom:8px;display:block;"></i>
+                        <i aria-hidden="true" class="fas fa-image" style="font-size:2rem;margin-bottom:8px;display:block;"></i>
                         Load an image to start
                     </div>
                     <canvas id="steg-canvas"></canvas>
@@ -406,7 +443,7 @@
                                 <button class="btn" data-op="neg_r">Negate R</button>
                                 <button class="btn" data-op="neg_g">Negate G</button>
                                 <button class="btn" data-op="neg_b">Negate B</button>
-                                <button class="btn btn-full" id="btnSaveRgb"><i class="fas fa-save"></i> Save result</button>
+                                <button class="btn btn-full" id="btnSaveRgb"><i aria-hidden="true" class="fas fa-save"></i> Save result</button>
                             </div>
                         </div>
                     </div>
@@ -434,75 +471,94 @@
                 </div>
 
                 <!--ENCODE-->
-                <div id="steg-panel-encode" class="steg-panel">
+                <div id="steg-panel-hide" class="steg-panel">
                     <div class="steg-side-box">
-                        <div class="steg-box-title">LSB Text Encoder</div>
+                        <div class="steg-box-title"><i aria-hidden="true" class="fas fa-lock"></i> Hide Data</div>
+                        <div class="seg">
+                            <button class="btn active" data-hm="text"><i aria-hidden="true" class="fas fa-font"></i> Text</button>
+                            <button class="btn" data-hm="image"><i aria-hidden="true" class="fas fa-image"></i> Image</button>
+                            <button class="btn" data-hm="file"><i aria-hidden="true" class="fas fa-file"></i> File</button>
+                        </div>
+                        <div id="hideTextWrap">
+                            <textarea id="hideText" class="steg-ta" placeholder="Type your secret message here..."></textarea>
+                        </div>
+                        <div id="hideFileWrap" style="display:none;">
+                            <label class="btn btn-full" style="cursor:pointer;display:block;text-align:center;">
+                                <i aria-hidden="true" class="fas fa-upload"></i> <span id="hideFileLabel">Select a file to hide</span>
+                                <input type="file" id="hideFile" style="display:none;">
+                            </label>
+                            <div id="hideFileInfo" style="font-size:11px;color:var(--clr-muted,#888);margin-top:6px;"></div>
+                            <img id="hidePreview" class="steg-preview" alt="secret preview">
+                        </div>
+                        <div class="ctrl-row" style="margin-top:10px;">
+                            <label>Password</label>
+                            <input type="password" id="hidePass" class="steg-input" placeholder="optional - AES-256 encrypt">
+                        </div>
+                        <label class="steg-check"><input type="checkbox" id="hideScatter"> Scatter bits across image (uses password)</label>
                         <div class="ctrl-row">
                             <label>Channel</label>
-                            <select id="encCh" class="steg-sel">
-                                <option value="0">Red</option>
-                                <option value="1">Green</option>
-                                <option value="2">Blue</option>
-                                <option value="3">All channels (Luma)</option>
+                            <select id="hideCh" class="steg-sel">
+                                <option value="0">Red</option><option value="1">Green</option><option value="2">Blue</option><option value="3" selected>All RGB</option>
                             </select>
                         </div>
                         <div class="ctrl-row">
-                            <label>Bits / pixel</label>
-                            <select id="encBits" class="steg-sel">
-                                <option value="1">1 bit &mdash; max stealth</option>
-                                <option value="2">2 bits</option>
-                                <option value="4">4 bits &mdash; medium</option>
+                            <label>Bits / channel</label>
+                            <select id="hideBits" class="steg-sel">
+                                <option value="1">1 bit - max stealth</option><option value="2">2 bits</option><option value="4">4 bits - max capacity</option>
                             </select>
                         </div>
-                        <p style="font-size:11px;color:var(--clr-muted,#888);margin-bottom:6px;">Secret message:</p>
-                        <textarea id="encText" class="steg-ta" placeholder="Type your secret message here..."></textarea>
+                        <div class="seg" style="margin-top:8px;">
+                            <button class="btn" data-preset="stealth">Stealth</button>
+                            <button class="btn" data-preset="balanced">Balanced</button>
+                            <button class="btn" data-preset="capacity">Capacity</button>
+                        </div>
+                        <div style="margin-top:10px;">
+                            <div class="cap-track"><div class="cap-fill" id="capFill"></div></div>
+                            <div id="capText" style="font-size:10px;color:var(--clr-muted,#888);">0 / 0 bytes</div>
+                        </div>
                         <div class="btn-grid-2" style="margin-top:10px;">
-                            <button class="btn btn-full" id="btnEncode" style="background:var(--clr-accent,#e07820);color:#fff;font-weight:bold;border-color:var(--clr-accent,#e07820);">
-                                <i class="fas fa-lock"></i> Encode &amp; Preview
+                            <button class="btn btn-full" id="btnHide" style="background:var(--clr-accent,#e07820);color:#fff;font-weight:bold;border-color:var(--clr-accent,#e07820);">
+                                <i aria-hidden="true" class="fas fa-lock"></i> Hide &amp; Preview
                             </button>
-                            <button class="btn btn-full" id="btnSaveEnc" disabled>
-                                <i class="fas fa-save"></i> Save stego image
+                            <button class="btn btn-full" id="btnSaveStego" disabled>
+                                <i aria-hidden="true" class="fas fa-save"></i> Save stego PNG
                             </button>
                         </div>
-                        <p id="encStatus" style="font-size:10px;color:var(--clr-muted,#888);margin-top:7px;text-align:center;"></p>
+                        <p id="hideStatus" style="font-size:10px;color:var(--clr-muted,#888);margin-top:7px;text-align:center;"></p>
+                        <p class="steg-note"><i aria-hidden="true" class="fas fa-exclamation-triangle"></i> Always save as PNG - saving as JPEG destroys the hidden data. To reveal, use the same channel, bits, password and scatter settings.</p>
                     </div>
                 </div>
 
                 <!-- DECODE -->
-                <div id="steg-panel-decode" class="steg-panel">
+                <div id="steg-panel-reveal" class="steg-panel">
                     <div class="steg-side-box">
-                        <div class="steg-box-title">LSB Text Decoder</div>
+                        <div class="steg-box-title"><i aria-hidden="true" class="fas fa-unlock"></i> Reveal Data</div>
+                        <div class="ctrl-row">
+                            <label>Password</label>
+                            <input type="password" id="revPass" class="steg-input" placeholder="if it was encrypted">
+                        </div>
+                        <label class="steg-check"><input type="checkbox" id="revScatter"> Bits were scattered (uses password)</label>
+                        <label class="steg-check"><input type="checkbox" id="revRaw"> Raw text mode (legacy / no header)</label>
                         <div class="ctrl-row">
                             <label>Channel</label>
-                            <select id="decCh" class="steg-sel">
-                                <option value="0">Red</option>
-                                <option value="1">Green</option>
-                                <option value="2">Blue</option>
-                                <option value="3">All channels (Luma)</option>
+                            <select id="revCh" class="steg-sel">
+                                <option value="0">Red</option><option value="1">Green</option><option value="2">Blue</option><option value="3" selected>All RGB</option>
                             </select>
                         </div>
                         <div class="ctrl-row">
-                            <label>Bits / pixel</label>
-                            <select id="decBits" class="steg-sel">
-                                <option value="1">1 bit</option>
-                                <option value="2">2 bits</option>
-                                <option value="4">4 bits</option>
+                            <label>Bits / channel</label>
+                            <select id="revBits" class="steg-sel">
+                                <option value="1">1 bit</option><option value="2">2 bits</option><option value="4">4 bits</option>
                             </select>
                         </div>
-                        <div class="ctrl-row">
-                            <label>Max chars</label>
-                            <input type="range" id="decLen" min="10" max="5000" value="500" step="10">
-                            <span class="cv" id="decLenVal">500</span>
-                        </div>
-                        <button class="btn btn-full" id="btnDecode"
-                                style="width:100%;margin:10px 0;background:var(--clr-accent,#e07820);color:#fff;font-weight:bold;border-color:var(--clr-accent,#e07820);">
-                            <i class="fas fa-unlock"></i> Extract Hidden Data
+                        <button class="btn btn-full" id="btnReveal" style="width:100%;margin:10px 0;background:var(--clr-accent,#e07820);color:#fff;font-weight:bold;border-color:var(--clr-accent,#e07820);">
+                            <i aria-hidden="true" class="fas fa-unlock"></i> Reveal Hidden Data
                         </button>
-                        <textarea id="decOutput" class="steg-ta" readonly
-                                  placeholder="Extracted text will appear here..." style="height:90px;"></textarea>
-                        <button class="btn" id="btnCopy" style="width:100%;margin-top:8px;">
-                            <i class="fas fa-copy"></i> Copy result
-                        </button>
+                        <textarea id="revText" class="steg-ta" readonly placeholder="Extracted text will appear here..." style="height:90px;display:none;"></textarea>
+                        <img id="revPreview" class="steg-preview" alt="revealed image">
+                        <button class="btn btn-full" id="btnRevDownload" style="display:none;margin-top:8px;"><i aria-hidden="true" class="fas fa-download"></i> Download</button>
+                        <button class="btn" id="btnRevCopy" style="width:100%;margin-top:8px;display:none;"><i aria-hidden="true" class="fas fa-copy"></i> Copy result</button>
+                        <p id="revStatus" style="font-size:10px;color:var(--clr-muted,#888);margin-top:7px;text-align:center;"></p>
                     </div>
                 </div>
 
@@ -511,12 +567,12 @@
             <div>
 
                 <div class="steg-side-box">
-                    <div class="steg-box-title"><i class="fas fa-info-circle"></i> File Info</div>
+                    <div class="steg-box-title"><i aria-hidden="true" class="fas fa-info-circle"></i> File Info</div>
                     <div id="fileInfo" style="font-size:11px;color:var(--clr-muted,#888);">No image loaded</div>
                 </div>
 
                 <div class="steg-side-box">
-                    <div class="steg-box-title"><i class="fas fa-th-large"></i> Quick Bit Planes</div>
+                    <div class="steg-box-title"><i aria-hidden="true" class="fas fa-th-large"></i> Quick Bit Planes</div>
                     <div class="qp-grid" id="qpGrid">
                         <button class="btn" data-qp="0" title="LSB - most hidden">LSB (0)</button>
                         <button class="btn" data-qp="1">Bit 1</button>
@@ -530,16 +586,30 @@
                 </div>
 
                 <div class="steg-side-box">
-                    <div class="steg-box-title"><i class="fas fa-signal"></i> Bit Entropy (Red ch.)</div>
+                    <div class="steg-box-title"><i aria-hidden="true" class="fas fa-signal"></i> Bit Entropy (Red ch.)</div>
                     <div id="entropyBars"><span style="font-size:11px;color:var(--clr-muted,#888);">Load image</span></div>
                 </div>
 
                 <div class="steg-side-box">
-                    <div class="steg-box-title"><i class="fas fa-download"></i> Export</div>
+                    <div class="steg-box-title"><i aria-hidden="true" class="fas fa-user-secret"></i> Steganalysis</div>
+                    <div id="steganalysis"><span style="font-size:11px;color:var(--clr-muted,#888);">Load an image to analyze</span></div>
+                </div>
+
+                <div class="steg-side-box">
+                    <div class="steg-box-title"><i aria-hidden="true" class="fas fa-not-equal"></i> Compare vs Original</div>
+                    <div id="compareStats"><span style="font-size:11px;color:var(--clr-muted,#888);">Hide data to compare</span></div>
+                    <div class="btn-grid-2" style="margin-top:8px;">
+                        <button class="btn" id="btnShowDiff"><i aria-hidden="true" class="fas fa-eye"></i> Show diff</button>
+                        <button class="btn" id="btnHideDiff"><i aria-hidden="true" class="fas fa-eye-slash"></i> Hide diff</button>
+                    </div>
+                </div>
+
+                <div class="steg-side-box">
+                    <div class="steg-box-title"><i aria-hidden="true" class="fas fa-download"></i> Export</div>
                     <div style="display:flex;flex-direction:column;gap:7px;">
-                        <button class="btn" id="btnSaveCurrent"><i class="fas fa-camera"></i> Save current view</button>
-                        <button class="btn" id="btnSaveOrig"><i class="fas fa-image"></i> Save original</button>
-                        <button class="btn" id="btnReset"><i class="fas fa-trash-alt"></i> Reset all</button>
+                        <button class="btn" id="btnSaveCurrent"><i aria-hidden="true" class="fas fa-camera"></i> Save current view</button>
+                        <button class="btn" id="btnSaveOrig"><i aria-hidden="true" class="fas fa-image"></i> Save original</button>
+                        <button class="btn" id="btnReset"><i aria-hidden="true" class="fas fa-trash-alt"></i> Reset all</button>
                     </div>
                 </div>
 
@@ -558,40 +628,46 @@ const ctx     = canvas.getContext('2d');
 const dropEl  = document.getElementById('steg-drop');
 const dropIcon= document.getElementById('steg-drop-icon');
 const wsEl    = document.getElementById('steg-workspace');
+const MAGIC = [0x47,0x53,0x4C,0x31];
 
-let orig = null, stegoData = null;
+let orig = null, stegoData = null, lastFileName = 'image';
 let activeTab = 'bitplane', activeChannel = 'R', activeMode = 'bw';
 let rgbView = 'original', rgbOp = null;
+let hideMode = 'text', secretFile = null, secretBytes = null;
+let revealBlob = null, revealName = 'secret.bin';
 
-function toast(msg, dur=1800){
-    const t = document.getElementById('steg-toast');
+function $(id){ return document.getElementById(id); }
+function toast(msg, dur){
+    const t = $('steg-toast');
     t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), dur);
+    setTimeout(function(){ t.classList.remove('show'); }, dur || 2000);
 }
 
-document.getElementById('steg-file').addEventListener('change', e => {
-    if (e.target.files[0]) loadImage(e.target.files[0]);
-});
-dropEl.addEventListener('dragover', e => { e.preventDefault(); dropEl.style.borderColor='var(--clr-accent,#e07820)'; dropEl.style.background='rgba(224,120,32,.06)'; dropIcon.style.color='var(--clr-accent,#e07820)'; });
-dropEl.addEventListener('dragleave', () => { dropEl.style.borderColor='var(--clr-muted,#555)'; dropEl.style.background='rgba(0,0,0,.2)'; dropIcon.style.color='var(--clr-muted,#888)'; });
-dropEl.addEventListener('drop', e => { e.preventDefault(); dropEl.style.borderColor='var(--clr-muted,#555)'; dropEl.style.background='rgba(0,0,0,.2)'; dropIcon.style.color='var(--clr-muted,#888)'; if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]); });
+/* ---------- load image ---------- */
+$('steg-file').addEventListener('change', function(e){ if (e.target.files[0]) loadImage(e.target.files[0]); });
+dropEl.addEventListener('dragover', function(e){ e.preventDefault(); dropEl.style.borderColor='var(--clr-accent,#e07820)'; dropEl.style.background='rgba(224,120,32,.06)'; dropIcon.style.color='var(--clr-accent,#e07820)'; });
+dropEl.addEventListener('dragleave', function(){ dropEl.style.borderColor='var(--clr-muted,#555)'; dropEl.style.background='rgba(0,0,0,.2)'; dropIcon.style.color='var(--clr-muted,#888)'; });
+dropEl.addEventListener('drop', function(e){ e.preventDefault(); dropEl.style.borderColor='var(--clr-muted,#555)'; dropEl.style.background='rgba(0,0,0,.2)'; dropIcon.style.color='var(--clr-muted,#888)'; if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]); });
+window.addEventListener('paste', function(e){ const items=(e.clipboardData||{}).items||[]; for (let i=0;i<items.length;i++){ if (items[i].type && items[i].type.indexOf('image')===0){ const f=items[i].getAsFile(); if (f){ loadImage(f); toast('Pasted image loaded'); } } } });
 
 function loadImage(file){
     const r = new FileReader();
-    r.onload = ev => {
+    r.onload = function(ev){
         const img = new Image();
-        img.onload = () => {
+        img.onload = function(){
             canvas.width = img.width; canvas.height = img.height;
             ctx.drawImage(img, 0, 0);
             orig = ctx.getImageData(0, 0, canvas.width, canvas.height);
             stegoData = null;
-            document.getElementById('steg-canvas-empty').style.display = 'none';
+            const nm = file.name || 'image';
+            lastFileName = nm.indexOf('.')>=0 ? nm.slice(0, nm.lastIndexOf('.')) : nm;
+            $('steg-canvas-empty').style.display = 'none';
             canvas.style.display = 'block';
-            document.getElementById('steg-canvas-label').style.display = 'block';
+            $('steg-canvas-label').style.display = 'block';
             wsEl.style.display = 'block';
             dropEl.style.marginBottom = '0';
             updateFileInfo(file, img);
-            renderEntropy(); detectAnomalies(); renderAnalysis();
+            renderEntropy(); renderAnalysis(); runSteganalysis(); updateCompare(); updateCapacity();
             updateCanvas();
         };
         img.src = ev.target.result;
@@ -599,36 +675,37 @@ function loadImage(file){
     r.readAsDataURL(file);
 }
 
-document.querySelectorAll('.steg-tab').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.steg-tab').forEach(x => x.classList.remove('active'));
+/* ---------- tabs ---------- */
+document.querySelectorAll('.steg-tab').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.steg-tab').forEach(function(x){ x.classList.remove('active'); });
     b.classList.add('active'); activeTab = b.dataset.tab;
-    document.querySelectorAll('.steg-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('steg-panel-' + activeTab).classList.add('active');
+    document.querySelectorAll('.steg-panel').forEach(function(p){ p.classList.remove('active'); });
+    $('steg-panel-' + activeTab).classList.add('active');
     if (orig) updateCanvas();
-    if (orig && activeTab === 'analysis') renderAnalysis();
-}));
+    if (orig && activeTab === 'analysis'){ renderAnalysis(); runSteganalysis(); }
+}); });
 
 function updateCanvas(){
     if (!orig) return;
     if      (activeTab === 'bitplane') renderBitPlane();
     else if (activeTab === 'rgb')      renderRGB();
-    else if (activeTab === 'encode' && stegoData) ctx.putImageData(stegoData, 0, 0);
+    else if (activeTab === 'hide' && stegoData) ctx.putImageData(stegoData, 0, 0);
     else ctx.putImageData(orig, 0, 0);
     updateLabel();
 }
-
 function updateLabel(){
-    const l = document.getElementById('steg-canvas-label');
-    if (activeTab === 'bitplane') l.textContent = `Bit ${document.getElementById('bitSlider').value} - ${activeChannel} - ${activeMode}`;
-    else if (activeTab === 'rgb') l.textContent = `Channel: ${rgbView}`;
+    const l = $('steg-canvas-label');
+    if (activeTab === 'bitplane') l.textContent = 'Bit ' + $('bitSlider').value + ' - ' + activeChannel + ' - ' + activeMode;
+    else if (activeTab === 'rgb') l.textContent = 'Channel: ' + rgbView;
+    else if (activeTab === 'hide' && stegoData) l.textContent = 'stego (encoded)';
     else l.textContent = 'original';
 }
 
 function renderBitPlane(){
-    const bit = parseInt(document.getElementById('bitSlider').value);
+    const bit = parseInt($('bitSlider').value);
     const d = orig.data, out = ctx.createImageData(canvas.width, canvas.height), od = out.data;
     for (let i = 0; i < d.length; i += 4){
-        let r=(d[i  ]>>bit)&1, g=(d[i+1]>>bit)&1, b=(d[i+2]>>bit)&1, v;
+        let r=(d[i]>>bit)&1, g=(d[i+1]>>bit)&1, b=(d[i+2]>>bit)&1, v;
         if      (activeChannel==='R') v = r*255;
         else if (activeChannel==='G') v = g*255;
         else if (activeChannel==='B') v = b*255;
@@ -644,72 +721,66 @@ function renderBitPlane(){
 function renderRGB(){
     const d = orig.data, out = ctx.createImageData(canvas.width, canvas.height), od = out.data;
     for (let i = 0; i < d.length; i += 4){
-        if      (rgbView==='r')       { od[i]=d[i];       od[i+1]=0;        od[i+2]=0;        }
-        else if (rgbView==='g')       { od[i]=0;           od[i+1]=d[i+1];   od[i+2]=0;        }
-        else if (rgbView==='b')       { od[i]=0;           od[i+1]=0;        od[i+2]=d[i+2];   }
+        if      (rgbView==='r')       { od[i]=d[i];     od[i+1]=0;        od[i+2]=0;        }
+        else if (rgbView==='g')       { od[i]=0;        od[i+1]=d[i+1];   od[i+2]=0;        }
+        else if (rgbView==='b')       { od[i]=0;        od[i+1]=0;        od[i+2]=d[i+2];   }
         else if (rgbView==='gray')    { const l=Math.round(.299*d[i]+.587*d[i+1]+.114*d[i+2]); od[i]=od[i+1]=od[i+2]=l; }
-        else if (rgbOp==='swap_rb')   { od[i]=d[i+2];     od[i+1]=d[i+1];   od[i+2]=d[i];     }
-        else if (rgbOp==='swap_rg')   { od[i]=d[i+1];     od[i+1]=d[i];     od[i+2]=d[i+2];   }
-        else if (rgbOp==='invert_all'){ od[i]=255-d[i];   od[i+1]=255-d[i+1];od[i+2]=255-d[i+2]; }
-        else if (rgbOp==='neg_r')     { od[i]=255-d[i];   od[i+1]=d[i+1];   od[i+2]=d[i+2];   }
-        else if (rgbOp==='neg_g')     { od[i]=d[i];       od[i+1]=255-d[i+1];od[i+2]=d[i+2];  }
-        else if (rgbOp==='neg_b')     { od[i]=d[i];       od[i+1]=d[i+1];   od[i+2]=255-d[i+2]; }
-        else                          { od[i]=d[i];       od[i+1]=d[i+1];   od[i+2]=d[i+2];   }
+        else if (rgbOp==='swap_rb')   { od[i]=d[i+2];   od[i+1]=d[i+1];   od[i+2]=d[i];     }
+        else if (rgbOp==='swap_rg')   { od[i]=d[i+1];   od[i+1]=d[i];     od[i+2]=d[i+2];   }
+        else if (rgbOp==='invert_all'){ od[i]=255-d[i]; od[i+1]=255-d[i+1];od[i+2]=255-d[i+2]; }
+        else if (rgbOp==='neg_r')     { od[i]=255-d[i]; od[i+1]=d[i+1];   od[i+2]=d[i+2];   }
+        else if (rgbOp==='neg_g')     { od[i]=d[i];     od[i+1]=255-d[i+1];od[i+2]=d[i+2];  }
+        else if (rgbOp==='neg_b')     { od[i]=d[i];     od[i+1]=d[i+1];   od[i+2]=255-d[i+2]; }
+        else                          { od[i]=d[i];     od[i+1]=d[i+1];   od[i+2]=d[i+2];   }
         od[i+3]=255;
     }
     ctx.putImageData(out, 0, 0);
 }
 
-document.getElementById('bitSlider').addEventListener('input', function(){
-    document.getElementById('bitVal').textContent = this.value;
-    document.querySelectorAll('#qpGrid .btn').forEach(b => b.classList.toggle('active', b.dataset.qp == this.value));
-    if (orig && activeTab==='bitplane') renderBitPlane(); updateLabel();
+$('bitSlider').addEventListener('input', function(){
+    $('bitVal').textContent = this.value;
+    document.querySelectorAll('#qpGrid .btn').forEach(function(b){ b.classList.toggle('active', b.dataset.qp == this.value); }, this);
+    if (orig && activeTab==='bitplane') renderBitPlane();
+    updateLabel();
 });
-
-document.querySelectorAll('.ch-btn[data-ch]').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.ch-btn[data-ch]').forEach(x => x.classList.remove('active'));
+document.querySelectorAll('.ch-btn[data-ch]').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.ch-btn[data-ch]').forEach(function(x){ x.classList.remove('active'); });
     b.classList.add('active'); activeChannel = b.dataset.ch;
     if (orig && activeTab==='bitplane') renderBitPlane();
-}));
-
-document.querySelectorAll('.btn[data-mode]').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.btn[data-mode]').forEach(x => x.classList.remove('active'));
+}); });
+document.querySelectorAll('.btn[data-mode]').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.btn[data-mode]').forEach(function(x){ x.classList.remove('active'); });
     b.classList.add('active'); activeMode = b.dataset.mode;
     if (orig && activeTab==='bitplane') renderBitPlane();
-}));
-
-document.querySelectorAll('.ch-btn[data-view]').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.ch-btn[data-view]').forEach(x => x.classList.remove('active'));
+}); });
+document.querySelectorAll('.ch-btn[data-view]').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.ch-btn[data-view]').forEach(function(x){ x.classList.remove('active'); });
     b.classList.add('active'); rgbView = b.dataset.view; rgbOp = null;
     if (orig && activeTab==='rgb') renderRGB();
-}));
-
-document.querySelectorAll('.btn[data-op]').forEach(b => b.addEventListener('click', () => {
+}); });
+document.querySelectorAll('.btn[data-op]').forEach(function(b){ b.addEventListener('click', function(){
     rgbOp = b.dataset.op; rgbView = 'op';
     if (orig && activeTab==='rgb') renderRGB();
-}));
-
-document.querySelectorAll('#qpGrid .btn').forEach(b => b.addEventListener('click', () => {
+}); });
+document.querySelectorAll('#qpGrid .btn').forEach(function(b){ b.addEventListener('click', function(){
     const v = b.dataset.qp;
-    document.getElementById('bitSlider').value = v;
-    document.getElementById('bitVal').textContent = v;
-    document.querySelectorAll('#qpGrid .btn').forEach(x => x.classList.remove('active'));
+    $('bitSlider').value = v; $('bitVal').textContent = v;
+    document.querySelectorAll('#qpGrid .btn').forEach(function(x){ x.classList.remove('active'); });
     b.classList.add('active');
-    document.querySelectorAll('.steg-tab').forEach(t => t.classList.toggle('active', t.dataset.tab==='bitplane'));
-    document.querySelectorAll('.steg-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('steg-panel-bitplane').classList.add('active');
+    document.querySelectorAll('.steg-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.tab==='bitplane'); });
+    document.querySelectorAll('.steg-panel').forEach(function(p){ p.classList.remove('active'); });
+    $('steg-panel-bitplane').classList.add('active');
     activeTab = 'bitplane';
     if (orig){ renderBitPlane(); updateLabel(); }
-}));
+}); });
 
 function updateFileInfo(file, img){
-    document.getElementById('fileInfo').innerHTML = `
-        <div class="stat-row"><span>${file.name}</span></div>
-        <div class="stat-row"><span>Resolution</span><span class="stat-val">${img.width}&times;${img.height}</span></div>
-        <div class="stat-row"><span>File size</span><span class="stat-val">${(file.size/1024).toFixed(1)} KB</span></div>
-        <div class="stat-row"><span>Total pixels</span><span class="stat-val">${(img.width*img.height).toLocaleString()}</span></div>
-        <div class="stat-row"><span>Capacity (1-bit)</span><span class="stat-val">${Math.floor(img.width*img.height/8).toLocaleString()} chars</span></div>
-    `;
+    $('fileInfo').innerHTML =
+        '<div class="stat-row"><span>' + file.name + '</span></div>' +
+        '<div class="stat-row"><span>Resolution</span><span class="stat-val">' + img.width + '&times;' + img.height + '</span></div>' +
+        '<div class="stat-row"><span>File size</span><span class="stat-val">' + (file.size/1024).toFixed(1) + ' KB</span></div>' +
+        '<div class="stat-row"><span>Total pixels</span><span class="stat-val">' + (img.width*img.height).toLocaleString() + '</span></div>' +
+        '<div class="stat-row"><span>Capacity (1-bit RGB)</span><span class="stat-val">' + Math.floor(img.width*img.height*3/8).toLocaleString() + ' bytes</span></div>';
 }
 
 function renderAnalysis(){
@@ -717,13 +788,12 @@ function renderAnalysis(){
     const d = orig.data, n = d.length/4;
     let rs=0, gs=0, bs=0;
     for (let i=0;i<d.length;i+=4){ rs+=d[i]; gs+=d[i+1]; bs+=d[i+2]; }
-    document.getElementById('statsTable').innerHTML = `
-        <div class="stat-row"><span>Pixels</span><span class="stat-val">${n.toLocaleString()}</span></div>
-        <div class="stat-row"><span style="color:#cc4455;">Avg Red</span><span class="stat-val">${(rs/n).toFixed(1)}</span></div>
-        <div class="stat-row"><span style="color:#44aa66;">Avg Green</span><span class="stat-val">${(gs/n).toFixed(1)}</span></div>
-        <div class="stat-row"><span style="color:#5588ee;">Avg Blue</span><span class="stat-val">${(bs/n).toFixed(1)}</span></div>
-        <div class="stat-row"><span>LSB capacity</span><span class="stat-val">${Math.floor(n/8).toLocaleString()} chars</span></div>
-    `;
+    $('statsTable').innerHTML =
+        '<div class="stat-row"><span>Pixels</span><span class="stat-val">' + n.toLocaleString() + '</span></div>' +
+        '<div class="stat-row"><span style="color:#cc4455;">Avg Red</span><span class="stat-val">' + (rs/n).toFixed(1) + '</span></div>' +
+        '<div class="stat-row"><span style="color:#44aa66;">Avg Green</span><span class="stat-val">' + (gs/n).toFixed(1) + '</span></div>' +
+        '<div class="stat-row"><span style="color:#5588ee;">Avg Blue</span><span class="stat-val">' + (bs/n).toFixed(1) + '</span></div>' +
+        '<div class="stat-row"><span>LSB capacity</span><span class="stat-val">' + Math.floor(n*3/8).toLocaleString() + ' bytes</span></div>';
     const bins=24, step=256/bins;
     const rH=new Array(bins).fill(0), gH=new Array(bins).fill(0), bH=new Array(bins).fill(0);
     for (let i=0;i<d.length;i+=4){
@@ -731,154 +801,324 @@ function renderAnalysis(){
         gH[Math.min(bins-1,Math.floor(d[i+1]/step))]++;
         bH[Math.min(bins-1,Math.floor(d[i+2]/step))]++;
     }
-    const mx = Math.max(...rH,...gH,...bH);
+    const mx = Math.max.apply(null, rH.concat(gH).concat(bH));
     let html = '<div class="hist-wrap">';
-    [['R',rH,'#cc4455'],['G',gH,'#44aa66'],['B',bH,'#5588ee']].forEach(([lbl,arr,col]) => {
-        html += `<div class="hist-col"><div class="hist-lbl" style="color:${col}">${lbl}</div><div class="hist-bars">`;
-        arr.forEach(v => { const h=Math.max(1,Math.round((v/mx)*38)); html+=`<div class="hist-bar" style="height:${h}px;background:${col}"></div>`; });
+    [['R',rH,'#cc4455'],['G',gH,'#44aa66'],['B',bH,'#5588ee']].forEach(function(t){
+        html += '<div class="hist-col"><div class="hist-lbl" style="color:' + t[2] + '">' + t[0] + '</div><div class="hist-bars">';
+        t[1].forEach(function(v){ const h=Math.max(1,Math.round((v/mx)*38)); html += '<div class="hist-bar" style="height:' + h + 'px;background:' + t[2] + '"></div>'; });
         html += '</div></div>';
     });
     html += '</div>';
-    document.getElementById('histogram').innerHTML = html;
+    $('histogram').innerHTML = html;
+    const sd = (stegoData||orig).data;
     let lb='';
-    for (let i=0;i<64;i++){ const bit=d[i*4]&1; lb+=`<div class="lsb-cell ${bit?'on':'off'}">${bit}</div>`; }
-    document.getElementById('lsbGrid').innerHTML = lb;
+    for (let i=0;i<64;i++){ const bit=sd[i*4]&1; lb += '<div class="lsb-cell ' + (bit?'on':'off') + '">' + bit + '</div>'; }
+    $('lsbGrid').innerHTML = lb;
 }
 
 function renderEntropy(){
     if (!orig) return;
-    const d = orig.data, n = d.length/4;
+    const d = (stegoData||orig).data, n = d.length/4;
     let html = '';
     for (let bit=0; bit<8; bit++){
         let ones=0;
-        for (let i=0;i<d.length;i+=4) ones+=(d[i]>>bit)&1;
+        for (let i=0;i<d.length;i+=4) ones += (d[i]>>bit)&1;
         const ratio=ones/n;
         const ent=-((ratio*Math.log2(ratio+1e-9))+((1-ratio)*Math.log2(1-ratio+1e-9)));
         const pct=Math.round(ent*100);
         const col = bit<3 ? 'var(--clr-accent,#e07820)' : 'rgba(255,255,255,.25)';
-        html += `<div class="ent-row">
-            <span style="font-size:10px;color:var(--clr-muted,#888);min-width:38px;">Bit ${bit}</span>
-            <div class="ent-bg"><div class="ent-bar" style="width:${pct}%;background:${col}"></div></div>
-            <span style="font-size:10px;color:var(--clr-muted,#aaa);min-width:28px;">${pct}%</span>
-        </div>`;
+        html += '<div class="ent-row"><span style="font-size:10px;color:var(--clr-muted,#888);min-width:38px;">Bit ' + bit + '</span><div class="ent-bg"><div class="ent-bar" style="width:' + pct + '%;background:' + col + '"></div></div><span style="font-size:10px;color:var(--clr-muted,#aaa);min-width:28px;">' + pct + '%</span></div>';
     }
-    document.getElementById('entropyBars').innerHTML = html;
+    $('entropyBars').innerHTML = html;
 }
 
-function detectAnomalies(){
+/* ---------- steganalysis (chi-square attack) ---------- */
+function gammln(xx){
+    const cof=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];
+    let x=xx, y=xx, tmp=x+5.5; tmp-=(x+0.5)*Math.log(tmp);
+    let ser=1.000000000190015;
+    for (let j=0;j<6;j++){ y++; ser+=cof[j]/y; }
+    return -tmp+Math.log(2.5066282746310005*ser/x);
+}
+function gammp(a,x){
+    if (x<=0||a<=0) return 0;
+    if (x<a+1){
+        let ap=a, sum=1/a, del=sum;
+        for (let n=0;n<300;n++){ ap++; del*=x/ap; sum+=del; if (Math.abs(del)<Math.abs(sum)*1e-12) break; }
+        return sum*Math.exp(-x+a*Math.log(x)-gammln(a));
+    } else {
+        const FPMIN=1e-300; let b=x+1-a, c=1/FPMIN, d=1/b, h=d;
+        for (let i=1;i<=300;i++){ const an=-i*(i-a); b+=2; d=an*d+b; if (Math.abs(d)<FPMIN) d=FPMIN; c=b+an/c; if (Math.abs(c)<FPMIN) c=FPMIN; d=1/d; const del=d*c; h*=del; if (Math.abs(del-1)<1e-12) break; }
+        return 1-Math.exp(-x+a*Math.log(x)-gammln(a))*h;
+    }
+}
+function chiSquareAttack(channel){
+    const d=(stegoData||orig).data, h=new Array(256).fill(0);
+    for (let i=0;i<d.length;i+=4) h[d[i+channel]]++;
+    let chi=0, df=0;
+    for (let k=0;k<128;k++){ const e=(h[2*k]+h[2*k+1])/2; if (e>=1){ const diff=h[2*k]-e; chi+=diff*diff/e; df++; } }
+    if (df<1) df=1;
+    return { chi: chi, df: df, p: 1 - gammp(df/2, chi/2) };
+}
+function lsbRatio(channel){
+    const d=(stegoData||orig).data, n=d.length/4; let ones=0;
+    for (let i=0;i<d.length;i+=4) ones += d[i+channel]&1;
+    return ones/n;
+}
+function runSteganalysis(){
     if (!orig) return;
-    const d = orig.data, n = d.length/4;
-    let ones=0;
-    for (let i=0;i<d.length;i+=4) ones += d[i]&1;
-    const ratio = ones/n;
-    const uniform = ratio>0.48 && ratio<0.52;
-    let html = '';
-    html += `<div class="anom-item" style="color:${uniform?'#cc8820':'#44aa66'};">
-        ${uniform ? '? LSB is suspiciously uniform - possible hidden data' : '? LSB distribution looks natural'}
-    </div>`;
-    if (n>2000){
-        let pairs=0;
-        for (let i=0;i<Math.min(d.length-4,8000);i+=8) if((d[i]&1)===(d[i+4]&1)) pairs++;
-        const pr = pairs / Math.min(n/2, 1000);
-        html += `<div class="anom-item" style="color:${pr>0.55?'#cc8820':'#44aa66'};">
-            ${pr>0.55 ? '? High LSB pair correlation detected' : '? LSB pairs show normal variance'}
-        </div>`;
-    }
-    html += `<div class="anom-item" style="color:var(--clr-muted,#888);">? Max hidden data (1-bit): ${Math.floor(n/8).toLocaleString()} bytes</div>`;
-    document.getElementById('anomalies').innerHTML = html;
+    const el=$('steganalysis'); if (!el) return;
+    const res=chiSquareAttack(0);
+    const pr=lsbRatio(0), pg=lsbRatio(1), pb=lsbRatio(2);
+    const pct=Math.round(res.p*100);
+    const col = pct>66?'#cc4455':(pct>33?'#cc8820':'#44aa66');
+    const verdict = pct>66?'Likely contains hidden data':(pct>33?'Possibly modified':'Looks clean');
+    let html='';
+    html += '<div class="verdict" style="color:' + col + '">' + verdict + ' (' + pct + '%)</div>';
+    html += '<div class="mini-bar-bg"><div class="mini-bar" style="width:' + pct + '%;background:' + col + '"></div></div>';
+    html += '<div class="stat-row" style="margin-top:8px;"><span>Chi-square</span><span class="stat-val">' + res.chi.toFixed(1) + '</span></div>';
+    html += '<div class="stat-row"><span style="color:#cc4455;">LSB ratio R</span><span class="stat-val">' + pr.toFixed(4) + '</span></div>';
+    html += '<div class="stat-row"><span style="color:#44aa66;">LSB ratio G</span><span class="stat-val">' + pg.toFixed(4) + '</span></div>';
+    html += '<div class="stat-row"><span style="color:#5588ee;">LSB ratio B</span><span class="stat-val">' + pb.toFixed(4) + '</span></div>';
+    html += '<p class="steg-note">Chi-square attack: a high percentage means LSB value pairs are equalized, a classic sign of embedded data. Ratios near 0.5000 are also suspicious.</p>';
+    el.innerHTML=html;
 }
 
-document.getElementById('btnEncode').addEventListener('click', () => {
-    if (!orig) return toast('Load an image first');
-    const text = document.getElementById('encText').value;
-    if (!text) return toast('Enter a message to encode');
-    const chIdx = parseInt(document.getElementById('encCh').value);
-    const bpp   = parseInt(document.getElementById('encBits').value);
-    const msg   = text + '\0';
-    const bits  = [];
-    for (const c of msg) for (let b=7;b>=0;b--) bits.push((c.charCodeAt(0)>>b)&1);
-    const chMap    = [[0],[1],[2],[0,1,2]];
-    const channels = chMap[chIdx];
-    const maxBits  = Math.floor(orig.data.length/4) * bpp * channels.length;
-    if (bits.length > maxBits) return toast(`Message too long! Max ? ${Math.floor(maxBits/8)} chars`);
-    const enc  = new Uint8ClampedArray(orig.data);
-    let bi=0; const mask = (~((1<<bpp)-1)) & 0xFF;
-    for (let i=0; i<enc.length && bi<bits.length; i+=4){
-        for (const ch of channels){
-            if (bi>=bits.length) break;
-            let v = enc[i+ch] & mask;
-            for (let b=bpp-1; b>=0 && bi<bits.length; b--,bi++) v |= bits[bi]<<b;
-            enc[i+ch] = v;
-        }
-    }
-    stegoData = new ImageData(enc, canvas.width, canvas.height);
-    ctx.putImageData(stegoData, 0, 0);
-    document.getElementById('btnSaveEnc').disabled = false;
-    const usedPct = Math.round((bits.length/maxBits)*100);
-    document.getElementById('encStatus').textContent = `Encoded ${msg.length-1} chars - ${bits.length} bits - ${usedPct}% of capacity used`;
-    toast('Message encoded successfully!');
-});
+/* ---------- compare vs original ---------- */
+function luma(d,i){ return 0.299*d[i]+0.587*d[i+1]+0.114*d[i+2]; }
+function computePSNR(a,b){ let mse=0,c=0; for (let i=0;i<a.length;i+=4){ for (let k=0;k<3;k++){ const dd=a[i+k]-b[i+k]; mse+=dd*dd; c++; } } mse/=c; return mse===0?Infinity:10*Math.log10(255*255/mse); }
+function computeSSIM(a,b){ let n=0,ma=0,mb=0; for (let i=0;i<a.length;i+=4){ ma+=luma(a,i); mb+=luma(b,i); n++; } ma/=n; mb/=n; let va=0,vb=0,cov=0; for (let i=0;i<a.length;i+=4){ const la=luma(a,i)-ma, lb=luma(b,i)-mb; va+=la*la; vb+=lb*lb; cov+=la*lb; } va/=n; vb/=n; cov/=n; const c1=6.5025,c2=58.5225; return ((2*ma*mb+c1)*(2*cov+c2))/((ma*ma+mb*mb+c1)*(va+vb+c2)); }
+function changedPct(a,b){ let ch=0,c=0; for (let i=0;i<a.length;i+=4){ for (let k=0;k<3;k++){ if (a[i+k]!==b[i+k]) ch++; c++; } } return ch/c*100; }
+function updateCompare(){
+    const el=$('compareStats'); if (!el) return;
+    if (!stegoData){ el.innerHTML='<p class="steg-note">Hide data (or load a stego image and re-hide) to measure distortion against the original.</p>'; return; }
+    const psnr=computePSNR(orig.data, stegoData.data);
+    const ssim=computeSSIM(orig.data, stegoData.data);
+    const chp=changedPct(orig.data, stegoData.data);
+    el.innerHTML =
+        '<div class="stat-row"><span>PSNR</span><span class="stat-val">' + (psnr===Infinity?'∞':psnr.toFixed(2)+' dB') + '</span></div>' +
+        '<div class="stat-row"><span>SSIM (global)</span><span class="stat-val">' + ssim.toFixed(5) + '</span></div>' +
+        '<div class="stat-row"><span>Sub-pixels changed</span><span class="stat-val">' + chp.toFixed(2) + '%</span></div>' +
+        '<p class="steg-note">Higher PSNR and SSIM closer to 1 mean the hidden data is harder to detect.</p>';
+}
+function renderDiff(amp){
+    if (!orig || !stegoData){ toast('Need an original and an encoded image'); return; }
+    const out=ctx.createImageData(canvas.width, canvas.height), od=out.data, a=orig.data, b=stegoData.data;
+    for (let i=0;i<a.length;i+=4){ for (let k=0;k<3;k++){ od[i+k]=Math.min(255, Math.abs(a[i+k]-b[i+k])*amp); } od[i+3]=255; }
+    ctx.putImageData(out,0,0);
+    $('steg-canvas-label').textContent = 'diff x' + amp;
+}
 
-document.getElementById('btnDecode').addEventListener('click', () => {
-    if (!orig) return toast('Load an image first');
-    const chIdx = parseInt(document.getElementById('decCh').value);
-    const bpp   = parseInt(document.getElementById('decBits').value);
-    const maxC  = parseInt(document.getElementById('decLen').value);
-    const src   = stegoData || orig;
-    const d     = src.data;
-    const bits  = [];
-    const chMap = [[0],[1],[2],[0,1,2]];
-    const channels = chMap[chIdx];
-    for (let i=0; i<d.length; i+=4){
-        for (const ch of channels) for (let b=bpp-1;b>=0;b--) bits.push((d[i+ch]>>b)&1);
-        if (bits.length > maxC*8+16) break;
-    }
+/* ---------- bit / slot helpers ---------- */
+const CHMAP=[[0],[1],[2],[0,1,2]];
+function buildSlots(numPixels, channels){ const m=channels.length; const slots=new Int32Array(numPixels*m); let k=0; for (let p=0;p<numPixels;p++){ const base=p*4; for (let c=0;c<m;c++) slots[k++]=base+channels[c]; } return slots; }
+function seedFromPw(pw){ let h=2166136261; for (let i=0;i<pw.length;i++){ h=h^pw.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function mulberry32(a){ return function(){ a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function shuffleSlots(slots, seed){ const r=mulberry32(seed); for (let i=slots.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); const t=slots[i]; slots[i]=slots[j]; slots[j]=t; } return slots; }
+function embedBits(data, slots, bpp, bits){ let bi=0; const mask=(~((1<<bpp)-1))&0xFF; for (let s=0;s<slots.length && bi<bits.length;s++){ const idx=slots[s]; let v=data[idx]&mask; for (let b=bpp-1;b>=0 && bi<bits.length;b--,bi++) v|=bits[bi]<<b; data[idx]=v; } }
+function bytesToBits(bytes){ const bits=new Uint8Array(bytes.length*8); let k=0; for (let q=0;q<bytes.length;q++){ const byte=bytes[q]; for (let b=7;b>=0;b--) bits[k++]=(byte>>b)&1; } return bits; }
+function makeReader(data, slots, bpp){
+    let si=0; const buf=[];
+    function ensure(nbits){ while (buf.length<nbits && si<slots.length){ const idx=slots[si++]; for (let b=bpp-1;b>=0;b--) buf.push((data[idx]>>b)&1); } }
+    return {
+        readBytes:function(n){ ensure(n*8); if (buf.length<n*8) return null; const out=new Uint8Array(n); for (let i=0;i<n;i++){ let v=0; for (let b=0;b<8;b++) v=(v<<1)|buf[i*8+b]; out[i]=v; } buf.splice(0,n*8); return out; },
+        capacityBytes:function(){ return Math.floor(slots.length*bpp/8); }
+    };
+}
+
+/* ---------- crypto (AES-256-GCM via PBKDF2) ---------- */
+async function deriveKey(pw, salt){
+    const km=await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), {name:'PBKDF2'}, false, ['deriveKey']);
+    return crypto.subtle.deriveKey({name:'PBKDF2', salt:salt, iterations:120000, hash:'SHA-256'}, km, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+}
+async function encryptBytes(pw, plain){
+    const salt=crypto.getRandomValues(new Uint8Array(16));
+    const iv=crypto.getRandomValues(new Uint8Array(12));
+    const key=await deriveKey(pw, salt);
+    const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv:iv}, key, plain));
+    const blob=new Uint8Array(28+ct.length); blob.set(salt,0); blob.set(iv,16); blob.set(ct,28); return blob;
+}
+async function decryptBytes(pw, blob){
+    const salt=blob.slice(0,16), iv=blob.slice(16,28), ct=blob.slice(28);
+    const key=await deriveKey(pw, salt);
+    return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM', iv:iv}, key, ct));
+}
+
+/* ---------- container ---------- */
+function buildContainer(type, name, blob, encrypted){
+    const nameBytes=new TextEncoder().encode(name||'');
+    const nameLen=Math.min(255, nameBytes.length);
+    const head=new Uint8Array(7+nameLen+4);
+    head[0]=MAGIC[0]; head[1]=MAGIC[1]; head[2]=MAGIC[2]; head[3]=MAGIC[3];
+    head[4]=encrypted?1:0; head[5]=type; head[6]=nameLen;
+    for (let i=0;i<nameLen;i++) head[7+i]=nameBytes[i];
+    const off=7+nameLen, len=blob.length;
+    head[off]=(len>>>24)&0xFF; head[off+1]=(len>>>16)&0xFF; head[off+2]=(len>>>8)&0xFF; head[off+3]=len&0xFF;
+    const out=new Uint8Array(head.length+blob.length); out.set(head,0); out.set(blob,head.length); return out;
+}
+
+/* ---------- capacity ---------- */
+function updateCapacity(){
+    const bar=$('capFill'), txt=$('capText'); if (!bar||!txt||!orig) return;
+    const channels=CHMAP[parseInt($('hideCh').value)];
+    const bpp=parseInt($('hideBits').value);
+    const capacity=Math.floor((orig.data.length/4)*channels.length*bpp/8);
+    let payloadLen=0, nameLen=0;
+    if (hideMode==='text'){ payloadLen=new TextEncoder().encode($('hideText').value||'').length; }
+    else if (secretBytes){ payloadLen=secretBytes.length; nameLen=Math.min(255, new TextEncoder().encode(secretFile?secretFile.name:'').length); }
+    const encrypted=($('hidePass').value||'').length>0;
+    const used=7+nameLen+4+payloadLen+(encrypted?44:0);
+    const pct=capacity>0?Math.min(100, used/capacity*100):100;
+    bar.style.width=pct.toFixed(1)+'%';
+    bar.classList.toggle('over', used>capacity);
+    txt.textContent=used.toLocaleString()+' / '+capacity.toLocaleString()+' bytes ('+pct.toFixed(1)+'%)'+(used>capacity?' - too large!':'');
+}
+
+/* ---------- hide UI ---------- */
+document.querySelectorAll('.seg [data-hm]').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.seg [data-hm]').forEach(function(x){ x.classList.remove('active'); });
+    b.classList.add('active'); hideMode=b.dataset.hm;
+    $('hideTextWrap').style.display = hideMode==='text'?'block':'none';
+    $('hideFileWrap').style.display = hideMode==='text'?'none':'block';
+    $('hideFileLabel').textContent = hideMode==='image'?'Select an image to hide':'Select a file to hide';
+    updateCapacity();
+}); });
+$('hideFile').addEventListener('change', function(e){
+    const f=e.target.files[0]; if (!f) return; secretFile=f;
+    f.arrayBuffer().then(function(buf){
+        secretBytes=new Uint8Array(buf);
+        $('hideFileInfo').textContent=f.name+' - '+(f.size/1024).toFixed(1)+' KB';
+        const prev=$('hidePreview');
+        if (f.type.indexOf('image')===0){ prev.src=URL.createObjectURL(f); prev.style.display='block'; } else { prev.style.display='none'; }
+        updateCapacity();
+    });
+});
+['hideText','hideCh','hideBits','hidePass'].forEach(function(id){ $(id).addEventListener('input', updateCapacity); });
+$('hideCh').addEventListener('change', updateCapacity);
+$('hideBits').addEventListener('change', updateCapacity);
+document.querySelectorAll('[data-preset]').forEach(function(b){ b.addEventListener('click', function(){
+    const p=b.dataset.preset;
+    if (p==='stealth'){ $('hideCh').value='0'; $('hideBits').value='1'; }
+    else if (p==='balanced'){ $('hideCh').value='3'; $('hideBits').value='1'; }
+    else { $('hideCh').value='3'; $('hideBits').value='4'; }
+    updateCapacity(); toast('Preset: '+p);
+}); });
+
+$('btnHide').addEventListener('click', async function(){
+    if (!orig) return toast('Load a cover image first');
+    let type, name='', payload;
+    if (hideMode==='text'){ const txt=$('hideText').value; if (!txt) return toast('Enter a message to hide'); type=0; payload=new TextEncoder().encode(txt); }
+    else { if (!secretBytes) return toast('Choose a file to hide'); type=1; name=secretFile.name; payload=secretBytes; }
+    const pw=$('hidePass').value||'';
+    const channels=CHMAP[parseInt($('hideCh').value)];
+    const bpp=parseInt($('hideBits').value);
+    const scatter=$('hideScatter').checked;
+    if (scatter && !pw) return toast('Scatter needs a password');
+    const btn=$('btnHide');
+    try {
+        btn.disabled=true; $('hideStatus').textContent='Working...';
+        let blob=payload, encrypted=false;
+        if (pw){ blob=await encryptBytes(pw, payload); encrypted=true; }
+        const container=buildContainer(type, name, blob, encrypted);
+        const bits=bytesToBits(container);
+        const numPixels=orig.data.length/4;
+        let slots=buildSlots(numPixels, channels);
+        if (scatter) slots=shuffleSlots(slots, seedFromPw(pw));
+        if (bits.length > slots.length*bpp){ $('hideStatus').textContent=''; toast('Payload too large for this image / settings'); btn.disabled=false; return; }
+        const data=new Uint8ClampedArray(orig.data);
+        embedBits(data, slots, bpp, bits);
+        stegoData=new ImageData(data, canvas.width, canvas.height);
+        ctx.putImageData(stegoData,0,0); activeTab='hide';
+        $('btnSaveStego').disabled=false;
+        const psnr=computePSNR(orig.data, stegoData.data);
+        $('hideStatus').innerHTML='Hid '+container.length.toLocaleString()+' bytes'+(encrypted?' (encrypted)':'')+(scatter?' (scattered)':'')+' - PSNR '+(psnr===Infinity?'∞':psnr.toFixed(1)+' dB');
+        updateCompare(); runSteganalysis(); renderEntropy();
+        toast('Data hidden successfully!');
+    } catch(err){ $('hideStatus').textContent=''; toast('Error: '+(err&&err.message?err.message:err)); }
+    btn.disabled=false;
+});
+$('btnSaveStego').addEventListener('click', function(){ saveImageData(stegoData, lastFileName+'_stego.png'); });
+
+/* ---------- reveal ---------- */
+function revealLegacy(src, channels, bpp){
+    const d=src.data, bits=[], maxC=5000;
+    for (let i=0;i<d.length;i+=4){ for (let c=0;c<channels.length;c++) for (let b=bpp-1;b>=0;b--) bits.push((d[i+channels[c]]>>b)&1); if (bits.length>maxC*8+16) break; }
     let result='';
-    for (let i=0; i<bits.length-7; i+=8){
-        let code=0; for (let b=0;b<8;b++) code=(code<<1)|bits[i+b];
-        if (code===0) break;
-        result += String.fromCharCode(code);
-        if (result.length>=maxC) break;
+    for (let i=0;i<bits.length-7;i+=8){ let code=0; for (let b=0;b<8;b++) code=(code<<1)|bits[i+b]; if (code===0) break; result+=String.fromCharCode(code); if (result.length>=maxC) break; }
+    $('revText').value=result||'(no readable text found)'; $('revText').style.display='block'; $('btnRevCopy').style.display='block';
+    $('revStatus').textContent = result?('Recovered '+result.length+' chars (raw mode)'):'Nothing found';
+    toast(result?'Extracted text':'Nothing found');
+}
+$('btnReveal').addEventListener('click', async function(){
+    if (!orig) return toast('Load an image first');
+    const src=stegoData||orig;
+    const pw=$('revPass').value||'';
+    const channels=CHMAP[parseInt($('revCh').value)];
+    const bpp=parseInt($('revBits').value);
+    const scatter=$('revScatter').checked;
+    $('revText').style.display='none'; $('revPreview').style.display='none'; $('btnRevDownload').style.display='none'; $('btnRevCopy').style.display='none';
+    if (scatter && !pw) return toast('Scatter needs the password');
+    if ($('revRaw').checked){ return revealLegacy(src, channels, bpp); }
+    let slots=buildSlots(src.data.length/4, channels);
+    if (scatter) slots=shuffleSlots(slots, seedFromPw(pw));
+    const reader=makeReader(src.data, slots, bpp);
+    const head=reader.readBytes(7);
+    if (!head || head[0]!==MAGIC[0] || head[1]!==MAGIC[1] || head[2]!==MAGIC[2] || head[3]!==MAGIC[3]){
+        $('revStatus').textContent='No GibsyLab payload found. Match the channel / bits / scatter settings, or enable raw text mode.'; toast('No payload found'); return;
     }
-    document.getElementById('decOutput').value = result || '(no readable text found)';
-    if (result) toast(`Extracted ${result.length} characters`); else toast('Nothing found');
+    const encrypted=head[4]&1, type=head[5], nameLen=head[6];
+    const nameBytes = nameLen ? reader.readBytes(nameLen) : new Uint8Array(0);
+    const lenB=reader.readBytes(4); if (!lenB){ toast('Corrupt header'); return; }
+    const plen=((lenB[0]<<24)|(lenB[1]<<16)|(lenB[2]<<8)|lenB[3])>>>0;
+    if (plen>reader.capacityBytes()){ $('revStatus').textContent='Invalid payload length - wrong settings?'; toast('Wrong settings'); return; }
+    const blob=reader.readBytes(plen); if (!blob){ toast('Truncated payload'); return; }
+    let payload=blob;
+    if (encrypted){
+        if (!pw){ $('revStatus').textContent='This payload is encrypted - enter the password.'; toast('Password required'); return; }
+        try { payload=await decryptBytes(pw, blob); } catch(e){ $('revStatus').textContent='Wrong password or corrupted data.'; toast('Decryption failed'); return; }
+    }
+    if (type===0){
+        const text=new TextDecoder().decode(payload);
+        $('revText').value=text; $('revText').style.display='block'; $('btnRevCopy').style.display='block';
+        $('revStatus').textContent='Recovered '+text.length+' characters'+(encrypted?' (decrypted)':'');
+        toast('Hidden text revealed!');
+    } else {
+        const name=new TextDecoder().decode(nameBytes)||'secret.bin';
+        revealName=name; revealBlob=new Blob([payload]);
+        $('btnRevDownload').style.display='block'; $('btnRevDownload').innerHTML='<i class="fas fa-download"></i> Download '+name;
+        const lower=name.toLowerCase(); const exts=['.png','.jpg','.jpeg','.gif','.webp','.bmp','.svg'];
+        let isImg=false; for (let i=0;i<exts.length;i++){ if (lower.lastIndexOf(exts[i])===lower.length-exts[i].length && lower.length>=exts[i].length) isImg=true; }
+        if (isImg){ $('revPreview').src=URL.createObjectURL(revealBlob); $('revPreview').style.display='block'; }
+        $('revStatus').textContent='Recovered file: '+name+' ('+(payload.length/1024).toFixed(1)+' KB)'+(encrypted?' (decrypted)':'');
+        toast('Hidden file revealed!');
+    }
 });
+$('btnRevDownload').addEventListener('click', function(){ if (!revealBlob) return; const a=document.createElement('a'); a.href=URL.createObjectURL(revealBlob); a.download=revealName; a.click(); });
+$('btnRevCopy').addEventListener('click', function(){ const v=$('revText').value; if (!v) return; if (navigator.clipboard){ navigator.clipboard.writeText(v).then(function(){ toast('Copied!'); }).catch(function(){ toast('Copy failed'); }); } });
 
-document.getElementById('decLen').addEventListener('input', function(){ document.getElementById('decLenVal').textContent = this.value; });
-document.getElementById('btnCopy').addEventListener('click', () => {
-    const v = document.getElementById('decOutput').value;
-    if (v) navigator.clipboard.writeText(v).then(() => toast('Copied to clipboard!'));
-});
-
-function saveCurrentView(){
-    const t=document.createElement('canvas'); t.width=canvas.width; t.height=canvas.height;
-    t.getContext('2d').drawImage(canvas,0,0);
-    const a=document.createElement('a'); a.download=`stego_${activeTab}_${Date.now()}.png`; a.href=t.toDataURL('image/png'); a.click(); toast('Saved!');
-}
-function saveImageData(data, name){
-    if (!data) return toast('Nothing to save');
-    const t=document.createElement('canvas'); t.width=canvas.width; t.height=canvas.height;
-    t.getContext('2d').putImageData(data,0,0);
-    const a=document.createElement('a'); a.download=name; a.href=t.toDataURL('image/png'); a.click(); toast('Saved!');
-}
-
-document.getElementById('btnSaveBit').addEventListener('click', saveCurrentView);
-document.getElementById('btnOrigView').addEventListener('click', () => { if (orig) { ctx.putImageData(orig,0,0); updateLabel(); } });
-document.getElementById('btnSaveRgb').addEventListener('click', saveCurrentView);
-document.getElementById('btnSaveCurrent').addEventListener('click', saveCurrentView);
-document.getElementById('btnSaveOrig').addEventListener('click', () => saveImageData(orig, 'original.png'));
-document.getElementById('btnSaveEnc').addEventListener('click', () => saveImageData(stegoData, `stego_encoded_${Date.now()}.png`));
-document.getElementById('btnReset').addEventListener('click', () => {
+/* ---------- save / diff / reset ---------- */
+function saveCurrentView(){ const t=document.createElement('canvas'); t.width=canvas.width; t.height=canvas.height; t.getContext('2d').drawImage(canvas,0,0); const a=document.createElement('a'); a.download='stego_'+activeTab+'_'+Date.now()+'.png'; a.href=t.toDataURL('image/png'); a.click(); toast('Saved!'); }
+function saveImageData(data, name){ if (!data) return toast('Nothing to save'); const t=document.createElement('canvas'); t.width=canvas.width; t.height=canvas.height; t.getContext('2d').putImageData(data,0,0); const a=document.createElement('a'); a.download=name; a.href=t.toDataURL('image/png'); a.click(); toast('Saved!'); }
+$('btnSaveBit').addEventListener('click', saveCurrentView);
+$('btnOrigView').addEventListener('click', function(){ if (orig){ ctx.putImageData(orig,0,0); updateLabel(); } });
+$('btnSaveRgb').addEventListener('click', saveCurrentView);
+$('btnSaveCurrent').addEventListener('click', saveCurrentView);
+$('btnSaveOrig').addEventListener('click', function(){ saveImageData(orig, lastFileName+'_original.png'); });
+$('btnShowDiff').addEventListener('click', function(){ renderDiff(25); });
+$('btnHideDiff').addEventListener('click', function(){ if (orig) updateCanvas(); });
+$('btnReset').addEventListener('click', function(){
     if (!orig) return;
-    stegoData = null; ctx.putImageData(orig,0,0); updateLabel();
-    document.getElementById('encText').value = '';
-    document.getElementById('decOutput').value = '';
-    document.getElementById('encStatus').textContent = '';
-    document.getElementById('btnSaveEnc').disabled = true;
+    stegoData=null; ctx.putImageData(orig,0,0); activeTab='bitplane'; updateLabel();
+    $('hideText').value=''; $('hideStatus').textContent=''; $('btnSaveStego').disabled=true;
+    secretFile=null; secretBytes=null; $('hideFileInfo').textContent=''; $('hidePreview').style.display='none'; $('hideFile').value='';
+    $('revText').value=''; $('revStatus').textContent=''; $('revText').style.display='none'; $('revPreview').style.display='none'; $('btnRevDownload').style.display='none'; $('btnRevCopy').style.display='none';
+    revealBlob=null;
+    updateCompare(); runSteganalysis(); renderEntropy(); renderAnalysis(); updateCapacity();
     toast('Reset complete');
 });
 
 })();
 </script>
+<script src="../script.js"></script>
 </body>
 </html>

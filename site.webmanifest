@@ -1,0 +1,18 @@
+{
+  "name": "GibsyLab",
+  "short_name": "GibsyLab",
+  "description": "An all-in-one suite of free, private, browser-based web utilities for images, media, text, and code.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0d0c0a",
+  "theme_color": "#0d0c0a",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
