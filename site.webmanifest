@@ -1,6 +1,6 @@
 {
-  "name": "GibsyLab",
-  "short_name": "GibsyLab",
+  "name": "EncrizeLab",
+  "short_name": "EncrizeLab",
   "description": "An all-in-one suite of free, private, browser-based web utilities for images, media, text, and code.",
   "start_url": "/",
   "scope": "/",

@@ -58,9 +58,9 @@
     }
   }
 
-  window.GibsyLab = window.GibsyLab || {};
-  window.GibsyLab.toast = toast;
-  window.GibsyLab.copy = copy;
+  window.EncrizeLab = window.EncrizeLab || {};
+  window.EncrizeLab.toast = toast;
+  window.EncrizeLab.copy = copy;
 
   function highlightActiveLink(sidebar) {
     var here = window.location.pathname.split("/").pop() || "index.html";

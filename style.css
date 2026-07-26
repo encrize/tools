@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 /* =====================================================================
-   GibsyLab \u2014 Neo-Brutalist design system
+   EncrizeLab \u2014 Neo-Brutalist design system
    Light theme: yellow page, white cards, thick black borders,
    hard offset shadows, square corners, bold type.
    Re-themes the whole site via shared --clr-* variables + class hooks.
@@ -392,7 +392,7 @@ button:focus-visible,
 
 main:focus { outline: none; }
 
-/* ===== Toast notifications (window.GibsyLab.toast) ===== */
+/* ===== Toast notifications (window.EncrizeLab.toast) ===== */
 .gl-toast {
     position: fixed;
     left: 50%;
