@@ -20,7 +20,8 @@
     --clr-text: #111111;
     --clr-muted: #555555;          /* readable muted on light */
     --clr-muted-soft: #777777;
-    --clr-accent: #ff4d2e;         /* brutalist red-orange */
+    --clr-accent: #ff4d2e;          
+    --clr-accent-text: #e62200;     
     --clr-accent-hover: #e63a1d;
     --clr-success: #18a558;
     --clr-success-hover: #128a48;
@@ -145,7 +146,7 @@ body {
 }
 
 .nav-link.active {
-    background-color: var(--clr-accent);
+    background-color: var(--clr-accent-text);
     color: #fff;
     border-color: var(--brut-ink);
     box-shadow: 3px 3px 0 var(--brut-ink);
@@ -426,7 +427,7 @@ main:focus { outline: none; }
     font-size: 0.85rem;
     text-align: center;
 }
-.site-footer a { color: var(--clr-accent); text-decoration: none; font-weight: 600; }
+.site-footer a {  color: var(--clr-accent-text); text-decoration: none; font-weight: 600; }
 .site-footer a:hover,
 .site-footer a:focus-visible { text-decoration: underline; }
 
