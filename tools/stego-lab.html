@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0c0a">
-    <title>Steganography Lab - GibsyLab</title>
-    <meta property="og:image" content="https://tools.gibsy.qd.je/og-image.png">
+    <title>Steganography Lab - EncrizeLab</title>
+    <meta property="og:image" content="https://tools.encrize.vip/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="GibsyLab - free private browser-based tools">
-    <meta name="twitter:image" content="https://tools.gibsy.qd.je/og-image.png">
+    <meta property="og:image:alt" content="EncrizeLab - free private browser-based tools">
+    <meta name="twitter:image" content="https://tools.encrize.vip/og-image.png">
     <meta name="keywords" content="steganography, hide message in image, lsb steganography, hide files in image, aes-256 encryption, steganalysis">
     <meta name="description" content="Hide secret messages inside images and decode them again using LSB steganography. Everything stays on your device.">
-    <meta name="author" content="GibsyLab">
+    <meta name="author" content="EncrizeLab">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tools.gibsy.qd.je/tools/stego-lab.html">
+    <link rel="canonical" href="https://tools.encrize.vip/tools/stego-lab.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="GibsyLab">
-    <meta property="og:title" content="Stego Lab | GibsyLab">
+    <meta property="og:site_name" content="EncrizeLab">
+    <meta property="og:title" content="Stego Lab | EncrizeLab">
     <meta property="og:description" content="Hide secret messages inside images and decode them again using LSB steganography. Everything stays on your device.">
-    <meta property="og:url" content="https://tools.gibsy.qd.je/tools/stego-lab.html">
+    <meta property="og:url" content="https://tools.encrize.vip/tools/stego-lab.html">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Stego Lab | GibsyLab">
+    <meta name="twitter:title" content="Stego Lab | EncrizeLab">
     <meta name="twitter:description" content="Hide secret messages inside images and decode them again using LSB steganography. Everything stays on your device.">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="../favicon.svg">
@@ -354,7 +354,7 @@
     "@type": "SoftwareApplication",
     "name": "Steganography Lab",
     "description": "Hide secret messages inside images and decode them again using LSB steganography. Everything stays on your device.",
-    "url": "https://tools.gibsy.qd.je/tools/stego-lab.html",
+    "url": "https://tools.encrize.vip/tools/stego-lab.html",
     "applicationCategory": "SecurityApplication",
     "operatingSystem": "Any (web browser)",
     "browserRequirements": "Requires JavaScript. Runs fully client-side.",
@@ -365,9 +365,9 @@
     },
     "publisher": {
       "@type": "Organization",
-      "name": "GibsyLab",
-      "url": "https://tools.gibsy.qd.je/",
-      "logo": "https://tools.gibsy.qd.je/favicon.svg"
+      "name": "EncrizeLab",
+      "url": "https://tools.encrize.vip/",
+      "logo": "https://tools.encrize.vip/favicon.svg"
     },
     "isAccessibleForFree": true
   },
@@ -378,14 +378,14 @@
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "GibsyLab",
-        "item": "https://tools.gibsy.qd.je/"
+        "name": "EncrizeLab",
+        "item": "https://tools.encrize.vip/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Steganography Lab",
-        "item": "https://tools.gibsy.qd.je/tools/stego-lab.html"
+        "item": "https://tools.encrize.vip/tools/stego-lab.html"
       }
     ]
   }
@@ -396,12 +396,12 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar">
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
-    <a class="topbar-brand" href="../index.html">GibsyLab</a>
+    <a class="topbar-brand" href="../index.html">EncrizeLab</a>
 </div>
 <div class="nav-overlay" id="navOverlay" hidden></div>
 
 <aside class="sidebar" id="primaryNav" aria-label="Main navigation">
-    <div class="sidebar-header">GibsyLab</div>
+    <div class="sidebar-header">EncrizeLab</div>
     <ul class="nav-menu">
         <li class="nav-item"><a href="../index.html" class="nav-link"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
         <li class="nav-category">Graphics &amp; Photo</li>
@@ -1165,7 +1165,7 @@ $('btnReveal').addEventListener('click', async function(){
     const reader=makeReader(src.data, slots, bpp);
     const head=reader.readBytes(7);
     if (!head || head[0]!==MAGIC[0] || head[1]!==MAGIC[1] || head[2]!==MAGIC[2] || head[3]!==MAGIC[3]){
-        $('revStatus').textContent='No GibsyLab payload found. Match the channel / bits / scatter settings, or enable raw text mode.'; toast('No payload found'); return;
+        $('revStatus').textContent='No EncrizeLab payload found. Match the channel / bits / scatter settings, or enable raw text mode.'; toast('No payload found'); return;
     }
     const encrypted=head[4]&1, type=head[5], nameLen=head[6];
     const nameBytes = nameLen ? reader.readBytes(nameLen) : new Uint8Array(0);
