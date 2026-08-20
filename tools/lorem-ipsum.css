@@ -1,0 +1,21 @@
+[data-split-style="1"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {text-align: center;}
+
+[data-split-style="2"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {margin-right: 15px;}
+
+[data-split-style="3"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {grid-template-columns: 1fr;}
+
+[data-split-style="4"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {margin-bottom: 15px;}
+
+[data-split-style="5"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {display:block; margin-bottom: 5px;}
+
+[data-split-style="6"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {padding: 10px 20px; width: 100%;}
+
+[data-split-style="7"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {margin-top: 20px;}
+
+[data-split-style="8"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {display:block; margin-bottom: 5px;}
+
+[data-split-style="9"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {width: 100%; padding: 10px; resize: vertical;}
+
+[data-split-style="10"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {margin-top: 20px; text-align: right;}
+
+[data-split-style="11"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {padding: 10px 20px;}

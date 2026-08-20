@@ -1,0 +1,17 @@
+.regex-input-row { display:flex; align-items:center; gap:.5rem; margin-top:1.5rem; }
+        .regex-slash { font-size:1.5rem; color:var(--clr-accent,#e8633a); font-weight:700; font-family:monospace; }
+        .regex-field { flex:1; padding:10px 14px; background:var(--clr-surface,#1e1a17); border:1px solid var(--clr-border,#3a3330); border-radius:6px; color:var(--clr-text,#f0ebe6); font-size:1rem; font-family:monospace; }
+        .flags-field { width:70px; padding:10px 10px; background:var(--clr-surface,#1e1a17); border:1px solid var(--clr-border,#3a3330); border-radius:6px; color:var(--clr-text,#f0ebe6); font-size:1rem; font-family:monospace; }
+        .test-area { width:100%; min-height:160px; padding:12px; background:var(--clr-surface,#1e1a17); border:1px solid var(--clr-border,#3a3330); border-radius:6px; color:var(--clr-text,#f0ebe6); font-size:.9rem; resize:vertical; font-family:monospace; box-sizing:border-box; margin-top:1rem; }
+        .highlight-area { width:100%; min-height:160px; padding:12px; background:var(--clr-surface,#1e1a17); border:1px solid var(--clr-border,#3a3330); border-radius:6px; font-size:.9rem; font-family:monospace; box-sizing:border-box; margin-top:.5rem; white-space:pre-wrap; word-break:break-all; line-height:1.6; }
+        mark { background:rgba(232,99,58,0.5); color:inherit; border-radius:3px; padding:0 2px; }
+        .match-info { margin-top:1rem; padding:10px 14px; background:var(--clr-surface,#1e1a17); border:1px solid var(--clr-border,#3a3330); border-radius:6px; font-size:.875rem; }
+        .match-count { color:var(--clr-accent,#e8633a); font-weight:700; }
+        .regex-error { color:#f44336; font-size:.875rem; margin-top:.4rem; min-height:1.2em; }
+        .section-label { font-weight:700; margin-top:1.5rem; margin-bottom:.4rem; }
+        .match-list { margin-top:.75rem; display:flex; flex-direction:column; gap:.4rem; }
+        .match-item { padding:6px 12px; background:rgba(232,99,58,0.1); border:1px solid rgba(232,99,58,0.3); border-radius:4px; font-family:monospace; font-size:.85rem; }
+
+[data-split-style="1"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {text-align: center;}
+
+[data-split-style="2"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {display:none;}

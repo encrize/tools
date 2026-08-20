@@ -1,34 +1,35 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0d0c0a">
-    <title>Image to Base64 / Data URI Converter - EncrizeLab</title>
-    <meta property="og:image" content="https://tools.encrize.vip/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="EncrizeLab - free private browser-based tools">
-    <meta name="twitter:image" content="https://tools.encrize.vip/og-image.png">
-    <meta name="keywords" content="image to base64, data uri converter, base64 encode image, image base64 string, css background base64, inline image, png to base64, jpg to base64">
-    <meta name="description" content="Convert any image to a Base64 string or Data URI right in your browser. Copy as raw Base64, CSS background, or HTML img tag. Fast, free and 100% offline.">
-    <meta name="author" content="EncrizeLab">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tools.encrize.vip/tools/image-base64.html">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="EncrizeLab">
-    <meta property="og:title" content="Image to Base64 / Data URI Converter | EncrizeLab">
-    <meta property="og:description" content="Convert any image to a Base64 string or Data URI right in your browser. Copy as raw Base64, CSS background, or HTML img tag. 100% offline.">
-    <meta property="og:url" content="https://tools.encrize.vip/tools/image-base64.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Image to Base64 / Data URI Converter | EncrizeLab">
-    <meta name="twitter:description" content="Convert any image to a Base64 string or Data URI right in your browser. Copy as raw Base64, CSS background, or HTML img tag. 100% offline.">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="../favicon.svg">
-    <link rel="manifest" href="../site.webmanifest">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#0d0c0a" name="theme-color"/>
+<title>Image to Base64 / Data URI Converter - EncrizeLab</title>
+<meta content="https://tools.encrize.vip/og-image.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="EncrizeLab - free private browser-based tools" property="og:image:alt"/>
+<meta content="https://tools.encrize.vip/og-image.png" name="twitter:image"/>
+<meta content="image to base64, data uri converter, base64 encode image, image base64 string, css background base64, inline image, png to base64, jpg to base64" name="keywords"/>
+<meta content="Convert any image to a Base64 string or Data URI right in your browser. Copy as raw Base64, CSS background, or HTML img tag. Fast, free and 100% offline." name="description"/>
+<meta content="EncrizeLab" name="author"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://tools.encrize.vip/tools/image-base64.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="EncrizeLab" property="og:site_name"/>
+<meta content="Image to Base64 / Data URI Converter | EncrizeLab" property="og:title"/>
+<meta content="Convert any image to a Base64 string or Data URI right in your browser. Copy as raw Base64, CSS background, or HTML img tag. 100% offline." property="og:description"/>
+<meta content="https://tools.encrize.vip/tools/image-base64.html" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Image to Base64 / Data URI Converter | EncrizeLab" name="twitter:title"/>
+<meta content="Convert any image to a Base64 string or Data URI right in your browser. Copy as raw Base64, CSS background, or HTML img tag. 100% offline." name="twitter:description"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../favicon.svg" rel="apple-touch-icon"/>
+<link href="../site.webmanifest" rel="manifest"/>
+<link href="../style.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script type="application/ld+json">
 [
   {
     "@context": "https://schema.org",
@@ -53,181 +54,96 @@
   }
 ]
     </script>
-    <style>
-        .gl-stack{display:flex;flex-direction:column;gap:22px;}
-        .gl-h3{font-size:1rem;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px;}
-        .gl-grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-                                .gl-btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
-        .gl-meta{list-style:none;margin:14px 0 0;padding:0;font-size:.85rem;}
-        .gl-meta li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #eee;padding:6px 0;}
-        .gl-meta strong{font-weight:700;}
-        .gl-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
-        .gl-tab{padding:7px 12px;border:2px solid var(--brut-ink);background:#fff;cursor:pointer;font-weight:700;font-size:.74rem;text-transform:uppercase;}
-        .gl-tab.active{background:var(--clr-accent);color:#fff;}
-        .gl-preview{border:2px solid var(--brut-ink);padding:10px;display:flex;align-items:center;justify-content:center;min-height:180px;background:repeating-conic-gradient(#e9e9e9 0% 25%,#fff 0% 50%) 50%/22px 22px;}
-        .gl-preview img{max-height:260px;}
-        #ib-out{font-family:'Consolas','Courier New',monospace;font-size:.82rem;word-break:break-all;}
-        @media(max-width:768px){.gl-grid2{grid-template-columns:1fr;}}
-    </style>
+<link href="image-base64.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar">
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
-    <a class="topbar-brand" href="../index.html">EncrizeLab</a>
+<button aria-controls="primaryNav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" id="navToggle" type="button"><i aria-hidden="true" class="fas fa-bars"></i></button>
+<a class="topbar-brand" href="../index.html">EncrizeLab</a>
 </div>
-<div class="nav-overlay" id="navOverlay" hidden></div>
-<aside class="sidebar" id="primaryNav" aria-label="Main navigation">
-    <div class="sidebar-header">EncrizeLab</div>
-    <ul class="nav-menu">
-        <li class="nav-item"><a href="../index.html" class="nav-link"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
-        <li class="nav-category">Graphics &amp; Photo</li>
-        <li class="nav-item"><a href="image-redactor.html" class="nav-link"><i aria-hidden="true" class="fas fa-sliders-h"></i> Image Redactor</a></li>
-        <li class="nav-item"><a href="social-media-cropper.html" class="nav-link"><i aria-hidden="true" class="fas fa-crop"></i> Social Cropper</a></li>
-        <li class="nav-item"><a href="image-splitter.html" class="nav-link"><i aria-hidden="true" class="fas fa-th-large"></i> Image Splitter</a></li>
-        <li class="nav-item"><a href="image-format-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-sync-alt"></i> Image Converter</a></li>
-        <li class="nav-item"><a href="palette-extractor.html" class="nav-link"><i aria-hidden="true" class="fas fa-palette"></i> Palette Extractor</a></li>
-        <li class="nav-item"><a href="placeholder-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-image"></i> Placeholder Gen</a></li>
-        <li class="nav-item"><a href="color-picker.html" class="nav-link"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</a></li>
-        <li class="nav-item"><a href="stego-lab.html" class="nav-link"><i aria-hidden="true" class="fas fa-user-secret"></i> Stego Lab</a></li>
-        <li class="nav-item"><a href="watermark.html" class="nav-link"><i aria-hidden="true" class="fas fa-stamp"></i> Watermark Tool</a></li>
-        <li class="nav-item"><a href="image-base64.html" class="nav-link active"><i aria-hidden="true" class="fas fa-file-code"></i> Image to Base64</a></li>
-        <li class="nav-category">Conversion &amp; Math</li>
-        <li class="nav-item"><a href="graph-calc.html" class="nav-link"><i aria-hidden="true" class="fas fa-calculator"></i> Graphic Calculator</a></li>
-        <li class="nav-item"><a href="date-calculator.html" class="nav-link"><i aria-hidden="true" class="fas fa-calendar-alt"></i> Date Calculator</a></li>
-        <li class="nav-item"><a href="num-system.html" class="nav-link"><i aria-hidden="true" class="fas fa-microchip"></i> Number Systems</a></li>
-        <li class="nav-item"><a href="base-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-exchange-alt"></i> Base Converter</a></li>
-        <li class="nav-item"><a href="mp3-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-headphones"></i> Media Converter</a></li>
-        <li class="nav-category">Utilities &amp; Text</li>
-        <li class="nav-item"><a href="exif-cleaner.html" class="nav-link"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
-        <li class="nav-item"><a href="exif-viewer.html" class="nav-link"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
-        <li class="nav-item"><a href="pass-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
-        <li class="nav-item"><a href="pass-strength.html" class="nav-link"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
-        <li class="nav-item"><a href="qr-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
-        <li class="nav-item"><a href="word-counter.html" class="nav-link"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
-        <li class="nav-item"><a href="lorem-ipsum.html" class="nav-link"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
-        <li class="nav-item"><a href="hash-generator.html" class="nav-link"><i aria-hidden="true" class="fas fa-hashtag"></i> Hash Generator</a></li>
-        <li class="nav-item"><a href="json-formatter.html" class="nav-link"><i aria-hidden="true" class="fas fa-code"></i> JSON Formatter</a></li>
-        <li class="nav-item"><a href="regex-tester.html" class="nav-link"><i aria-hidden="true" class="fas fa-search"></i> Regex Tester</a></li>
-        <li class="nav-item"><a href="url-encoder.html" class="nav-link"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
-        <li class="nav-item"><a href="diff-checker.html" class="nav-link"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
-        <li class="nav-item"><a href="markdown-editor.html" class="nav-link"><i aria-hidden="true" class="fab fa-markdown"></i> Markdown Editor</a></li>
-        <li class="nav-item"><a href="random-picker.html" class="nav-link"><i aria-hidden="true" class="fas fa-dice"></i> Random Picker</a></li>
-    </ul>
+<div class="nav-overlay" hidden="" id="navOverlay"></div>
+<aside aria-label="Main navigation" class="sidebar" id="primaryNav">
+<div class="sidebar-header">EncrizeLab</div>
+<ul class="nav-menu">
+<li class="nav-item"><a class="nav-link" href="../index.html"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
+<li class="nav-category">Graphics &amp; Photo</li>
+<li class="nav-item"><a class="nav-link" href="image-redactor.html"><i aria-hidden="true" class="fas fa-sliders-h"></i> Image Redactor</a></li>
+<li class="nav-item"><a class="nav-link" href="social-media-cropper.html"><i aria-hidden="true" class="fas fa-crop"></i> Social Cropper</a></li>
+<li class="nav-item"><a class="nav-link" href="image-splitter.html"><i aria-hidden="true" class="fas fa-th-large"></i> Image Splitter</a></li>
+<li class="nav-item"><a class="nav-link" href="image-format-converter.html"><i aria-hidden="true" class="fas fa-sync-alt"></i> Image Converter</a></li>
+<li class="nav-item"><a class="nav-link" href="palette-extractor.html"><i aria-hidden="true" class="fas fa-palette"></i> Palette Extractor</a></li>
+<li class="nav-item"><a class="nav-link" href="placeholder-gen.html"><i aria-hidden="true" class="fas fa-image"></i> Placeholder Gen</a></li>
+<li class="nav-item"><a class="nav-link" href="color-picker.html"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</a></li>
+<li class="nav-item"><a class="nav-link" href="stego-lab.html"><i aria-hidden="true" class="fas fa-user-secret"></i> Stego Lab</a></li>
+<li class="nav-item"><a class="nav-link" href="watermark.html"><i aria-hidden="true" class="fas fa-stamp"></i> Watermark Tool</a></li>
+<li class="nav-item"><a class="nav-link active" href="image-base64.html"><i aria-hidden="true" class="fas fa-file-code"></i> Image to Base64</a></li>
+<li class="nav-category">Conversion &amp; Math</li>
+<li class="nav-item"><a class="nav-link" href="graph-calc.html"><i aria-hidden="true" class="fas fa-calculator"></i> Graphic Calculator</a></li>
+<li class="nav-item"><a class="nav-link" href="date-calculator.html"><i aria-hidden="true" class="fas fa-calendar-alt"></i> Date Calculator</a></li>
+<li class="nav-item"><a class="nav-link" href="num-system.html"><i aria-hidden="true" class="fas fa-microchip"></i> Number Systems</a></li>
+<li class="nav-item"><a class="nav-link" href="base-converter.html"><i aria-hidden="true" class="fas fa-exchange-alt"></i> Base Converter</a></li>
+<li class="nav-item"><a class="nav-link" href="mp3-converter.html"><i aria-hidden="true" class="fas fa-headphones"></i> Media Converter</a></li>
+<li class="nav-category">Utilities &amp; Text</li>
+<li class="nav-item"><a class="nav-link" href="exif-cleaner.html"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
+<li class="nav-item"><a class="nav-link" href="exif-viewer.html"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
+<li class="nav-item"><a class="nav-link" href="pass-gen.html"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
+<li class="nav-item"><a class="nav-link" href="pass-strength.html"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
+<li class="nav-item"><a class="nav-link" href="qr-gen.html"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
+<li class="nav-item"><a class="nav-link" href="word-counter.html"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
+<li class="nav-item"><a class="nav-link" href="lorem-ipsum.html"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
+<li class="nav-item"><a class="nav-link" href="hash-generator.html"><i aria-hidden="true" class="fas fa-hashtag"></i> Hash Generator</a></li>
+<li class="nav-item"><a class="nav-link" href="json-formatter.html"><i aria-hidden="true" class="fas fa-code"></i> JSON Formatter</a></li>
+<li class="nav-item"><a class="nav-link" href="regex-tester.html"><i aria-hidden="true" class="fas fa-search"></i> Regex Tester</a></li>
+<li class="nav-item"><a class="nav-link" href="url-encoder.html"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
+<li class="nav-item"><a class="nav-link" href="diff-checker.html"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
+<li class="nav-item"><a class="nav-link" href="markdown-editor.html"><i aria-hidden="true" class="fab fa-markdown"></i> Markdown Editor</a></li>
+<li class="nav-item"><a class="nav-link" href="random-picker.html"><i aria-hidden="true" class="fas fa-dice"></i> Random Picker</a></li>
+</ul>
 </aside>
-
-    <main class="main-content" id="main" tabindex="-1">
-        <div class="container" style="text-align:center;">
-            <h1><i aria-hidden="true" class="fas fa-file-code" style="margin-right:14px;"></i>Image to Base64 / Data URI</h1>
-            <p>Turn any image into a Base64 string or Data URI, entirely in your browser. Nothing is uploaded &mdash; the file never leaves your device.</p>
-
-            <div class="gl-stack">
-                <div id="ib-drop" class="drop-zone" role="button" tabindex="0" aria-label="Upload an image">
-                    <i class="fas fa-cloud-arrow-up" aria-hidden="true"></i>
-                    <p class="dz-title">Drop an image here or click to browse</p>
-                    <p class="dz-hint">PNG, JPG, GIF, WebP, SVG, ICO, BMP &mdash; everything stays on your device.</p>
-                    <input type="file" id="ib-file" accept="image/*" hidden>
-                </div>
-
-                <div id="ib-result" hidden>
-                    <div class="gl-grid2">
-                        <div>
-                            <h2 class="gl-h3">Preview</h2>
-                            <div class="gl-preview"><img id="ib-img" alt="Selected image preview"></div>
-                            <ul class="gl-meta" id="ib-meta"></ul>
-                        </div>
-                        <div>
-                            <h2 class="gl-h3">Output</h2>
-                            <div class="gl-tabs" role="tablist">
-                                <button type="button" class="gl-tab active" data-fmt="datauri">Data URI</button>
-                                <button type="button" class="gl-tab" data-fmt="raw">Raw Base64</button>
-                                <button type="button" class="gl-tab" data-fmt="css">CSS</button>
-                                <button type="button" class="gl-tab" data-fmt="img">HTML &lt;img&gt;</button>
-                            </div>
-                            <textarea id="ib-out" rows="11" readonly spellcheck="false" aria-label="Base64 output"></textarea>
-                            <div class="gl-btnrow">
-                                <button class="btn" id="ib-copy"><i class="fas fa-copy" aria-hidden="true"></i> Copy</button>
-                                <button class="btn btn-download" id="ib-dl"><i class="fas fa-download" aria-hidden="true"></i> Download .txt</button>
-                                <button class="btn btn-secondary" id="ib-reset"><i class="fas fa-rotate-left" aria-hidden="true"></i> New image</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <footer class="site-footer">
-                <p style="margin:0;">&copy; <span data-year>2026</span> EncrizeLab &mdash; free, private, browser-based tools. No uploads, no tracking.</p>
-                <p style="margin:6px 0 0;">Contact &mdash; <a href="mailto:detdomovgleb@gmail.com">detdomovgleb@gmail.com</a></p>
-            </footer>
-        </div>
-    </main>
-
-    <script>
-    (function(){
-        var drop=document.getElementById('ib-drop'),
-            file=document.getElementById('ib-file'),
-            result=document.getElementById('ib-result'),
-            img=document.getElementById('ib-img'),
-            metaEl=document.getElementById('ib-meta'),
-            out=document.getElementById('ib-out'),
-            tabs=document.querySelectorAll('.gl-tab');
-        var state={dataUri:'',mime:'',name:'',bytes:0};
-        var fmt='datauri';
-
-        function fmtBytes(n){
-            if(n<1024) return n+' B';
-            if(n<1048576) return (n/1024).toFixed(1)+' KB';
-            return (n/1048576).toFixed(2)+' MB';
-        }
-        function render(){
-            var raw=state.dataUri.split(',')[1]||'';
-            if(fmt==='datauri') out.value=state.dataUri;
-            else if(fmt==='raw') out.value=raw;
-            else if(fmt==='css') out.value='background-image: url("'+state.dataUri+'");';
-            else out.value='<img src="'+state.dataUri+'" alt="">';
-        }
-        function load(f){
-            if(!f){return;}
-            if(!/^image\//.test(f.type)){window.EncrizeLab.toast('Please choose an image file.','error');return;}
-            var r=new FileReader();
-            r.onload=function(e){
-                state.dataUri=e.target.result;
-                state.mime=f.type||'image/*';
-                state.name=f.name||'image';
-                state.bytes=f.size||0;
-                img.src=state.dataUri;
-                var b64=(state.dataUri.split(',')[1]||'').length;
-                img.onload=function(){
-                    metaEl.innerHTML='';
-                    var rows=[['File name',state.name],['Type',state.mime],['Dimensions',img.naturalWidth+' x '+img.naturalHeight+' px'],['Original size',fmtBytes(state.bytes)],['Base64 size',fmtBytes(b64)]];
-                    rows.forEach(function(row){var li=document.createElement('li');li.innerHTML='<span>'+row[0]+'</span><strong>'+row[1]+'</strong>';metaEl.appendChild(li);});
-                };
-                result.hidden=false;
-                render();
-                window.EncrizeLab.toast('Image encoded!','success');
-            };
-            r.onerror=function(){window.EncrizeLab.toast('Could not read that file.','error');};
-            r.readAsDataURL(f);
-        }
-        drop.addEventListener('click',function(){file.click();});
-        drop.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click();}});
-        file.addEventListener('change',function(e){load(e.target.files[0]);});
-        ['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('dragover');});});
-        ['dragleave','drop'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('dragover');});});
-        drop.addEventListener('drop',function(e){if(e.dataTransfer.files.length)load(e.dataTransfer.files[0]);});
-        document.addEventListener('paste',function(e){var items=e.clipboardData&&e.clipboardData.files;if(items&&items.length)load(items[0]);});
-        tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.classList.remove('active');});t.classList.add('active');fmt=t.dataset.fmt;render();});});
-        document.getElementById('ib-copy').addEventListener('click',function(){if(!out.value){return;}window.EncrizeLab.copy(out.value,'Copied to clipboard!');});
-        document.getElementById('ib-dl').addEventListener('click',function(){
-            if(!out.value)return;
-            var blob=new Blob([out.value],{type:'text/plain'});
-            var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-            a.download=(state.name.replace(/\.[^.]+$/,'')||'image')+'-base64.txt';
-            document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href);
-        });
-        document.getElementById('ib-reset').addEventListener('click',function(){result.hidden=true;file.value='';state={dataUri:'',mime:'',name:'',bytes:0};});
-    })();
-    </script>
+<main class="main-content" id="main" tabindex="-1">
+<div class="container" data-split-style="1">
+<h1><i aria-hidden="true" class="fas fa-file-code" data-split-style="2"></i>Image to Base64 / Data URI</h1>
+<p>Turn any image into a Base64 string or Data URI, entirely in your browser. Nothing is uploaded — the file never leaves your device.</p>
+<div class="gl-stack">
+<div aria-label="Upload an image" class="drop-zone" id="ib-drop" role="button" tabindex="0">
+<i aria-hidden="true" class="fas fa-cloud-arrow-up"></i>
+<p class="dz-title">Drop an image here or click to browse</p>
+<p class="dz-hint">PNG, JPG, GIF, WebP, SVG, ICO, BMP — everything stays on your device.</p>
+<input accept="image/*" hidden="" id="ib-file" type="file"/>
+</div>
+<div hidden="" id="ib-result">
+<div class="gl-grid2">
+<div>
+<h2 class="gl-h3">Preview</h2>
+<div class="gl-preview"><img alt="Selected image preview" id="ib-img"/></div>
+<ul class="gl-meta" id="ib-meta"></ul>
+</div>
+<div>
+<h2 class="gl-h3">Output</h2>
+<div class="gl-tabs" role="tablist">
+<button class="gl-tab active" data-fmt="datauri" type="button">Data URI</button>
+<button class="gl-tab" data-fmt="raw" type="button">Raw Base64</button>
+<button class="gl-tab" data-fmt="css" type="button">CSS</button>
+<button class="gl-tab" data-fmt="img" type="button">HTML &lt;img&gt;</button>
+</div>
+<textarea aria-label="Base64 output" id="ib-out" readonly="" rows="11" spellcheck="false"></textarea>
+<div class="gl-btnrow">
+<button class="btn" id="ib-copy"><i aria-hidden="true" class="fas fa-copy"></i> Copy</button>
+<button class="btn btn-download" id="ib-dl"><i aria-hidden="true" class="fas fa-download"></i> Download .txt</button>
+<button class="btn btn-secondary" id="ib-reset"><i aria-hidden="true" class="fas fa-rotate-left"></i> New image</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="site-footer">
+<p data-split-style="3">© <span data-year="">2026</span> EncrizeLab — free, private, browser-based tools. No uploads, no tracking.</p>
+<p data-split-style="4">Contact — <a href="mailto:detdomovgleb@gmail.com">detdomovgleb@gmail.com</a></p>
+</footer>
+</div>
+</main>
+<script src="image-base64.js"></script>
 <script src="../script.js"></script>
 </body>
 </html>

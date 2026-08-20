@@ -1,0 +1,16 @@
+.json-valid { color: #4caf50; }
+        .json-invalid { color: #f44336; }
+        .editor-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+        @media(max-width:700px){ .editor-row { grid-template-columns: 1fr; } }
+        .editor-label { font-weight: 700; margin-bottom: .4rem; display: flex; justify-content: space-between; align-items: center; }
+        textarea.code-area { width:100%; min-height:340px; padding:12px; background:var(--clr-surface,#1e1a17); border:1px solid var(--clr-border,#3a3330); border-radius:6px; color:var(--clr-text,#f0ebe6); font-size:.875rem; resize:vertical; font-family:monospace; box-sizing:border-box; }
+        .btn-row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem; }
+        .btn-primary { background:var(--clr-accent,#e8633a); color:#fff; border:none; padding:10px 24px; border-radius:6px; font-size:.9rem; cursor:pointer; font-weight:600; }
+        .btn-secondary { background:transparent; color:var(--clr-text,#f0ebe6); border:1px solid var(--clr-border,#3a3330); padding:10px 24px; border-radius:6px; font-size:.9rem; cursor:pointer; }
+        #statusBar { margin-top:.75rem; padding:8px 14px; border-radius:6px; font-size:.875rem; display:none; }
+
+[data-split-style="1"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {text-align: center;}
+
+[data-split-style="2"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {padding:4px 12px;font-size:.8rem;}
+
+[data-split-style="3"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {padding:4px 12px;font-size:.8rem;}

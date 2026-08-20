@@ -1,0 +1,22 @@
+.gl-stack{display:flex;flex-direction:column;gap:22px;}
+        .gl-h3{font-size:1rem;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px;}
+        .gl-grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+                                .gl-btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+        .gl-meta{list-style:none;margin:14px 0 0;padding:0;font-size:.85rem;}
+        .gl-meta li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #eee;padding:6px 0;}
+        .gl-meta strong{font-weight:700;}
+        .gl-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+        .gl-tab{padding:7px 12px;border:2px solid var(--brut-ink);background:#fff;cursor:pointer;font-weight:700;font-size:.74rem;text-transform:uppercase;}
+        .gl-tab.active{background:var(--clr-accent);color:#fff;}
+        .gl-preview{border:2px solid var(--brut-ink);padding:10px;display:flex;align-items:center;justify-content:center;min-height:180px;background:repeating-conic-gradient(#e9e9e9 0% 25%,#fff 0% 50%) 50%/22px 22px;}
+        .gl-preview img{max-height:260px;}
+        #ib-out{font-family:'Consolas','Courier New',monospace;font-size:.82rem;word-break:break-all;}
+        @media(max-width:768px){.gl-grid2{grid-template-columns:1fr;}}
+
+[data-split-style="1"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {text-align:center;}
+
+[data-split-style="2"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {margin-right:14px;}
+
+[data-split-style="3"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {margin:0;}
+
+[data-split-style="4"]:not(#split-style-guard-1):not(#split-style-guard-2):not(#split-style-guard-3):not(#split-style-guard-4):not(#split-style-guard-5):not(#split-style-guard-6):not(#split-style-guard-7):not(#split-style-guard-8):not(#split-style-guard-9):not(#split-style-guard-10) {margin:6px 0 0;}

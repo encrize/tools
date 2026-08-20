@@ -1,53 +1,36 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0d0c0a">
-    <title>Color Picker - EncrizeLab</title>
-    <meta property="og:image" content="https://tools.encrize.vip/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="EncrizeLab - free private browser-based tools">
-    <meta name="twitter:image" content="https://tools.encrize.vip/og-image.png">
-    <meta name="keywords" content="color picker, hex to rgb, rgb to hsl, color converter, tints and shades, web colors">
-    <meta name="description" content="Pick colors and convert between HEX, RGB, and HSL, generate tints and shades, and copy values with one click.">
-    <meta name="author" content="EncrizeLab">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tools.encrize.vip/tools/color-picker.html">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="EncrizeLab">
-    <meta property="og:title" content="Color Picker | EncrizeLab">
-    <meta property="og:description" content="Pick colors and convert between HEX, RGB, and HSL, generate tints and shades, and copy values with one click.">
-    <meta property="og:url" content="https://tools.encrize.vip/tools/color-picker.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Color Picker | EncrizeLab">
-    <meta name="twitter:description" content="Pick colors and convert between HEX, RGB, and HSL, generate tints and shades, and copy values with one click.">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="../favicon.svg">
-    <link rel="manifest" href="../site.webmanifest">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .color-main { display:flex; gap:2rem; flex-wrap:wrap; margin-top:2rem; align-items:flex-start; }
-        .color-preview-box { width:180px; height:180px; border-radius:12px; border:2px solid var(--clr-border,#3a3330); flex-shrink:0; transition: background .15s; }
-        .color-controls { flex:1; min-width:260px; }
-        .picker-row { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; }
-        input[type=color] { width:52px; height:52px; border:none; border-radius:8px; cursor:pointer; background:none; padding:0; }
-        .format-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
-        .format-item label { font-size:.8rem; font-weight:700; color:var(--clr-muted,#888); text-transform:uppercase; letter-spacing:.5px; display:block; margin-bottom:.3rem; }
-        .format-item input { width:100%; padding:9px 12px; background:var(--clr-surface,#1e1a17); border:1px solid var(--clr-border,#3a3330); border-radius:6px; color:var(--clr-text,#f0ebe6); font-size:.875rem; font-family:monospace; box-sizing:border-box; }
-        .copy-btn { margin-top:.4rem; width:100%; background:transparent; border:1px solid var(--clr-border,#3a3330); color:var(--clr-text,#f0ebe6); padding:5px; border-radius:4px; cursor:pointer; font-size:.78rem; }
-        .copy-btn:hover { border-color:var(--clr-accent,#e8633a); color:var(--clr-accent,#e8633a); }
-        .swatches { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
-        .swatch { width:36px; height:36px; border-radius:0; cursor:pointer; border:2px solid var(--brut-ink,#111); box-shadow:2px 2px 0 var(--brut-ink,#111); transition:transform .1s; }
-        .swatch:hover { transform:translate(-1px,-1px) scale(1.08); box-shadow:3px 3px 0 var(--brut-ink,#111); }
-        .section-label { font-weight:700; margin-bottom:.6rem; }
-        .shades-row { display:flex; gap:.4rem; margin-top:1.5rem; flex-wrap:wrap; }
-        .shade { height:40px; flex:1; min-width:40px; border-radius:0; cursor:pointer; border:2px solid var(--brut-ink,#111); transition:transform .1s; }
-        .shade:hover { transform:scaleY(1.1); box-shadow:2px 2px 0 var(--brut-ink,#111); }
-    </style>
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#0d0c0a" name="theme-color"/>
+<title>Color Picker - EncrizeLab</title>
+<meta content="https://tools.encrize.vip/og-image.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="EncrizeLab - free private browser-based tools" property="og:image:alt"/>
+<meta content="https://tools.encrize.vip/og-image.png" name="twitter:image"/>
+<meta content="color picker, hex to rgb, rgb to hsl, color converter, tints and shades, web colors" name="keywords"/>
+<meta content="Pick colors and convert between HEX, RGB, and HSL, generate tints and shades, and copy values with one click." name="description"/>
+<meta content="EncrizeLab" name="author"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://tools.encrize.vip/tools/color-picker.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="EncrizeLab" property="og:site_name"/>
+<meta content="Color Picker | EncrizeLab" property="og:title"/>
+<meta content="Pick colors and convert between HEX, RGB, and HSL, generate tints and shades, and copy values with one click." property="og:description"/>
+<meta content="https://tools.encrize.vip/tools/color-picker.html" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Color Picker | EncrizeLab" name="twitter:title"/>
+<meta content="Pick colors and convert between HEX, RGB, and HSL, generate tints and shades, and copy values with one click." name="twitter:description"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../favicon.svg" rel="apple-touch-icon"/>
+<link href="../site.webmanifest" rel="manifest"/>
+<link href="../style.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="color-picker.css" rel="stylesheet"/>
+<script type="application/ld+json">
 [
   {
     "@context": "https://schema.org",
@@ -95,167 +78,94 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar">
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
-    <a class="topbar-brand" href="../index.html">EncrizeLab</a>
+<button aria-controls="primaryNav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" id="navToggle" type="button"><i aria-hidden="true" class="fas fa-bars"></i></button>
+<a class="topbar-brand" href="../index.html">EncrizeLab</a>
 </div>
-<div class="nav-overlay" id="navOverlay" hidden></div>
-<aside class="sidebar" id="primaryNav" aria-label="Main navigation">
-    <div class="sidebar-header">EncrizeLab</div>
-    <ul class="nav-menu">
-        <li class="nav-item"><a href="../index.html" class="nav-link"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
-        <li class="nav-category">Graphics &amp; Photo</li>
-        <li class="nav-item"><a href="image-redactor.html" class="nav-link"><i aria-hidden="true" class="fas fa-sliders-h"></i> Image Redactor</a></li>
-        <li class="nav-item"><a href="social-media-cropper.html" class="nav-link"><i aria-hidden="true" class="fas fa-crop"></i> Social Cropper</a></li>
-        <li class="nav-item"><a href="image-splitter.html" class="nav-link"><i aria-hidden="true" class="fas fa-th-large"></i> Image Splitter</a></li>
-        <li class="nav-item"><a href="image-format-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-sync-alt"></i> Image Converter</a></li>
-        <li class="nav-item"><a href="palette-extractor.html" class="nav-link"><i aria-hidden="true" class="fas fa-palette"></i> Palette Extractor</a></li>
-        <li class="nav-item"><a href="placeholder-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-image"></i> Placeholder Gen</a></li>
-        <li class="nav-item"><a href="color-picker.html" class="nav-link active"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</a></li>
-        <li class="nav-item"><a href="stego-lab.html" class="nav-link"><i aria-hidden="true" class="fas fa-user-secret"></i> Stego Lab</a></li>
-        <li class="nav-item"><a href="watermark.html" class="nav-link"><i aria-hidden="true" class="fas fa-stamp"></i> Watermark Tool</a></li>
-        <li class="nav-item"><a href="image-base64.html" class="nav-link"><i aria-hidden="true" class="fas fa-file-code"></i> Image to Base64</a></li>
-        <li class="nav-category">Conversion &amp; Math</li>
-        <li class="nav-item"><a href="graph-calc.html" class="nav-link"><i aria-hidden="true" class="fas fa-calculator"></i> Graphic Calculator</a></li>
-        <li class="nav-item"><a href="date-calculator.html" class="nav-link"><i aria-hidden="true" class="fas fa-calendar-alt"></i> Date Calculator</a></li>
-        <li class="nav-item"><a href="num-system.html" class="nav-link"><i aria-hidden="true" class="fas fa-microchip"></i> Number Systems</a></li>
-        <li class="nav-item"><a href="base-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-exchange-alt"></i> Base Converter</a></li>
-        <li class="nav-item"><a href="mp3-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-headphones"></i> Media Converter</a></li>
-        <li class="nav-category">Utilities &amp; Text</li>
-        <li class="nav-item"><a href="exif-cleaner.html" class="nav-link"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
-        <li class="nav-item"><a href="exif-viewer.html" class="nav-link"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
-        <li class="nav-item"><a href="pass-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
-        <li class="nav-item"><a href="pass-strength.html" class="nav-link"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
-        <li class="nav-item"><a href="qr-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
-        <li class="nav-item"><a href="word-counter.html" class="nav-link"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
-        <li class="nav-item"><a href="lorem-ipsum.html" class="nav-link"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
-        <li class="nav-item"><a href="hash-generator.html" class="nav-link"><i aria-hidden="true" class="fas fa-hashtag"></i> Hash Generator</a></li>
-        <li class="nav-item"><a href="json-formatter.html" class="nav-link"><i aria-hidden="true" class="fas fa-code"></i> JSON Formatter</a></li>
-        <li class="nav-item"><a href="regex-tester.html" class="nav-link"><i aria-hidden="true" class="fas fa-search"></i> Regex Tester</a></li>
-        <li class="nav-item"><a href="url-encoder.html" class="nav-link"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
-        <li class="nav-item"><a href="diff-checker.html" class="nav-link"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
-        <li class="nav-item"><a href="markdown-editor.html" class="nav-link"><i aria-hidden="true" class="fab fa-markdown"></i> Markdown Editor</a></li>
-        <li class="nav-item"><a href="random-picker.html" class="nav-link"><i aria-hidden="true" class="fas fa-dice"></i> Random Picker</a></li>
-    </ul>
+<div class="nav-overlay" hidden="" id="navOverlay"></div>
+<aside aria-label="Main navigation" class="sidebar" id="primaryNav">
+<div class="sidebar-header">EncrizeLab</div>
+<ul class="nav-menu">
+<li class="nav-item"><a class="nav-link" href="../index.html"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
+<li class="nav-category">Graphics &amp; Photo</li>
+<li class="nav-item"><a class="nav-link" href="image-redactor.html"><i aria-hidden="true" class="fas fa-sliders-h"></i> Image Redactor</a></li>
+<li class="nav-item"><a class="nav-link" href="social-media-cropper.html"><i aria-hidden="true" class="fas fa-crop"></i> Social Cropper</a></li>
+<li class="nav-item"><a class="nav-link" href="image-splitter.html"><i aria-hidden="true" class="fas fa-th-large"></i> Image Splitter</a></li>
+<li class="nav-item"><a class="nav-link" href="image-format-converter.html"><i aria-hidden="true" class="fas fa-sync-alt"></i> Image Converter</a></li>
+<li class="nav-item"><a class="nav-link" href="palette-extractor.html"><i aria-hidden="true" class="fas fa-palette"></i> Palette Extractor</a></li>
+<li class="nav-item"><a class="nav-link" href="placeholder-gen.html"><i aria-hidden="true" class="fas fa-image"></i> Placeholder Gen</a></li>
+<li class="nav-item"><a class="nav-link active" href="color-picker.html"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</a></li>
+<li class="nav-item"><a class="nav-link" href="stego-lab.html"><i aria-hidden="true" class="fas fa-user-secret"></i> Stego Lab</a></li>
+<li class="nav-item"><a class="nav-link" href="watermark.html"><i aria-hidden="true" class="fas fa-stamp"></i> Watermark Tool</a></li>
+<li class="nav-item"><a class="nav-link" href="image-base64.html"><i aria-hidden="true" class="fas fa-file-code"></i> Image to Base64</a></li>
+<li class="nav-category">Conversion &amp; Math</li>
+<li class="nav-item"><a class="nav-link" href="graph-calc.html"><i aria-hidden="true" class="fas fa-calculator"></i> Graphic Calculator</a></li>
+<li class="nav-item"><a class="nav-link" href="date-calculator.html"><i aria-hidden="true" class="fas fa-calendar-alt"></i> Date Calculator</a></li>
+<li class="nav-item"><a class="nav-link" href="num-system.html"><i aria-hidden="true" class="fas fa-microchip"></i> Number Systems</a></li>
+<li class="nav-item"><a class="nav-link" href="base-converter.html"><i aria-hidden="true" class="fas fa-exchange-alt"></i> Base Converter</a></li>
+<li class="nav-item"><a class="nav-link" href="mp3-converter.html"><i aria-hidden="true" class="fas fa-headphones"></i> Media Converter</a></li>
+<li class="nav-category">Utilities &amp; Text</li>
+<li class="nav-item"><a class="nav-link" href="exif-cleaner.html"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
+<li class="nav-item"><a class="nav-link" href="exif-viewer.html"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
+<li class="nav-item"><a class="nav-link" href="pass-gen.html"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
+<li class="nav-item"><a class="nav-link" href="pass-strength.html"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
+<li class="nav-item"><a class="nav-link" href="qr-gen.html"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
+<li class="nav-item"><a class="nav-link" href="word-counter.html"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
+<li class="nav-item"><a class="nav-link" href="lorem-ipsum.html"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
+<li class="nav-item"><a class="nav-link" href="hash-generator.html"><i aria-hidden="true" class="fas fa-hashtag"></i> Hash Generator</a></li>
+<li class="nav-item"><a class="nav-link" href="json-formatter.html"><i aria-hidden="true" class="fas fa-code"></i> JSON Formatter</a></li>
+<li class="nav-item"><a class="nav-link" href="regex-tester.html"><i aria-hidden="true" class="fas fa-search"></i> Regex Tester</a></li>
+<li class="nav-item"><a class="nav-link" href="url-encoder.html"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
+<li class="nav-item"><a class="nav-link" href="diff-checker.html"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
+<li class="nav-item"><a class="nav-link" href="markdown-editor.html"><i aria-hidden="true" class="fab fa-markdown"></i> Markdown Editor</a></li>
+<li class="nav-item"><a class="nav-link" href="random-picker.html"><i aria-hidden="true" class="fas fa-dice"></i> Random Picker</a></li>
+</ul>
 </aside>
-
 <main class="main-content" id="main" tabindex="-1">
-    <div class="container">
-        <h1 style="text-align: center;"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</h1>
-        <p style="text-align: center;">Pick a color and convert between HEX, RGB, HSL, and CSS formats.</p>
-
-        <div class="color-main">
-            <div class="color-preview-box" id="preview"></div>
-            <div class="color-controls">
-                <div class="picker-row">
-                    <input type="color" id="colorPicker" value="#e8633a" oninput="updateFromPicker()">
-                    <span style="font-size:.9rem;color:var(--clr-muted,#888);">Click to pick a color</span>
-                </div>
-
-                <div class="format-grid">
-                    <div class="format-item">
-                        <label>HEX</label>
-                        <input type="text" id="hexVal" value="#e8633a" oninput="updateFromHex()">
-                        <button class="copy-btn" onclick="copyVal('hexVal')">COPY</button>
-                    </div>
-                    <div class="format-item">
-                        <label>RGB</label>
-                        <input type="text" id="rgbVal" readonly>
-                        <button class="copy-btn" onclick="copyVal('rgbVal')">COPY</button>
-                    </div>
-                    <div class="format-item">
-                        <label>HSL</label>
-                        <input type="text" id="hslVal" readonly>
-                        <button class="copy-btn" onclick="copyVal('hslVal')">COPY</button>
-                    </div>
-                    <div class="format-item">
-                        <label>CSS Variable</label>
-                        <input type="text" id="cssVal" readonly>
-                        <button class="copy-btn" onclick="copyVal('cssVal')">COPY</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div style="margin-top:2rem;">
-            <div class="section-label">Shades</div>
-            <div class="shades-row" id="shades"></div>
-        </div>
-
-        <div style="margin-top:1.5rem;">
-            <div class="section-label">Preset Colors</div>
-            <div class="swatches" id="swatches"></div>
-        </div>
-    </div>
+<div class="container">
+<h1 data-split-style="1"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</h1>
+<p data-split-style="2">Pick a color and convert between HEX, RGB, HSL, and CSS formats.</p>
+<div class="color-main">
+<div class="color-preview-box" id="preview"></div>
+<div class="color-controls">
+<div class="picker-row">
+<input data-split-event="1" id="colorPicker" type="color" value="#e8633a"/>
+<span data-split-style="3">Click to pick a color</span>
+</div>
+<div class="format-grid">
+<div class="format-item">
+<label>HEX</label>
+<input data-split-event="2" id="hexVal" type="text" value="#e8633a"/>
+<button class="copy-btn" data-split-event="3">COPY</button>
+</div>
+<div class="format-item">
+<label>RGB</label>
+<input id="rgbVal" readonly="" type="text"/>
+<button class="copy-btn" data-split-event="4">COPY</button>
+</div>
+<div class="format-item">
+<label>HSL</label>
+<input id="hslVal" readonly="" type="text"/>
+<button class="copy-btn" data-split-event="5">COPY</button>
+</div>
+<div class="format-item">
+<label>CSS Variable</label>
+<input id="cssVal" readonly="" type="text"/>
+<button class="copy-btn" data-split-event="6">COPY</button>
+</div>
+</div>
+</div>
+</div>
+<div data-split-style="4">
+<div class="section-label">Shades</div>
+<div class="shades-row" id="shades"></div>
+</div>
+<div data-split-style="5">
+<div class="section-label">Preset Colors</div>
+<div class="swatches" id="swatches"></div>
+</div>
+</div>
 </main>
-
-<script>
-const presets = ['#e8633a','#f44336','#e91e63','#9c27b0','#673ab7','#3f51b5','#2196f3','#03a9f4','#00bcd4','#009688','#4caf50','#8bc34a','#cddc39','#ffeb3b','#ffc107','#ff9800','#ff5722','#795548','#607d8b','#ffffff','#aaaaaa','#333333','#000000'];
-
-function hexToRgb(hex) {
-    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-    return {r,g,b};
-}
-function rgbToHsl(r,g,b) {
-    r/=255; g/=255; b/=255;
-    const max=Math.max(r,g,b), min=Math.min(r,g,b);
-    let h,s,l=(max+min)/2;
-    if(max===min){h=s=0;}
-    else{const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);
-    switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}}
-    return {h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};
-}
-function shadeHex(hex, pct) {
-    let {r,g,b}=hexToRgb(hex);
-    r=Math.min(255,Math.round(r+pct*2.55));
-    g=Math.min(255,Math.round(g+pct*2.55));
-    b=Math.min(255,Math.round(b+pct*2.55));
-    return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
-}
-function update(hex) {
-    document.getElementById('preview').style.background = hex;
-    document.getElementById('colorPicker').value = hex;
-    document.getElementById('hexVal').value = hex.toUpperCase();
-    const {r,g,b}=hexToRgb(hex);
-    document.getElementById('rgbVal').value = `rgb(${r}, ${g}, ${b})`;
-    const {h,s,l}=rgbToHsl(r,g,b);
-    document.getElementById('hslVal').value = `hsl(${h}, ${s}%, ${l}%)`;
-    document.getElementById('cssVal').value = `--color: ${hex.toUpperCase()};`;
-    const shadesEl = document.getElementById('shades');
-    shadesEl.innerHTML = '';
-    for(let p=-50;p<=50;p+=10) {
-        const sh = shadeHex(hex, p);
-        const d = document.createElement('div');
-        d.className = 'shade';
-        d.style.background = sh;
-        d.title = sh;
-        d.onclick = () => update(sh);
-        shadesEl.appendChild(d);
-    }
-}
-function updateFromPicker() { update(document.getElementById('colorPicker').value); }
-function updateFromHex() {
-    let v = document.getElementById('hexVal').value.trim();
-    if (!v.startsWith('#')) v = '#' + v;
-    if (/^#[0-9a-fA-F]{6}$/.test(v)) update(v);
-}
-function copyVal(id) {
-    const val = document.getElementById(id).value;
-    if (!val) return;
-    window.EncrizeLab.copy(val, 'Copied ' + val);
-}
-
-const sw = document.getElementById('swatches');
-presets.forEach(c => {
-    const d = document.createElement('div');
-    d.className = 'swatch';
-    d.style.background = c;
-    d.title = c;
-    d.onclick = () => update(c);
-    sw.appendChild(d);
-});
-
-update('#e8633a');
-</script>
+<script src="color-picker.js"></script>
 <script src="../script.js"></script>
 </body>
 </html>

@@ -1,34 +1,35 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0d0c0a">
-    <title>Number System Converter - EncrizeLab</title>
-    <meta property="og:image" content="https://tools.encrize.vip/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="EncrizeLab - free private browser-based tools">
-    <meta name="twitter:image" content="https://tools.encrize.vip/og-image.png">
-    <meta name="keywords" content="number system converter, binary, decimal, hexadecimal, octal, base conversion, big integers">
-    <meta name="description" content="Instantly convert numbers between decimal, octal, hexadecimal, and binary. Supports very large integers.">
-    <meta name="author" content="EncrizeLab">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tools.encrize.vip/tools/num-system.html">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="EncrizeLab">
-    <meta property="og:title" content="Number System Converter | EncrizeLab">
-    <meta property="og:description" content="Instantly convert numbers between decimal, octal, hexadecimal, and binary. Supports very large integers.">
-    <meta property="og:url" content="https://tools.encrize.vip/tools/num-system.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Number System Converter | EncrizeLab">
-    <meta name="twitter:description" content="Instantly convert numbers between decimal, octal, hexadecimal, and binary. Supports very large integers.">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="../favicon.svg">
-    <link rel="manifest" href="../site.webmanifest">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#0d0c0a" name="theme-color"/>
+<title>Number System Converter - EncrizeLab</title>
+<meta content="https://tools.encrize.vip/og-image.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="EncrizeLab - free private browser-based tools" property="og:image:alt"/>
+<meta content="https://tools.encrize.vip/og-image.png" name="twitter:image"/>
+<meta content="number system converter, binary, decimal, hexadecimal, octal, base conversion, big integers" name="keywords"/>
+<meta content="Instantly convert numbers between decimal, octal, hexadecimal, and binary. Supports very large integers." name="description"/>
+<meta content="EncrizeLab" name="author"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://tools.encrize.vip/tools/num-system.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="EncrizeLab" property="og:site_name"/>
+<meta content="Number System Converter | EncrizeLab" property="og:title"/>
+<meta content="Instantly convert numbers between decimal, octal, hexadecimal, and binary. Supports very large integers." property="og:description"/>
+<meta content="https://tools.encrize.vip/tools/num-system.html" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Number System Converter | EncrizeLab" name="twitter:title"/>
+<meta content="Instantly convert numbers between decimal, octal, hexadecimal, and binary. Supports very large integers." name="twitter:description"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../favicon.svg" rel="apple-touch-icon"/>
+<link href="../site.webmanifest" rel="manifest"/>
+<link href="../style.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script type="application/ld+json">
 [
   {
     "@context": "https://schema.org",
@@ -72,151 +73,80 @@
   }
 ]
     </script>
-</head>
+<link href="num-system.css" rel="stylesheet"/></head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar">
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
-    <a class="topbar-brand" href="../index.html">EncrizeLab</a>
+<button aria-controls="primaryNav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" id="navToggle" type="button"><i aria-hidden="true" class="fas fa-bars"></i></button>
+<a class="topbar-brand" href="../index.html">EncrizeLab</a>
 </div>
-<div class="nav-overlay" id="navOverlay" hidden></div>
-<aside class="sidebar" id="primaryNav" aria-label="Main navigation">
-    <div class="sidebar-header">EncrizeLab</div>
-    <ul class="nav-menu">
-        <li class="nav-item"><a href="../index.html" class="nav-link"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
-        <li class="nav-category">Graphics &amp; Photo</li>
-        <li class="nav-item"><a href="image-redactor.html" class="nav-link"><i aria-hidden="true" class="fas fa-sliders-h"></i> Image Redactor</a></li>
-        <li class="nav-item"><a href="social-media-cropper.html" class="nav-link"><i aria-hidden="true" class="fas fa-crop"></i> Social Cropper</a></li>
-        <li class="nav-item"><a href="image-splitter.html" class="nav-link"><i aria-hidden="true" class="fas fa-th-large"></i> Image Splitter</a></li>
-        <li class="nav-item"><a href="image-format-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-sync-alt"></i> Image Converter</a></li>
-        <li class="nav-item"><a href="palette-extractor.html" class="nav-link"><i aria-hidden="true" class="fas fa-palette"></i> Palette Extractor</a></li>
-        <li class="nav-item"><a href="placeholder-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-image"></i> Placeholder Gen</a></li>
-        <li class="nav-item"><a href="color-picker.html" class="nav-link"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</a></li>
-        <li class="nav-item"><a href="stego-lab.html" class="nav-link"><i aria-hidden="true" class="fas fa-user-secret"></i> Stego Lab</a></li>
-        <li class="nav-item"><a href="watermark.html" class="nav-link"><i aria-hidden="true" class="fas fa-stamp"></i> Watermark Tool</a></li>
-        <li class="nav-item"><a href="image-base64.html" class="nav-link"><i aria-hidden="true" class="fas fa-file-code"></i> Image to Base64</a></li>
-        <li class="nav-category">Conversion &amp; Math</li>
-        <li class="nav-item"><a href="graph-calc.html" class="nav-link"><i aria-hidden="true" class="fas fa-calculator"></i> Graphic Calculator</a></li>
-        <li class="nav-item"><a href="date-calculator.html" class="nav-link"><i aria-hidden="true" class="fas fa-calendar-alt"></i> Date Calculator</a></li>
-        <li class="nav-item"><a href="num-system.html" class="nav-link active"><i aria-hidden="true" class="fas fa-microchip"></i> Number Systems</a></li>
-        <li class="nav-item"><a href="base-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-exchange-alt"></i> Base Converter</a></li>
-        <li class="nav-item"><a href="mp3-converter.html" class="nav-link"><i aria-hidden="true" class="fas fa-headphones"></i> Media Converter</a></li>
-        <li class="nav-category">Utilities &amp; Text</li>
-        <li class="nav-item"><a href="exif-cleaner.html" class="nav-link"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
-        <li class="nav-item"><a href="exif-viewer.html" class="nav-link"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
-        <li class="nav-item"><a href="pass-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
-        <li class="nav-item"><a href="pass-strength.html" class="nav-link"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
-        <li class="nav-item"><a href="qr-gen.html" class="nav-link"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
-        <li class="nav-item"><a href="word-counter.html" class="nav-link"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
-        <li class="nav-item"><a href="lorem-ipsum.html" class="nav-link"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
-        <li class="nav-item"><a href="hash-generator.html" class="nav-link"><i aria-hidden="true" class="fas fa-hashtag"></i> Hash Generator</a></li>
-        <li class="nav-item"><a href="json-formatter.html" class="nav-link"><i aria-hidden="true" class="fas fa-code"></i> JSON Formatter</a></li>
-        <li class="nav-item"><a href="regex-tester.html" class="nav-link"><i aria-hidden="true" class="fas fa-search"></i> Regex Tester</a></li>
-        <li class="nav-item"><a href="url-encoder.html" class="nav-link"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
-        <li class="nav-item"><a href="diff-checker.html" class="nav-link"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
-        <li class="nav-item"><a href="markdown-editor.html" class="nav-link"><i aria-hidden="true" class="fab fa-markdown"></i> Markdown Editor</a></li>
-        <li class="nav-item"><a href="random-picker.html" class="nav-link"><i aria-hidden="true" class="fas fa-dice"></i> Random Picker</a></li>
-    </ul>
+<div class="nav-overlay" hidden="" id="navOverlay"></div>
+<aside aria-label="Main navigation" class="sidebar" id="primaryNav">
+<div class="sidebar-header">EncrizeLab</div>
+<ul class="nav-menu">
+<li class="nav-item"><a class="nav-link" href="../index.html"><i aria-hidden="true" class="fas fa-home"></i> Home</a></li>
+<li class="nav-category">Graphics &amp; Photo</li>
+<li class="nav-item"><a class="nav-link" href="image-redactor.html"><i aria-hidden="true" class="fas fa-sliders-h"></i> Image Redactor</a></li>
+<li class="nav-item"><a class="nav-link" href="social-media-cropper.html"><i aria-hidden="true" class="fas fa-crop"></i> Social Cropper</a></li>
+<li class="nav-item"><a class="nav-link" href="image-splitter.html"><i aria-hidden="true" class="fas fa-th-large"></i> Image Splitter</a></li>
+<li class="nav-item"><a class="nav-link" href="image-format-converter.html"><i aria-hidden="true" class="fas fa-sync-alt"></i> Image Converter</a></li>
+<li class="nav-item"><a class="nav-link" href="palette-extractor.html"><i aria-hidden="true" class="fas fa-palette"></i> Palette Extractor</a></li>
+<li class="nav-item"><a class="nav-link" href="placeholder-gen.html"><i aria-hidden="true" class="fas fa-image"></i> Placeholder Gen</a></li>
+<li class="nav-item"><a class="nav-link" href="color-picker.html"><i aria-hidden="true" class="fas fa-eye-dropper"></i> Color Picker</a></li>
+<li class="nav-item"><a class="nav-link" href="stego-lab.html"><i aria-hidden="true" class="fas fa-user-secret"></i> Stego Lab</a></li>
+<li class="nav-item"><a class="nav-link" href="watermark.html"><i aria-hidden="true" class="fas fa-stamp"></i> Watermark Tool</a></li>
+<li class="nav-item"><a class="nav-link" href="image-base64.html"><i aria-hidden="true" class="fas fa-file-code"></i> Image to Base64</a></li>
+<li class="nav-category">Conversion &amp; Math</li>
+<li class="nav-item"><a class="nav-link" href="graph-calc.html"><i aria-hidden="true" class="fas fa-calculator"></i> Graphic Calculator</a></li>
+<li class="nav-item"><a class="nav-link" href="date-calculator.html"><i aria-hidden="true" class="fas fa-calendar-alt"></i> Date Calculator</a></li>
+<li class="nav-item"><a class="nav-link active" href="num-system.html"><i aria-hidden="true" class="fas fa-microchip"></i> Number Systems</a></li>
+<li class="nav-item"><a class="nav-link" href="base-converter.html"><i aria-hidden="true" class="fas fa-exchange-alt"></i> Base Converter</a></li>
+<li class="nav-item"><a class="nav-link" href="mp3-converter.html"><i aria-hidden="true" class="fas fa-headphones"></i> Media Converter</a></li>
+<li class="nav-category">Utilities &amp; Text</li>
+<li class="nav-item"><a class="nav-link" href="exif-cleaner.html"><i aria-hidden="true" class="fas fa-shield-alt"></i> EXIF Cleaner</a></li>
+<li class="nav-item"><a class="nav-link" href="exif-viewer.html"><i aria-hidden="true" class="fas fa-search-plus"></i> EXIF Viewer</a></li>
+<li class="nav-item"><a class="nav-link" href="pass-gen.html"><i aria-hidden="true" class="fas fa-key"></i> Password Gen</a></li>
+<li class="nav-item"><a class="nav-link" href="pass-strength.html"><i aria-hidden="true" class="fas fa-user-shield"></i> Password Strength</a></li>
+<li class="nav-item"><a class="nav-link" href="qr-gen.html"><i aria-hidden="true" class="fas fa-qrcode"></i> QR Generator</a></li>
+<li class="nav-item"><a class="nav-link" href="word-counter.html"><i aria-hidden="true" class="fas fa-font"></i> Word Counter</a></li>
+<li class="nav-item"><a class="nav-link" href="lorem-ipsum.html"><i aria-hidden="true" class="fas fa-pen-nib"></i> Lorem Ipsum</a></li>
+<li class="nav-item"><a class="nav-link" href="hash-generator.html"><i aria-hidden="true" class="fas fa-hashtag"></i> Hash Generator</a></li>
+<li class="nav-item"><a class="nav-link" href="json-formatter.html"><i aria-hidden="true" class="fas fa-code"></i> JSON Formatter</a></li>
+<li class="nav-item"><a class="nav-link" href="regex-tester.html"><i aria-hidden="true" class="fas fa-search"></i> Regex Tester</a></li>
+<li class="nav-item"><a class="nav-link" href="url-encoder.html"><i aria-hidden="true" class="fas fa-link"></i> URL Encoder</a></li>
+<li class="nav-item"><a class="nav-link" href="diff-checker.html"><i aria-hidden="true" class="fas fa-code-branch"></i> Diff Checker</a></li>
+<li class="nav-item"><a class="nav-link" href="markdown-editor.html"><i aria-hidden="true" class="fab fa-markdown"></i> Markdown Editor</a></li>
+<li class="nav-item"><a class="nav-link" href="random-picker.html"><i aria-hidden="true" class="fas fa-dice"></i> Random Picker</a></li>
+</ul>
 </aside>
-
-
-    <main class="main-content" id="main" tabindex="-1">
-        <div class="container">
-            <h1 style="text-align: center;"><i aria-hidden="true" class="fas fa-microchip" style="margin-right: 15px;"></i> Number System Converter</h1>
-            <p style="text-align: center;">Enter a number in any base to convert it across different number systems.</p>
-            
-            <div class="tool-grid" style="grid-template-columns: 1fr;">
-                <div class="input-group" style="margin-bottom: 15px;">
-                    <label style="display:block; margin-bottom: 5px;">Decimal (DEC)</label>
-                    <input type="text" id="dec-input" placeholder="e.g., 12">
-                </div>
-                <div class="input-group" style="margin-bottom: 15px;">
-                    <label style="display:block; margin-bottom: 5px;">Octal (OCT)</label>
-                    <input type="text" id="oct-input" placeholder="e.g., 14">
-                </div>
-                <div class="input-group" style="margin-bottom: 15px;">
-                    <label style="display:block; margin-bottom: 5px;">Hexadecimal (HEX)</label>
-                    <input type="text" id="hex-input" placeholder="e.g., C">
-                </div>
-                <div class="input-group" style="margin-bottom: 15px;">
-                    <label style="display:block; margin-bottom: 5px;">Binary (BIN)</label>
-                    <input type="text" id="bin-input" placeholder="e.g., 1100">
-                </div>
-            </div>
-            
-            <div style="margin-top: 20px; text-align: right;">
-                <button class="btn" onclick="clearAll()" style="padding: 10px 20px;">Clear All</button>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        const decInput = document.getElementById('dec-input');
-        const octInput = document.getElementById('oct-input');
-        const hexInput = document.getElementById('hex-input');
-        const binInput = document.getElementById('bin-input');
-
-        const RADIX = { dec: 10n, oct: 8n, hex: 16n, bin: 2n };
-        const PATTERN = {
-            dec: /^[0-9]+$/,
-            oct: /^[0-7]+$/,
-            hex: /^[0-9a-fA-F]+$/,
-            bin: /^[01]+$/
-        };
-        const inputs = { dec: decInput, oct: octInput, hex: hexInput, bin: binInput };
-
-        // Parse a string in an arbitrary base (2-16) into a BigInt.
-        function parseBig(str, radix) {
-            let result = 0n;
-            for (const ch of str.toLowerCase()) {
-                const digit = BigInt(parseInt(ch, 16));
-                result = result * radix + digit;
-            }
-            return result;
-        }
-
-        function setError(el, on) {
-            el.classList.toggle('gl-field-error', on);
-        }
-
-        function updateAll(rawValue, from) {
-            const value = rawValue.trim();
-            setError(inputs[from], false);
-
-            if (value === '') { clearAll(true); return; }
-
-            // Allow an optional leading minus sign for negative numbers.
-            const negative = value.startsWith('-');
-            const digits = negative ? value.slice(1) : value;
-
-            if (!PATTERN[from].test(digits)) {
-                setError(inputs[from], true);
-                return;
-            }
-
-            const magnitude = parseBig(digits, RADIX[from]);
-            const decimalValue = negative ? -magnitude : magnitude;
-            const sign = decimalValue < 0n ? '-' : '';
-            const abs = decimalValue < 0n ? -decimalValue : decimalValue;
-
-            if (from !== 'dec') decInput.value = sign + abs.toString(10);
-            if (from !== 'oct') octInput.value = sign + abs.toString(8);
-            if (from !== 'hex') hexInput.value = sign + abs.toString(16).toUpperCase();
-            if (from !== 'bin') binInput.value = sign + abs.toString(2);
-        }
-
-        decInput.addEventListener('input', (e) => updateAll(e.target.value, 'dec'));
-        octInput.addEventListener('input', (e) => updateAll(e.target.value, 'oct'));
-        hexInput.addEventListener('input', (e) => updateAll(e.target.value, 'hex'));
-        binInput.addEventListener('input', (e) => updateAll(e.target.value, 'bin'));
-
-        function clearAll(keepFocusValue) {
-            [decInput, octInput, hexInput, binInput].forEach((el) => {
-                if (!keepFocusValue || el !== document.activeElement) el.value = '';
-                setError(el, false);
-            });
-        }
-    </script>
+<main class="main-content" id="main" tabindex="-1">
+<div class="container">
+<h1 data-split-style="1"><i aria-hidden="true" class="fas fa-microchip" data-split-style="2"></i> Number System Converter</h1>
+<p data-split-style="3">Enter a number in any base to convert it across different number systems.</p>
+<div class="tool-grid" data-split-style="4">
+<div class="input-group" data-split-style="5">
+<label data-split-style="6">Decimal (DEC)</label>
+<input id="dec-input" placeholder="e.g., 12" type="text"/>
+</div>
+<div class="input-group" data-split-style="7">
+<label data-split-style="8">Octal (OCT)</label>
+<input id="oct-input" placeholder="e.g., 14" type="text"/>
+</div>
+<div class="input-group" data-split-style="9">
+<label data-split-style="10">Hexadecimal (HEX)</label>
+<input id="hex-input" placeholder="e.g., C" type="text"/>
+</div>
+<div class="input-group" data-split-style="11">
+<label data-split-style="12">Binary (BIN)</label>
+<input id="bin-input" placeholder="e.g., 1100" type="text"/>
+</div>
+</div>
+<div data-split-style="13">
+<button class="btn" data-split-event="1" data-split-style="14">Clear All</button>
+</div>
+</div>
+</main>
+<script src="num-system.js"></script>
 <script src="../script.js"></script>
 </body>
 </html>
